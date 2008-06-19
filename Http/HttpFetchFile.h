@@ -7,6 +7,7 @@
 //
 // Copyright 2007      Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 //
@@ -32,29 +33,37 @@ class StoragePolicy;
 class HttpJob
 {
  public:
-    HttpJob()
-      : status( NoStatus ),
-        priority( NoPriority )
-    {
-        buffer = new QBuffer( &data );
-        buffer->open( QIODevice::WriteOnly );
-    }
+    HttpJob( const QUrl & sourceUrl, const QString & destFileName, QString const id );
+    ~HttpJob();
 
-    virtual ~HttpJob()
-    {
-        buffer->close();
-        delete buffer;
-    }
+    QUrl sourceUrl() const;
+    void setSourceUrl( const QUrl & );
 
-    QString     originalRelativeUrlString;
-    QString     relativeUrlString;
-    QString     targetDirString;
-    QUrl        serverUrl;
-    QByteArray  data;
-    QBuffer    *buffer;
-    QString     initiatorId;
-    Status      status;
-    Priority    priority;
+    QString initiatorId() const;
+    void setInitiatorId( const QString & );
+
+    QString destinationFileName() const;
+    void setDestinationFileName( const QString & );
+
+    QString originalDestinationFileName() const;
+
+    void setStatus( const Status );
+
+    QBuffer * buffer();
+    QByteArray & data();
+
+ private:
+    Q_DISABLE_COPY( HttpJob )
+    QUrl        m_sourceUrl;
+    QString     m_destinationFileName;
+    // if there is a redirection, we have to know the original file name
+    // for proper blacklisting etc.
+    QString     m_originalDestinationFileName;
+    QByteArray  m_data;
+    QBuffer    *m_buffer;
+    QString     m_initiatorId;
+    Status      m_status;
+    Priority    m_priority;
 };
 
 
@@ -85,10 +94,62 @@ class HttpFetchFile : public QObject
     void httpRequestFinished( int requestId, bool error );
 
  private:
+    Q_DISABLE_COPY( HttpFetchFile )
     QHttp *m_pHttp;
     QMap<int, HttpJob*> m_pJobMap;
     StoragePolicy *m_storagePolicy;
 };
+
+
+inline QUrl HttpJob::sourceUrl() const
+{
+    return m_sourceUrl;
+}
+
+inline void HttpJob::setSourceUrl( const QUrl & url )
+{
+    m_sourceUrl = url;
+}
+
+inline QString HttpJob::initiatorId() const
+{
+    return m_initiatorId;
+}
+
+inline void HttpJob::setInitiatorId( const QString & id )
+{
+    m_initiatorId = id;
+}
+
+inline QString HttpJob::destinationFileName() const
+{
+    return m_destinationFileName;
+}
+
+inline void HttpJob::setDestinationFileName( const QString & fileName )
+{
+    m_destinationFileName = fileName;
+}
+
+inline QString HttpJob::originalDestinationFileName() const
+{
+    return m_originalDestinationFileName;
+}
+
+inline void HttpJob::setStatus( const Status status )
+{
+    m_status = status;
+}
+
+inline QBuffer * HttpJob::buffer()
+{
+    return m_buffer;
+}
+
+inline QByteArray & HttpJob::data()
+{
+    return m_data;
+}
 
 
 #endif // HTTPFETCHFILE_H

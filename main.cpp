@@ -1,4 +1,4 @@
-/* this program is developed on QDevelop -- a good Qt IDE by Jean - Luc Biord and others :) 
+/* this program is developed on QDevelop -- a good Qt IDE by Jean - Luc Biord and others :) & Kdevelop also
 qt used = Qt Open Source Edition version 4.4.1-snapshot-20080419.
 on open suse 10.3*/
 #include <QApplication>
