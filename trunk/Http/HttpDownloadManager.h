@@ -80,9 +80,9 @@ class HttpDownloadManager : public QObject
     void addJob( const QString& relativeUrlString, const QString &id );
 
     /**
-     * Adds a new job with a server, relative url and given id.
+     * Adds a new job with a sourceUrl, destination file name and given id.
      */
-    void addJob( const QString& server, const QString& relativeUrlString, const QString &id );
+    void addJob( const QUrl& sourceUrl, const QString& destFilename, const QString &id );
 
     /**
      * Removes the @p job from the manager.
@@ -99,6 +99,7 @@ class HttpDownloadManager : public QObject
     void reportResult( HttpJob *job, int id );
 
  private:
+    Q_DISABLE_COPY( HttpDownloadManager )
     // Check whether the job gets processed already or whether it got blacklisted
     bool              acceptJob( HttpJob  *job );
     bool              m_downloadEnabled;
