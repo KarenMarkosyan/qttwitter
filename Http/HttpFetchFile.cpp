@@ -15,7 +15,7 @@
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpResponseHeader>
 
-#include "MarbleDirs.h"
+// #include "MarbleDirs.h"
 #include "StoragePolicy.h"
 
 
@@ -141,4 +141,4 @@ void HttpFetchFile::httpRequestFinished ( int requestId, bool error )
     m_pJobMap.remove ( requestId );
 }
 
-#include "HttpFetchFile.moc"
+// #include "HttpFetchFile.moc"
