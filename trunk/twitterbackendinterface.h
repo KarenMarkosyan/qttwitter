@@ -55,56 +55,62 @@ test
 downtime_schedule
 */
 #include <QObject>
-#include <Http/http.h>
+#include <Http/HttpDownloadManager.h>
 #include <QDebug>
+#include <HttpDownloadManager.h>
+#include "CacheStoragePolicy.h"
 //
 class twitterBackendInterface : public QObject
 {
-Q_OBJECT
+        Q_OBJECT
 public:
-	twitterBackendInterface();
+        twitterBackendInterface();
 public slots:
-	/*Twitter API SLots*/	
-	void  public_timeline(/*int since_id*/);//Primary 
-	void  friends_timeline();//Primary
-	void  user_timeline();//Primary
-	void  showStatus();
-	void  update();//Primary
-	void  replies();
-	void  destroy();
-	void  friends();
-	void  followers();
-	void  featured();
-	void  showUser();
-	void  direct_messages();
-	void  sent();
-	void  newDirectMessage();
-	void  destroyDirectMessage();
-	void  createFriendship();
-	void  destroyFriendship();
-	void  verify_credentials();
-	void  end_session();
-	void  archive();
-	void  update_location();
-	void  update_delivery_device();
-	void  createFavourite();
-	void  destroyFavourite();
-	void  follow();//Primary
-	void  leave();//Primary
-	void  createBlockage();
-	void  destroyBlockage();
-	void  test();//Primary
-	void  downtime_schedule();//Primary
-	/*End OF twitter API Slots*/
-	//void setUserNamePassword(QString,QString);
+        /*Twitter API SLots*/
+        void  public_timeline(/*int since_id*/);//Primary
+        void  friends_timeline();//Primary
+        void  user_timeline();//Primary
+        void  showStatus();
+        void  update();//Primary
+        void  replies();
+        void  destroy();
+        void  friends();
+        void  followers();
+        void  featured();
+        void  showUser();
+        void  direct_messages();
+        void  sent();
+        void  newDirectMessage();
+        void  destroyDirectMessage();
+        void  createFriendship();
+        void  destroyFriendship();
+        void  verify_credentials();
+        void  end_session();
+        void  archive();
+        void  update_location();
+        void  update_delivery_device();
+        void  createFavourite();
+        void  destroyFavourite();
+        void  follow();//Primary
+        void  leave();//Primary
+        void  createBlockage();
+        void  destroyBlockage();
+        void  test();//Primary
+        void  downtime_schedule();//Primary
+        /*End OF twitter API Slots*/
+        //void setUserNamePassword(QString,QString);
 signals:
-	void public_timeline(QString);
+        void public_timeline(QString);
+        void statusMessage(QString id);//
 private:
-	QString sendMessage;
-	Http myHttp;
+        QString sendMessage;
+        HttpDownloadManager* myDownloader;
+        CacheStoragePolicy*  myStoragePolicy;
+
 };
 
-namespace Backend{
-    class twitterBackend: public twitterBackendInterface {};
+namespace Backend
+{
+class twitterBackend: public twitterBackendInterface {};
 }
 #endif

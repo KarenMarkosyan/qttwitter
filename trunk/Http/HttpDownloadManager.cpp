@@ -15,7 +15,7 @@
 #include <QtCore/QDebug>
 
 #include "HttpFetchFile.h"
-#include "MarbleDirs.h"
+// #include "MarbleDirs.h"
 #include "StoragePolicy.h"
 
 HttpDownloadManager::HttpDownloadManager ( const QUrl& serverUrl, StoragePolicy *policy )
@@ -199,4 +199,4 @@ void HttpDownloadManager::reportResult ( HttpJob* job, int err )
 
 }
 
-#include "HttpDownloadManager.moc"
+// #include "HttpDownloadManager.moc"

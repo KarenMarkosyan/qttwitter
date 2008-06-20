@@ -118,4 +118,5 @@ class HttpDownloadManager : public QObject
 };
 
 
+
 #endif // __MARBLE__HTTPDOWNLOADMANAGER_H
