@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainWindow.ui'
 **
-** Created: Fri Jun 20 05:26:10 2008
+** Created: Mon Jun 23 13:12:44 2008
 **      by: Qt User Interface Compiler version 4.4.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -49,6 +49,7 @@ public:
     QAction *actionFavorite_Methods;
     QAction *actionBlock_Methods;
     QAction *actionIs_It_Working;
+    QAction *actionView_Images_From_Area;
     QWidget *centralwidget;
     QLabel *twitterImageLabel;
     QLabel *textLabelMainWindow;
@@ -66,7 +67,7 @@ public:
     {
     if (MainWindow->objectName().isEmpty())
         MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-    MainWindow->resize(484, 339);
+    MainWindow->resize(515, 327);
     QIcon icon;
     icon.addPixmap(QPixmap(QString::fromUtf8(":/twitter/TwitterPostIcon.png")), QIcon::Normal, QIcon::Off);
     MainWindow->setWindowIcon(icon);
@@ -171,20 +172,22 @@ public:
     QIcon icon17;
     icon17.addPixmap(QPixmap(QString::fromUtf8(":/twitter/questionmark")), QIcon::Normal, QIcon::Off);
     actionIs_It_Working->setIcon(icon17);
+    actionView_Images_From_Area = new QAction(MainWindow);
+    actionView_Images_From_Area->setObjectName(QString::fromUtf8("actionView_Images_From_Area"));
     centralwidget = new QWidget(MainWindow);
     centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-    centralwidget->setGeometry(QRect(0, 67, 484, 251));
+    centralwidget->setGeometry(QRect(0, 70, 515, 233));
     twitterImageLabel = new QLabel(centralwidget);
     twitterImageLabel->setObjectName(QString::fromUtf8("twitterImageLabel"));
     twitterImageLabel->setGeometry(QRect(130, 80, 221, 61));
     twitterImageLabel->setPixmap(QPixmap(QString::fromUtf8(":/twitter/Twitter.png")));
     textLabelMainWindow = new QLabel(centralwidget);
     textLabelMainWindow->setObjectName(QString::fromUtf8("textLabelMainWindow"));
-    textLabelMainWindow->setGeometry(QRect(10, 30, 461, 121));
+    textLabelMainWindow->setGeometry(QRect(10, 30, 461, 41));
     MainWindow->setCentralWidget(centralwidget);
     menubar = new QMenuBar(MainWindow);
     menubar->setObjectName(QString::fromUtf8("menubar"));
-    menubar->setGeometry(QRect(0, 0, 484, 28));
+    menubar->setGeometry(QRect(0, 0, 515, 31));
     menuFile = new QMenu(menubar);
     menuFile->setObjectName(QString::fromUtf8("menuFile"));
     menuAbout = new QMenu(menubar);
@@ -200,11 +203,11 @@ public:
     MainWindow->setMenuBar(menubar);
     statusbar = new QStatusBar(MainWindow);
     statusbar->setObjectName(QString::fromUtf8("statusbar"));
-    statusbar->setGeometry(QRect(0, 318, 484, 21));
+    statusbar->setGeometry(QRect(0, 303, 515, 24));
     MainWindow->setStatusBar(statusbar);
     toolBar = new QToolBar(MainWindow);
     toolBar->setObjectName(QString::fromUtf8("toolBar"));
-    toolBar->setGeometry(QRect(0, 28, 484, 39));
+    toolBar->setGeometry(QRect(0, 31, 515, 39));
     MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
     menubar->addAction(menuFile->menuAction());
@@ -227,6 +230,7 @@ public:
     menuAbout_2->addAction(actionAbout_Qt);
     menuAbout_2->addAction(actionHelp);
     menuOther_Services->addAction(menuSet_FaceBook_Status->menuAction());
+    menuOther_Services->addAction(actionView_Images_From_Area);
     menuSet_FaceBook_Status->addAction(actionFacebook_Status_Twitter);
     menuTwitter->addAction(actionSet_New_Status);
     menuTwitter->addAction(actionFollow);
@@ -309,8 +313,9 @@ public:
     actionFavorite_Methods->setText(QApplication::translate("MainWindow", "Favorite Methods", 0, QApplication::UnicodeUTF8));
     actionBlock_Methods->setText(QApplication::translate("MainWindow", "Block Methods", 0, QApplication::UnicodeUTF8));
     actionIs_It_Working->setText(QApplication::translate("MainWindow", "Is It Working?", 0, QApplication::UnicodeUTF8));
+    actionView_Images_From_Area->setText(QApplication::translate("MainWindow", "View Images From Area", 0, QApplication::UnicodeUTF8));
     twitterImageLabel->setText(QString());
-    textLabelMainWindow->setText(QString());
+    textLabelMainWindow->setText(QApplication::translate("MainWindow", "textlabel", 0, QApplication::UnicodeUTF8));
     menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
     menuAbout->setTitle(QApplication::translate("MainWindow", "Timeline", 0, QApplication::UnicodeUTF8));
     menuAbout_2->setTitle(QApplication::translate("MainWindow", "About", 0, QApplication::UnicodeUTF8));

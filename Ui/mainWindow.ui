@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>484</width>
-    <height>339</height>
+    <width>515</width>
+    <height>327</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -20,9 +20,9 @@
    <property name="geometry" >
     <rect>
      <x>0</x>
-     <y>67</y>
-     <width>484</width>
-     <height>251</height>
+     <y>70</y>
+     <width>515</width>
+     <height>233</height>
     </rect>
    </property>
    <widget class="QLabel" name="twitterImageLabel" >
@@ -47,11 +47,11 @@
       <x>10</x>
       <y>30</y>
       <width>461</width>
-      <height>121</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="text" >
-     <string/>
+     <string>textlabel</string>
     </property>
    </widget>
   </widget>
@@ -60,8 +60,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>484</width>
-     <height>28</height>
+     <width>515</width>
+     <height>31</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile" >
@@ -104,6 +104,7 @@
      <addaction name="actionFacebook_Status_Twitter" />
     </widget>
     <addaction name="menuSet_FaceBook_Status" />
+    <addaction name="actionView_Images_From_Area" />
    </widget>
    <widget class="QMenu" name="menuTwitter" >
     <property name="title" >
@@ -129,9 +130,9 @@
    <property name="geometry" >
     <rect>
      <x>0</x>
-     <y>318</y>
-     <width>484</width>
-     <height>21</height>
+     <y>303</y>
+     <width>515</width>
+     <height>24</height>
     </rect>
    </property>
   </widget>
@@ -139,8 +140,8 @@
    <property name="geometry" >
     <rect>
      <x>0</x>
-     <y>28</y>
-     <width>484</width>
+     <y>31</y>
+     <width>515</width>
      <height>39</height>
     </rect>
    </property>
@@ -373,6 +374,11 @@
    </property>
    <property name="text" >
     <string>Is It Working?</string>
+   </property>
+  </action>
+  <action name="actionView_Images_From_Area" >
+   <property name="text" >
+    <string>View Images From Area</string>
    </property>
   </action>
  </widget>

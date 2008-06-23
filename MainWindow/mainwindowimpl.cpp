@@ -13,7 +13,8 @@ MainWindowImpl::MainWindowImpl( )
 	//connect(actionLogout, SIGNAL(triggered()), this, SIGNAL(doLogout()));
 	connect(actionPrint, SIGNAL(triggered()), this, SLOT(doPrint()));
 	connect(actionAbout_Qt, SIGNAL(triggered()), this, SLOT(showAboutQt()));
-	connect(actionAbout_Qt_Twitter, SIGNAL(triggered()), this, SLOT(showAboutQtTwitter()));
+    connect(actionAbout_Qt_Twitter, SIGNAL(triggered()), this, SLOT(showAboutQtTwitter()));
+//     connect(actionView_Images_From_Area,SIGNAL(triggered() ),this ,SIGNAL(showImageBrowser()));
 	//(actionExit, SIGNAL(triggered())already handled in Ui File
 
 	//Here Comes Timeline Menu
