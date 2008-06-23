@@ -6,6 +6,7 @@ on open suse 10.3*/
 #include "ui_login.h"
 #include "ui_sendTwit.h"
 #include "twitterbackendinterface.h"
+#include "imagebrowserimpl.h"
 #include <QDialog>
 
 
@@ -15,10 +16,11 @@ int main(int argc,char **argv)
 	QApplication app(argc,argv);
 	//this is derived from ui file and the added functionality  system tray MainWindow Class
 	MainWindowImpl mainWindow;
-	QDialog containerLoginDialog,containerSendTwitDialog;
+	QDialog containerLoginDialog,containerSendTwitDialog,containerImageBrowser;
 	Ui::loginDialog myLoginDialog;
 	Ui::sendTwitDialog mySendTwitDialog;
-	Backend::twitterBackend myTwitter;
+	Ui::imageBrowserimpl myImageBroswer;
+    Backend::twitterBackend myTwitter;
 	
 	//connection slots
 	QObject::connect(&mainWindow,SIGNAL(quit()),&app,SLOT(quit()));//just quit when you get quit signal
@@ -27,11 +29,13 @@ int main(int argc,char **argv)
 	//QObject::connect(&containerSendTwitDialog,SLOT(
 	QObject::connect(mainWindow.actionPublic,SIGNAL(triggered()),&myTwitter,SLOT(public_timeline()));
 	QObject::connect(mainWindow.actionFriends,SIGNAL(triggered()),&myTwitter,SLOT(friends_timeline()));
-	QObject::connect(mainWindow.actionOwn,SIGNAL(triggered()),&myTwitter,SLOT(user_timeline()));
+    QObject::connect(mainWindow.actionOwn,SIGNAL(triggered()),&myTwitter,SLOT(user_timeline()));
+    QObject::connect(mainWindow.actionView_Images_From_Area,SIGNAL(triggered()),&containerImageBrowser,SLOT(show()));
 	//QObject::connect(mainWindow.action,SIGNAL(triggered()),&myTwitter,SLOT());
 	//property setting
 	myLoginDialog.setupUi(&containerLoginDialog);
-	mySendTwitDialog.setupUi(&containerSendTwitDialog);
+    mySendTwitDialog.setupUi(&containerSendTwitDialog);
+    myImageBroswer.setupUi(&containerImageBrowser);
 	mainWindow.show();
 	return app.exec();
 }

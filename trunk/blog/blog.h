@@ -102,5 +102,9 @@ finally somehow have declared a barebone structure for twittr backend ..the head
 [Sat May 3 05:12:51 2008]
 working once again...just to make http class work,no idea how t make a abstratc http classso let's stick to making ui 
 first (updated Sat May 3 06:58:24 2008)
-
+[Mon Jun 23 11:21:33 2008]
+started working on qttwitter just few days back... right now i ported Http dwonlaoding  code Marble () to qttwitter and is planning to port more code like the webbrowser.
+[Mon Jun 23 13:36:24 2008]
+added image browser to test it,, i am trying to make a panoramio image browser ,, which finally find it's place in marble ,rught now this is testing place for it
+]
 */

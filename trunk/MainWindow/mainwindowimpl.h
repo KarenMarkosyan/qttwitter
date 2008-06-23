@@ -20,7 +20,8 @@ signals:
 	void showPublicTimeline();
 	void showOwnTimeline();
 	void showFollowerTimeline();
-	void showFriendsline();
+    void showFriendsline();
+//     void showImageBrowser();//just show the image browser mode
 
 
 };

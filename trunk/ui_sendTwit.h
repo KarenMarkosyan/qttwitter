@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'sendTwit.ui'
 **
-** Created: Fri Jun 20 05:26:10 2008
+** Created: Mon Jun 23 12:54:34 2008
 **      by: Qt User Interface Compiler version 4.4.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
