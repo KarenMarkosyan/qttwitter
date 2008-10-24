@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'imageBrowser.ui'
 **
-** Created: Mon Jun 23 13:20:11 2008
+** Created: Mon Jun 23 21:08:15 2008
 **      by: Qt User Interface Compiler version 4.4.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -30,9 +30,9 @@ public:
     QFrame *frame;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton;
-    QSlider *horizontalSlider;
+    QPushButton *pushButtonPrevious;
+    QPushButton *pushButtonNext;
+    QSlider *horizontalSliderForImage;
     QLCDNumber *lcdNumber;
     QLabel *label;
 
@@ -41,7 +41,6 @@ public:
     if (imageBrowser->objectName().isEmpty())
         imageBrowser->setObjectName(QString::fromUtf8("imageBrowser"));
     imageBrowser->resize(400, 300);
-    imageBrowser->setProperty("imageToShow", QVariant(0));
     frame = new QFrame(imageBrowser);
     frame->setObjectName(QString::fromUtf8("frame"));
     frame->setGeometry(QRect(10, 20, 381, 271));
@@ -53,27 +52,27 @@ public:
     gridLayout = new QGridLayout(gridLayoutWidget);
     gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
     gridLayout->setContentsMargins(0, 0, 0, 0);
-    pushButton_2 = new QPushButton(gridLayoutWidget);
-    pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-    pushButton_2->setMaximumSize(QSize(62, 16777215));
+    pushButtonPrevious = new QPushButton(gridLayoutWidget);
+    pushButtonPrevious->setObjectName(QString::fromUtf8("pushButtonPrevious"));
+    pushButtonPrevious->setMaximumSize(QSize(62, 16777215));
 
-    gridLayout->addWidget(pushButton_2, 1, 0, 2, 1);
+    gridLayout->addWidget(pushButtonPrevious, 1, 0, 2, 1);
 
-    pushButton = new QPushButton(gridLayoutWidget);
-    pushButton->setObjectName(QString::fromUtf8("pushButton"));
-    pushButton->setMinimumSize(QSize(0, 0));
-    pushButton->setMaximumSize(QSize(41, 16777215));
+    pushButtonNext = new QPushButton(gridLayoutWidget);
+    pushButtonNext->setObjectName(QString::fromUtf8("pushButtonNext"));
+    pushButtonNext->setMinimumSize(QSize(0, 0));
+    pushButtonNext->setMaximumSize(QSize(41, 16777215));
 
-    gridLayout->addWidget(pushButton, 1, 2, 2, 1);
+    gridLayout->addWidget(pushButtonNext, 1, 2, 2, 1);
 
-    horizontalSlider = new QSlider(gridLayoutWidget);
-    horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
-    horizontalSlider->setValue(50);
-    horizontalSlider->setSliderPosition(50);
-    horizontalSlider->setOrientation(Qt::Horizontal);
-    horizontalSlider->setTickPosition(QSlider::TicksBothSides);
+    horizontalSliderForImage = new QSlider(gridLayoutWidget);
+    horizontalSliderForImage->setObjectName(QString::fromUtf8("horizontalSliderForImage"));
+    horizontalSliderForImage->setValue(50);
+    horizontalSliderForImage->setSliderPosition(50);
+    horizontalSliderForImage->setOrientation(Qt::Horizontal);
+    horizontalSliderForImage->setTickPosition(QSlider::TicksBothSides);
 
-    gridLayout->addWidget(horizontalSlider, 3, 0, 1, 3);
+    gridLayout->addWidget(horizontalSliderForImage, 3, 0, 1, 3);
 
     lcdNumber = new QLCDNumber(gridLayoutWidget);
     lcdNumber->setObjectName(QString::fromUtf8("lcdNumber"));
@@ -93,7 +92,7 @@ public:
 
 
     retranslateUi(imageBrowser);
-    QObject::connect(horizontalSlider, SIGNAL(valueChanged(int)), lcdNumber, SLOT(display(int)));
+    QObject::connect(horizontalSliderForImage, SIGNAL(valueChanged(int)), lcdNumber, SLOT(display(int)));
 
     QMetaObject::connectSlotsByName(imageBrowser);
     } // setupUi
@@ -101,8 +100,8 @@ public:
     void retranslateUi(QWidget *imageBrowser)
     {
     imageBrowser->setWindowTitle(QApplication::translate("imageBrowser", "Form", 0, QApplication::UnicodeUTF8));
-    pushButton_2->setText(QApplication::translate("imageBrowser", "Previous", 0, QApplication::UnicodeUTF8));
-    pushButton->setText(QApplication::translate("imageBrowser", "Next", 0, QApplication::UnicodeUTF8));
+    pushButtonPrevious->setText(QApplication::translate("imageBrowser", "Previous", 0, QApplication::UnicodeUTF8));
+    pushButtonNext->setText(QApplication::translate("imageBrowser", "Next", 0, QApplication::UnicodeUTF8));
     label->setText(QApplication::translate("imageBrowser", "TextLabel", 0, QApplication::UnicodeUTF8));
     Q_UNUSED(imageBrowser);
     } // retranslateUi

@@ -107,4 +107,13 @@ started working on qttwitter just few days back... right now i ported Http dwonl
 [Mon Jun 23 13:36:24 2008]
 added image browser to test it,, i am trying to make a panoramio image browser ,, which finally find it's place in marble ,rught now this is testing place for it
 ]
+
+[Fri Oct 24 04:15:32 2008]
+removed all the trash codes that had accumulated all along..
+now this program is using qttwit lib.. this removes pressure on me to develop library on my own :P
+now i can develop a gui on it in much better way BTW  i also removed everything from HTTP directory as it's not required anymore..
+this time i did some major cleanup ..and hence this code is now free of following 
+(1)unnecessary code
+(2)porn which accidentally started piling up in this directory :P :D
+(3)open suse wallpapers 
 */
