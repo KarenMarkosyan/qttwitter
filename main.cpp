@@ -6,7 +6,7 @@ on open suse 10.3*/
 #include "ui_login.h"
 #include "ui_sendTwit.h"
 #include "twitterbackendinterface.h"
-#include "imagebrowserimpl.h"
+// #include "imagebrowserimpl.h"
 #include <QDialog>
 
 
@@ -19,7 +19,7 @@ int main(int argc,char **argv)
 	QDialog containerLoginDialog,containerSendTwitDialog,containerImageBrowser;
 	Ui::loginDialog myLoginDialog;
 	Ui::sendTwitDialog mySendTwitDialog;
-	Ui::imageBrowserimpl myImageBroswer;
+// 	Ui::imageBrowserimpl myImageBroswer; //not needed right now
     Backend::twitterBackend myTwitter;
 	
 	//connection slots
@@ -35,7 +35,7 @@ int main(int argc,char **argv)
 	//property setting
 	myLoginDialog.setupUi(&containerLoginDialog);
     mySendTwitDialog.setupUi(&containerSendTwitDialog);
-    myImageBroswer.setupUi(&containerImageBrowser);
+//     myImageBroswer.setupUi(&containerImageBrowser);
 	mainWindow.show();
 	return app.exec();
 }
