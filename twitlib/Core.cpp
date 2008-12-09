@@ -1,9 +1,10 @@
 #include "Core.h"
-
+#include "Decipher.h"
 #include <QtXml/QDomDocument>
 #include <QtGui/QMessageBox>
 #include <QtCore/QUrl>
-
+#include <QtCore/QFile>
+#include <QDebug>
 //=====================================================================
 QString Core::TWITTER_HOST = "twitter.com";
 QString Core::VERIFY_CREDENTIALS_URL = "/account/verify_credentials.xml";
@@ -11,7 +12,6 @@ QString Core::PUBLIC_TIMELINE_URL = "/statuses/public_timeline.xml";
 QString Core::GET_SINGLE_STATUS_URL = "/statuses/show/[req-id].xml";
 QString Core::FEATURED_USERS_URL = "/statuses/featured.xml";
 QString Core::LOGOUT_URL = "/account/end_session";
-QString Core::DOWNTIME_SCH_URL = "/downtime_schedule.xml";
 QString Core::IS_TWITTER_UP_URL = "/help/test.xml";
 QString Core::USERS_TIMELINE_URL = "/statuses/user_timeline[/opt-user].xml";
 QString Core::GET_FAVORITES_URL = "/favorites[/opt-user].xml";
@@ -30,19 +30,13 @@ QString Core::CREATE_FRIENDSHIP_URL = "/friendships/create/[req-user].xml";
 QString Core::REMOVE_FRIENDSHIP_URL = "/friendships/destroy/[req-user].xml";
 QString Core::FRIENDSHIP_EXIST_URL = "http://twitter.com/friendships/exists.xml";
 QString Core::UPDATE_LOCATION_URL = "/account/update_location.xml";
-QString Core::UPDATE_DELIVERY_DEVICE = "/account/update_delivery_device.xml";
-QString Core::REMAINING_API_REQUESTS = "/account/rate_limit_status.xml";
+QString Core::UPDATE_DELIVERY_DEVICE_URL = "/account/update_delivery_device.xml";
+QString Core::REMAINING_API_REQUESTS_URL = "/account/rate_limit_status.xml";
 QString Core::ADD_FAVORITE_URL = "/favorites/create/[req-id].xml";
 QString Core::REMOVE_FAVORITE_URL = "/favorites/destroy/[req-id].xml";
-QString Core::START_FOLLOW_URL = "/notifications/follow/[req-user].xml";
-QString Core::STOP_FOLLOW_URL = "/notifications/leave/[req-user].xml";
-QString Core::START_BLOCK_URL = "/blocks/create/[req-user].xml";
-QString Core::STOP_BLOCK_URL = "/blocks/destroy/[req-user].xml";
-
 //=====================================================================
-Core::Core(ITwitReply *obj)
+Core::Core()
 {
-    m_subscriber = obj;
     m_eventLoop = new QEventLoop(this);
 	m_http = new QHttp(TWITTER_HOST);
 
@@ -73,27 +67,29 @@ void Core::Done ( bool /*error*/ )
 //=====================================================================
 void Core::DataReadProgress ( int /*done*/, int /*total*/ )
 {
-    //m_subscriber->OnMessageReceived(QString::number(done).toStdString()+" / "+QString::number(total).toStdString());
+    //emit OnMessageReceived(QString::number(done).toStdString()+" / "+QString::number(total).toStdString());
 }
 //=====================================================================
-int Core::MakeGetRequest(QString req)
+int Core::MakeGetRequest(QString req,Returnables::RequestId reqId)
 {
-    int reqId;
+    int id;
     QBuffer *tempBuffer = new QBuffer;
     tempBuffer->open(QIODevice::ReadWrite);
-    reqId = m_http->get(req,tempBuffer);
-    m_buffer[reqId] = tempBuffer;
-	return reqId;
+    id = m_http->get(req,tempBuffer);
+	m_buffer[id].buffer = tempBuffer;
+	m_buffer[id].requestid = reqId;
+	return id;
 }
 //=====================================================================
-int Core::MakePostRequest(QString path,QByteArray req)
+int Core::MakePostRequest(QString path,QByteArray req,Returnables::RequestId reqId)
 {
-    int reqId;
+    int id;
     QBuffer *tempBuffer = new QBuffer;
     tempBuffer->open(QIODevice::ReadWrite);
-    reqId = m_http->post(path,req,tempBuffer);
-    m_buffer[reqId] = tempBuffer;
-	return reqId;
+    id = m_http->post(path,req,tempBuffer);
+	m_buffer[id].buffer = tempBuffer;
+	m_buffer[id].requestid = reqId;
+	return id;
 }
 //=====================================================================
 void Core::RequestStarted(int /*id*/)
@@ -101,42 +97,167 @@ void Core::RequestStarted(int /*id*/)
 //=====================================================================
 void Core::ReqFinished(int id, bool error)
 {
-    QByteArray resp;
+    QString response;
     QHttpResponseHeader head;
+
+	if(error)
+	{
+		emit OnError(m_http->errorString());
+	}
     
-    head = m_http->lastResponse();
+	head = m_http->lastResponse(); 
     if(head.isValid())
         responseHeaderReceived(head);
      
-    if(m_buffer[id])
-        resp = m_buffer[id]->data();
+	if(m_buffer[id].buffer)
+		response = QString(m_buffer[id].buffer->data());
+	else
+		response = QString::null;
      
-    if(error)
+	if(!response.isNull())
     {
-        m_subscriber->OnError(m_http->errorString().toStdString());
-    }
-    else if(id == m_loginId)
-    {      
-        m_credentialsId = MakeGetRequest(VERIFY_CREDENTIALS_URL);
-    }
-    else if(id == m_credentialsId)
+		switch(m_buffer[id].requestid)
+		{
+		case Returnables::PUBLIC_TIMELINE:
+			Returnables::PublicTimeline *pTimeline;
+			pTimeline = Decipher::Instance()->PublicTimeline(response);
+                        emit OnResponseReceived(pTimeline);
+			break;
+		case Returnables::FRIENDS_TIMELINE:
+			Returnables::FriendsTimeline *fTimeline;
+			fTimeline = Decipher::Instance()->FriendsTimeline(response);
+			emit OnResponseReceived(fTimeline);
+			break;
+		case Returnables::SINGLE_STATUS:
+			Returnables::SingleStatus *singleStatus;
+			singleStatus = Decipher::Instance()->SingleStatus(response);
+			emit OnResponseReceived(singleStatus);
+			break;
+		case Returnables::FEATURED_USERS:
+			Returnables::FeaturedUsers *featuredUsers;
+			featuredUsers = Decipher::Instance()->FeaturedUsers(response);
+			emit OnResponseReceived(featuredUsers);
+			break;
+		case Returnables::VERIFY_CREDENTIALS:
+			Returnables::Login *login;
+			login = Decipher::Instance()->Login(response);
+			emit OnResponseReceived(login);
+			break;
+		case Returnables::TWITTER_UP:
+			Returnables::TwitterUp *twitterUp;
+			twitterUp = Decipher::Instance()->TwitterUp(response);
+			emit OnResponseReceived(twitterUp);
+			break;
+		case Returnables::USER_TIMELINE:
+			Returnables::UserTimeline *userTimeline;
+			userTimeline = Decipher::Instance()->UserTimeline(response);
+			emit OnResponseReceived(userTimeline);
+			break;
+		case Returnables::FAVORITES:
+			Returnables::Favorites *favorites;
+			favorites = Decipher::Instance()->Favorites(response);
+			emit OnResponseReceived(favorites);
+			break;
+		case Returnables::NEW_STATUS:
+			Returnables::NewStatus *newStatus;
+			newStatus = Decipher::Instance()->NewStatus(response);
+			emit OnResponseReceived(newStatus);
+			break;
+		case Returnables::RECENT_REPLIES:
+			Returnables::RecentReplies *replies;
+			replies = Decipher::Instance()->RecentReplies(response);
+			emit OnResponseReceived(replies);
+			break;
+		case Returnables::REMOVE_STATUS:
+			Returnables::RemoveStatus *removedStatus;
+			removedStatus = Decipher::Instance()->RemoveStatus(response);
+			emit OnResponseReceived(removedStatus);
+			break;
+		case Returnables::FRIENDS:
+			Returnables::Friends *friends;
+			friends = Decipher::Instance()->Friends(response);
+			emit OnResponseReceived(friends);
+			break;
+		case Returnables::FOLLOWERS:
+			Returnables::Followers *followers;
+			followers = Decipher::Instance()->Followers(response);
+			emit OnResponseReceived(followers);
+			break;
+		case Returnables::USER_DETAILS:
+			Returnables::UserDetails *userDetails;
+			userDetails = Decipher::Instance()->UserDetails(response);
+			emit OnResponseReceived(userDetails);
+			break;
+		case Returnables::SENT_DIRECT_MESSAGES:
+			Returnables::SentDirectMessages *sentDirectMessages;
+			sentDirectMessages = Decipher::Instance()->SentDirectMessages(response);
+			emit OnResponseReceived(sentDirectMessages);
+			break;
+		case Returnables::RECEIVED_DIRECT_MESSAGES:
+			Returnables::ReceivedDirectMessages *receivedDirectMessages;
+			receivedDirectMessages = Decipher::Instance()->ReceivedDirectMessages(response);
+			emit OnResponseReceived(receivedDirectMessages);
+			break;
+		case Returnables::SEND_DIRECT_MESSAGE:
+			Returnables::SendDirectMessage *sendDirectMessage;
+			sendDirectMessage = Decipher::Instance()->SendDirectMessage(response);
+			emit OnResponseReceived(sendDirectMessage);
+			break;
+		case Returnables::REMOVE_DIRECT_MESSAGE:
+			Returnables::RemoveDirectMessage *removeDirectMessage;
+			removeDirectMessage = Decipher::Instance()->RemoveDirectMessage(response);
+			emit OnResponseReceived(removeDirectMessage);
+			break;
+		case Returnables::ADD_FRIENDSHIP:
+			Returnables::AddFriendship *addFriendship;
+			addFriendship = Decipher::Instance()->AddFriendShip(response);
+			emit OnResponseReceived(addFriendship);
+			break;
+		case Returnables::REMOVE_FRIENDSHIP:
+			Returnables::RemoveFriendship *removeFriendship;
+			removeFriendship = Decipher::Instance()->RemoveFriendship(response);
+			emit OnResponseReceived(removeFriendship);
+			break;
+		case Returnables::FRIENDSHIP_EXISTS:
+			Returnables::FriendshipExist *friendshipExists;
+			friendshipExists = Decipher::Instance()->FriendshipExist(response);
+			emit OnResponseReceived(friendshipExists);
+			break;
+		case Returnables::UPDATE_LOCATION:
+			Returnables::UpdateLocation *updateLocation;
+			updateLocation = Decipher::Instance()->UpdateLocation(response);
+			emit OnResponseReceived(updateLocation);
+			break;
+		case Returnables::DELIVERY_DEVICE:
+			Returnables::DeliveryDevice *deliveryDevice;
+			deliveryDevice = Decipher::Instance()->DeliveryDevice(response);
+			emit OnResponseReceived(deliveryDevice);
+			break;
+		case Returnables::API_REQUESTS:
+			Returnables::ApiRequests *apiRequests;
+			apiRequests = Decipher::Instance()->ApiRequests(response);
+			emit OnResponseReceived(apiRequests);
+			break;
+		case Returnables::ADD_FAVORITE:
+			Returnables::AddFavorite *addFavorite;
+			addFavorite = Decipher::Instance()->AddFavorite(response);
+			emit OnResponseReceived(addFavorite);
+			break;
+		case Returnables::REMOVE_FAVORITE:
+			Returnables::RemoveFavorite *removeFavorite;
+			removeFavorite = Decipher::Instance()->RemoveFavorite(response);
+			emit OnResponseReceived(removeFavorite);
+			break;
+		default:
+			emit OnMessageReceived(response);
+		}
+	}
+
+	if(m_buffer[id].buffer)
     {
-        QString buffer = QString(resp);
-        if(buffer.contains("true"))
-            m_subscriber->OnLoginStatus(true);
-        else
-            m_subscriber->OnLoginStatus(false);
-    }
-    else
-    {
-        m_subscriber->OnMessageReceived(QString(resp).toStdString());
-    }
-    
-    if(m_buffer[id])
-    {
-        m_buffer[id]->close();
-        delete m_buffer[id];
-        m_buffer[id] = NULL;
+		m_buffer[id].buffer->close();
+		delete m_buffer[id].buffer;
+		m_buffer[id].buffer = NULL;
     }
 }
 //=====================================================================
@@ -145,42 +266,41 @@ void Core::responseHeaderReceived(const QHttpResponseHeader &resp)
 	switch(resp.statusCode())
 	{
 		case SERVER::OK:
-            m_subscriber->OnStatusReceived(SERVER::OK);
+            emit OnStatusReceived(SERVER::OK);
 			break;
 		case SERVER::NOT_MODIFIED:
-            m_subscriber->OnStatusReceived(SERVER::NOT_MODIFIED);
+            emit OnStatusReceived(SERVER::NOT_MODIFIED);
 			break;
 		case SERVER::BAD_REQUEST:
-            m_subscriber->OnStatusReceived(SERVER::BAD_REQUEST);
+            emit OnStatusReceived(SERVER::BAD_REQUEST);
 			break;
 		case SERVER::NOT_AUTHORIZED:
-            m_subscriber->OnLoginStatus(false);
-            m_subscriber->OnStatusReceived(SERVER::NOT_AUTHORIZED);
+            emit OnStatusReceived(SERVER::NOT_AUTHORIZED);
 			break;
 		case SERVER::FORBIDDEN:
-            m_subscriber->OnStatusReceived(SERVER::FORBIDDEN);
+            emit OnStatusReceived(SERVER::FORBIDDEN);
 			break;
 		case SERVER::NOT_FOUND:
-            m_subscriber->OnStatusReceived(SERVER::NOT_FOUND);
+            emit OnStatusReceived(SERVER::NOT_FOUND);
 			break;
 		case SERVER::INTERNAL_SERVER_ERROR:
-            m_subscriber->OnStatusReceived(SERVER::INTERNAL_SERVER_ERROR);
+            emit OnStatusReceived(SERVER::INTERNAL_SERVER_ERROR);
 			break;
 		case SERVER::BAD_GATEWAY:
-            m_subscriber->OnStatusReceived(SERVER::BAD_GATEWAY);
+            emit OnStatusReceived(SERVER::BAD_GATEWAY);
 			break;
 		case SERVER::SERVICE_UNAVAILABLE:
-            m_subscriber->OnStatusReceived(SERVER::SERVICE_UNAVAILABLE);
+            emit OnStatusReceived(SERVER::SERVICE_UNAVAILABLE);
 			break;
 		default:
-            m_subscriber->OnStatusReceived(SERVER::UNKNOWN);
+            emit OnStatusReceived(SERVER::UNKNOWN);
 			break;
 	}
 }
 //=====================================================================
 void Core::GetPublicTimeline()
 {
-    MakeGetRequest(PUBLIC_TIMELINE_URL);
+    MakeGetRequest(PUBLIC_TIMELINE_URL,Returnables::PUBLIC_TIMELINE);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -189,38 +309,32 @@ void Core::GetSingleStatus(QString id)
     QString req;
     req = GET_SINGLE_STATUS_URL;
     req.replace("[req-id]",id);
-    MakeGetRequest(req);
+    MakeGetRequest(req,Returnables::SINGLE_STATUS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
 void Core::GetFeaturedUsers()
 {
-    MakeGetRequest(FEATURED_USERS_URL);
+    MakeGetRequest(FEATURED_USERS_URL,Returnables::FEATURED_USERS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
 void Core::Logout()
 {
-    MakePostRequest(LOGOUT_URL,"");
     m_http->setUser("","");
+	MakePostRequest(LOGOUT_URL,"",Returnables::LOGOUT);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
 void Core::Login(QString user, QString passw)
 {
-    m_loginId = m_http->setUser(user, passw);
-    m_eventLoop->exec(QEventLoop::AllEvents);
-}
-//=====================================================================
-void Core::GetDowntimeSchedule()
-{
-    MakeGetRequest(DOWNTIME_SCH_URL);
-    m_eventLoop->exec(QEventLoop::AllEvents);
+    m_http->setUser(user, passw);
+	VerifyCredentials();
 }
 //=====================================================================
 void Core::IsTwitterUp()
 {
-    MakeGetRequest(IS_TWITTER_UP_URL);
+    MakeGetRequest(IS_TWITTER_UP_URL,Returnables::TWITTER_UP);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -230,9 +344,9 @@ void Core::GetUsersTimeline(SERVER::Option2 *opt  /*=NULL*/)
     
     if(opt)
     {
-        QString user        = opt->user.c_str();
+        QString user        = opt->user;
         QString count      = QString::number(opt->count);
-        QString since       = opt->since.c_str();
+        QString since       = opt->since;
         QString sinceId    = QString::number(opt->sinceId);
         QString page       = QString::number(opt->page);
         
@@ -251,11 +365,11 @@ void Core::GetUsersTimeline(SERVER::Option2 *opt  /*=NULL*/)
         buildUrl.replace("[/opt-user]","");
     }
 
-    MakeGetRequest(buildUrl);
+    MakeGetRequest(buildUrl,Returnables::USER_TIMELINE);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
-void Core::GetFavorites(QString user  /*=""*/, int page  /*=1*/)
+void Core::GetFavorites(QString user  /*=""*/, unsigned int page  /*=1*/)
 {
     QString buildUrl  = GET_FAVORITES_URL;
     
@@ -264,9 +378,9 @@ void Core::GetFavorites(QString user  /*=""*/, int page  /*=1*/)
     else
         buildUrl.replace("[/opt-user]","");
     
-    buildUrl += "?page="+page;
-    
-    MakeGetRequest(buildUrl);    
+	buildUrl += "?page="+QString::number(page);
+
+    MakeGetRequest(buildUrl,Returnables::FAVORITES);    
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -276,7 +390,7 @@ void Core::GetFriendsTimeline(SERVER::Option1 *opt  /*=NULL*/)
     
     if(opt)
     {       
-        QString since       = opt->since.c_str();
+        QString since       = opt->since;
         QString sinceId    = QString::number(opt->sinceId);
         QString count      = QString::number(opt->count);
         QString page       = QString::number(opt->page);
@@ -287,7 +401,7 @@ void Core::GetFriendsTimeline(SERVER::Option1 *opt  /*=NULL*/)
         buildUrl += "&page="+page;
     }
 
-    MakeGetRequest(buildUrl);
+    MakeGetRequest(buildUrl,Returnables::FRIENDS_TIMELINE);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -299,7 +413,7 @@ void Core::PostNewStatus(QString status)
     req = "status=";
     req += encodedUrl;
     
-    MakePostRequest(POST_NEW_STATUS_URL,req);
+    MakePostRequest(POST_NEW_STATUS_URL,req,Returnables::NEW_STATUS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -310,7 +424,7 @@ void Core::GetRecentReplies(SERVER::Option3 *opt  /*=NULL*/)
     if(opt)
     {       
         QString page       = QString::number(opt->page);
-        QString since       = opt->since.c_str();
+        QString since       = opt->since;
         QString sinceId    = QString::number(opt->sinceId);
         
         buildUrl += "?page="+page;
@@ -318,17 +432,16 @@ void Core::GetRecentReplies(SERVER::Option3 *opt  /*=NULL*/)
         buildUrl += "&sinceId="+sinceId;
     }
 
-    MakeGetRequest(buildUrl);
+    MakeGetRequest(buildUrl,Returnables::RECENT_REPLIES);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
 void Core::RemoveStatus(QString id)
 {
-    QString buildUrl = REMOVE_STATUS_URL;
+	QString buildUrl = REMOVE_STATUS_URL;
+	buildUrl = buildUrl.replace("[req-id]",id);
     
-    buildUrl = buildUrl.replace("[req-id]",id);
-    
-    MakeGetRequest(buildUrl);
+	MakePostRequest(buildUrl,"",Returnables::REMOVE_STATUS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -338,10 +451,10 @@ void Core::GetFriends(SERVER::Option4 *opt  /*=NULL*/)
     
     if(opt)
     {
-        QString user        = opt->user.c_str();
+        QString user        = opt->user;
         QString page       = QString::number(opt->page);
         QString lite          = opt->lite ? "true" : "false";
-        QString since       = opt->since.c_str();
+        QString since       = opt->since;
         
         if(!user.isEmpty())
             buildUrl.replace("[/opt-user]","/"+user);
@@ -357,7 +470,7 @@ void Core::GetFriends(SERVER::Option4 *opt  /*=NULL*/)
         buildUrl.replace("[/opt-user]","");
     }
 
-    MakeGetRequest(buildUrl);
+    MakeGetRequest(buildUrl,Returnables::FRIENDS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -367,7 +480,7 @@ void Core::GetFollowers(SERVER::Option5 *opt  /*=NULL*/)
     
     if(opt)
     {
-        QString user        = opt->user.c_str();
+        QString user        = opt->user;
         QString page       = QString::number(opt->page);
         QString lite          = opt->lite ? "true" : "false";
         
@@ -384,7 +497,7 @@ void Core::GetFollowers(SERVER::Option5 *opt  /*=NULL*/)
         buildUrl.replace("[/opt-user]","");
     }
 
-    MakeGetRequest(buildUrl);
+    MakeGetRequest(buildUrl,Returnables::FOLLOWERS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -394,7 +507,7 @@ void Core::GetUserDetails(QString user)
     
     buildUrl = buildUrl.replace("[req-user]",user);
     
-    MakeGetRequest(buildUrl);
+    MakeGetRequest(buildUrl,Returnables::USER_DETAILS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -404,7 +517,7 @@ void Core::GetSentDirectMessages(SERVER::Option6 *opt  /*=NULL*/)
     
     if(opt)
     {       
-        QString since       = opt->since.c_str();
+        QString since       = opt->since;
         QString sinceId    = QString::number(opt->sinceId);
         QString page       = QString::number(opt->page);
         
@@ -413,7 +526,7 @@ void Core::GetSentDirectMessages(SERVER::Option6 *opt  /*=NULL*/)
         buildUrl += "&page="+page;
     }
 
-    MakeGetRequest(buildUrl);
+    MakeGetRequest(buildUrl,Returnables::SENT_DIRECT_MESSAGES);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -423,7 +536,7 @@ void Core::GetReceivedDirectMessages(SERVER::Option6 *opt  /*=NULL*/)
     
     if(opt)
     {       
-        QString since       = opt->since.c_str();
+        QString since       = opt->since;
         QString sinceId    = QString::number(opt->sinceId);
         QString page       = QString::number(opt->page);
         
@@ -432,7 +545,7 @@ void Core::GetReceivedDirectMessages(SERVER::Option6 *opt  /*=NULL*/)
         buildUrl += "&page="+page;
     }
 
-    MakeGetRequest(buildUrl);
+    MakeGetRequest(buildUrl,Returnables::RECEIVED_DIRECT_MESSAGES);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -447,7 +560,7 @@ void Core::SendDirectMessage(QString user, QString text)
     req += "text=";
     req += encodedText;
     
-    MakePostRequest(SEND_NEW_DIRECT_MESSAGE_URL,req);
+    MakePostRequest(SEND_NEW_DIRECT_MESSAGE_URL,req,Returnables::SEND_DIRECT_MESSAGE);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=================================================================================================================
@@ -456,18 +569,23 @@ void Core::RemoveDirectMessage(QString id)
     QString buildUrl = REMOVE_DIRECT_MESSAGE_URL;
     
     buildUrl = buildUrl.replace("[req-id]",id);
-    
-    MakeGetRequest(buildUrl);
+
+	MakePostRequest(buildUrl,"",Returnables::REMOVE_DIRECT_MESSAGE);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
-void Core::AddFriendship(QString user)
+void Core::AddFriendship(QString user, bool follow)
 {
-    QString buildUrl = CREATE_FRIENDSHIP_URL;
-    
-    buildUrl = buildUrl.replace("[req-user]",user);
-    
-    MakeGetRequest(buildUrl);
+    QByteArray req;
+	QString buildUrl;
+
+	buildUrl = CREATE_FRIENDSHIP_URL;
+	buildUrl = buildUrl.replace("[req-user]",user);
+  
+    req = "follow=";
+	req += follow ? "true" : "false";
+      
+	MakePostRequest(buildUrl,req,Returnables::ADD_FRIENDSHIP);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -477,7 +595,7 @@ void Core::RemoveFriendship(QString user)
     
     buildUrl = buildUrl.replace("[req-user]",user);
     
-    MakeGetRequest(buildUrl);
+	MakePostRequest(buildUrl,"",Returnables::REMOVE_FRIENDSHIP);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -488,13 +606,13 @@ void Core::FriendshipExist(QString user_a, QString user_b)
     buildUrl += "?user_a="+user_a;
     buildUrl += "&user_b="+user_b;
     
-    MakeGetRequest(buildUrl);
+    MakeGetRequest(buildUrl,Returnables::FRIENDSHIP_EXISTS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
 void Core::VerifyCredentials()
 {
-    MakeGetRequest(VERIFY_CREDENTIALS_URL);
+    MakeGetRequest(VERIFY_CREDENTIALS_URL,Returnables::VERIFY_CREDENTIALS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -506,34 +624,34 @@ void Core::UpdateLocation(QString location)
     req = "location=";
     req += encodedText;
     
-    MakePostRequest(UPDATE_LOCATION_URL,req);
+    MakePostRequest(UPDATE_LOCATION_URL,req,Returnables::UPDATE_LOCATION);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
 void Core::UpdateDeliveryDevice(SERVER::DEVICES device)
 {
-    QString buildUrl = UPDATE_DELIVERY_DEVICE;
+	QByteArray req;
 
-    switch(device)
+	switch(device)
     {
         case SERVER::SMS:
-            buildUrl += "?device=sms";
+            req = "device=sms";
             break;
         case SERVER::IM:
-            buildUrl += "?device=im";
+            req = "device=im";
            break;
         case SERVER::NONE:
-            buildUrl += "?device=none";
+            req = "device=none";
             break;
     }
     
-    MakeGetRequest(buildUrl);
+	MakePostRequest(UPDATE_DELIVERY_DEVICE_URL,req,Returnables::DELIVERY_DEVICE);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
 void Core::RemainingApiRequests()
 {
-    MakeGetRequest(REMAINING_API_REQUESTS);
+    MakeGetRequest(REMAINING_API_REQUESTS_URL,Returnables::API_REQUESTS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -543,7 +661,7 @@ void Core::AddFavorite(QString id)
     
     buildUrl = buildUrl.replace("[req-id]",id);
     
-    MakeGetRequest(buildUrl);
+	MakePostRequest(buildUrl,"",Returnables::ADD_FAVORITE);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -553,54 +671,10 @@ void Core::RemoveFavorite(QString id)
     
     buildUrl = buildUrl.replace("[req-id]",id);
     
-    MakeGetRequest(buildUrl);
+	MakePostRequest(buildUrl,"",Returnables::REMOVE_FAVORITE);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
-void Core::StartFollow(QString user)
-{
-    QString buildUrl = START_FOLLOW_URL;
-    
-    buildUrl = buildUrl.replace("[req-user]",user);
-    
-    MakeGetRequest(buildUrl);
-    m_eventLoop->exec(QEventLoop::AllEvents);
-}
-//=====================================================================
-void Core::StopFollow(QString user)
-{
-    QString buildUrl = STOP_FOLLOW_URL;
-    
-    buildUrl = buildUrl.replace("[req-user]",user);
-    
-    MakeGetRequest(buildUrl);
-    m_eventLoop->exec(QEventLoop::AllEvents);
-}
-//=====================================================================
-void Core::BlockUser(QString user)
-{
-    QString buildUrl = START_BLOCK_URL;
-    
-    buildUrl = buildUrl.replace("[req-user]",user);
-    
-    MakeGetRequest(buildUrl);
-    m_eventLoop->exec(QEventLoop::AllEvents);
-}
-//=====================================================================
-void Core::UnBlockUser(QString user)
-{
-    QString buildUrl = STOP_BLOCK_URL;
-    
-    buildUrl = buildUrl.replace("[req-user]",user);
-    
-    MakeGetRequest(buildUrl);
-    m_eventLoop->exec(QEventLoop::AllEvents);
-}
-//=====================================================================
-
-
-
-
 
 
 

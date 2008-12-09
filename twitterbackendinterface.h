@@ -2,10 +2,10 @@
 #define TWITTERBACKENDINTERFACE_H
 #include <QObject>
 #include <QDebug>
-#include <twitlib/ITwitReply.h>
+// #include <twitlib/ITwitReply.h>
 #include <twitlib/QTwitLib.h>
 
-class twitterBackendInterface : public QObject , public ITwitReply
+class twitterBackendInterface :public QObject
 {
     Q_OBJECT
 
@@ -48,10 +48,12 @@ public slots:
     //void setUserNamePassword(QString,QString);
 
     //callback from libTwit
-    void OnError ( std::string error );
-    void OnMessageReceived ( std::string message );
-    void OnStatusReceived ( SERVER::RESP response );
-    void OnLoginStatus ( bool isLoggedIn );
+    void OnError(QString error); 
+    void OnMessageReceived(QString message);
+    void OnStatusReceived(SERVER::RESP response);
+    void OnResponseReceived(Returnables::Response *);
+
+
 
 signals:
     void public_timeline ( QString );
