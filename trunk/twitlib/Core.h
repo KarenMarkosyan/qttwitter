@@ -6,16 +6,15 @@
 #include <QtCore/QEventLoop>
 #include <QtCore/QMap>
 #include <QtNetwork/QHttp>
-#include "ITwitReply.h"
 #include "Server.h"
+#include "Returnables.h"
 
-class Core : public QObject,
-                    public ITwitReply
+class Core : public QObject
 {
 	Q_OBJECT;
           
 	public:
-		Core(ITwitReply *obj);
+		Core();
 		virtual ~Core();
         
     public:
@@ -24,10 +23,9 @@ class Core : public QObject,
         void GetFeaturedUsers();
         void Logout();
         void Login(QString user, QString passw);
-        void GetDowntimeSchedule();
         void IsTwitterUp();
         void GetUsersTimeline(SERVER::Option2 *opt=NULL);
-        void GetFavorites(QString user="", int page=1);
+        void GetFavorites(QString user="", unsigned int page=1);
         void GetFriendsTimeline(SERVER::Option1 *opt=NULL);
         void PostNewStatus(QString status);
         void GetRecentReplies(SERVER::Option3 *opt=NULL);
@@ -39,7 +37,7 @@ class Core : public QObject,
         void GetReceivedDirectMessages(SERVER::Option6 *opt=NULL);
         void SendDirectMessage(QString user, QString text);
         void RemoveDirectMessage(QString id);
-        void AddFriendship(QString user);
+        void AddFriendship(QString user, bool follow=true);
         void RemoveFriendship(QString user);
         void FriendshipExist(QString user_a, QString user_b);
         void VerifyCredentials();
@@ -48,10 +46,6 @@ class Core : public QObject,
         void RemainingApiRequests();
         void AddFavorite(QString id);
         void RemoveFavorite(QString id);
-        void StartFollow(QString user);
-        void StopFollow(QString user);
-        void BlockUser(QString user);
-        void UnBlockUser(QString user);
 		
 	public slots:
         void RequestStarted(int id);
@@ -61,26 +55,29 @@ class Core : public QObject,
         
     signals:
         void QueryDone();
+        void OnError(QString error);
+        void OnMessageReceived(QString message);
+        void OnStatusReceived(SERVER::RESP resp);
+		void OnResponseReceived(Returnables::Response *resp);
+
+	private:
+		struct Info
+		{
+			Info() { buffer = NULL; }
+			QBuffer *buffer;
+			Returnables::RequestId requestid;
+		};
 
     private:
         void MakeConnections();
 		void responseHeaderReceived(const QHttpResponseHeader &resp);
-        int MakeGetRequest(QString req);
-        int MakePostRequest(QString path,QByteArray req);
-        
-    private:  //Interface functions
-        void OnError(std::string /*error*/) {}
-        void OnMessageReceived(std::string /*message*/) {}
-        void OnStatusReceived(SERVER::RESP /*response*/) {}
-        void OnLoginStatus(bool /*isLoggedIn*/) {}
-        
+        int MakeGetRequest(QString req,Returnables::RequestId reqId);
+        int MakePostRequest(QString path,QByteArray req,Returnables::RequestId reqId);
+               
 	private:
-        QMap<int,QBuffer*> m_buffer;
+        QMap<int,Info> m_buffer;
         QEventLoop  *m_eventLoop;
-		QHttp             *m_http;
-        ITwitReply      *m_subscriber;
-        int                  m_loginId;
-        int                  m_credentialsId;
+		QHttp       *m_http;
 		
 	private:
 		static QString TWITTER_HOST;
@@ -89,7 +86,6 @@ class Core : public QObject,
         static QString GET_SINGLE_STATUS_URL;
         static QString FEATURED_USERS_URL;        
         static QString LOGOUT_URL;
-        static QString DOWNTIME_SCH_URL;
         static QString IS_TWITTER_UP_URL;        
         static QString USERS_TIMELINE_URL;
         static QString GET_FAVORITES_URL;
@@ -108,14 +104,10 @@ class Core : public QObject,
         static QString REMOVE_FRIENDSHIP_URL;
         static QString FRIENDSHIP_EXIST_URL;
         static QString UPDATE_LOCATION_URL;
-        static QString UPDATE_DELIVERY_DEVICE;
-        static QString REMAINING_API_REQUESTS;
+        static QString UPDATE_DELIVERY_DEVICE_URL;
+        static QString REMAINING_API_REQUESTS_URL;
         static QString ADD_FAVORITE_URL;
         static QString REMOVE_FAVORITE_URL;
-        static QString START_FOLLOW_URL;
-        static QString STOP_FOLLOW_URL;
-        static QString START_BLOCK_URL;
-        static QString STOP_BLOCK_URL;
 };
 
 #endif // Core_H

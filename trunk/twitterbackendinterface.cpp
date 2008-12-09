@@ -3,8 +3,9 @@
 twitterBackendInterface::twitterBackendInterface( )
         : QObject()
 {
-    m_twitLib = new QTwitLib ( this );
+    m_twitLib = new QTwitLib ;
     isLogin = false;
+    connect(m_twitLib,SIGNAL(OnResponseReceived(Returnables::Response *)),this,SLOT(OnResponseReceived(Returnables::Response *)));
 }
 
 //
@@ -133,23 +134,28 @@ void  twitterBackendInterface::downtime_schedule()
 {
 }
 
-void twitterBackendInterface::OnError ( std::string error )
-{}
-
-void twitterBackendInterface::OnMessageReceived ( std::string message )
-{}
-
-void twitterBackendInterface::OnStatusReceived ( SERVER::RESP response )
-{}
-
-void twitterBackendInterface::OnLoginStatus ( bool isLoggedIn )
+void twitterBackendInterface::OnError(QString error)
 {
-    if ( isLoggedIn )
-    {
-        isLogin = TRUE;
-    }
-    else
-    {
-        isLogin = FALSE;
-    }
 }
+void twitterBackendInterface::OnMessageReceived(QString message)
+{
+}
+void twitterBackendInterface::OnStatusReceived(SERVER::RESP response)
+{
+  qDebug()<<"status recived";
+}
+void twitterBackendInterface::OnResponseReceived(Returnables::Response *)
+{
+}
+
+// void twitterBackendInterface::OnLoginStatus ( bool isLoggedIn )
+// {
+//     if ( isLoggedIn )
+//     {
+//         isLogin = TRUE;
+//     }
+//     else
+//     {
+//         isLogin = FALSE;
+//     }
+// }
