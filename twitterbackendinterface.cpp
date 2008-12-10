@@ -181,6 +181,9 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser*> 
           emit(public_timeline(value));
 
 }
+void twitterBackendInterface::setUserNamePassword(QString user , QString password)
+{
+}
 
 // void twitterBackendInterface::OnLoginStatus ( bool isLoggedIn )
 // {

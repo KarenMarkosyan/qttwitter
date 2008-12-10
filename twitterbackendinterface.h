@@ -46,7 +46,7 @@ public slots:
     void  test();//Primary
     void  downtime_schedule();//Primary
     /*End OF twitter API Slots*/
-    //void setUserNamePassword(QString,QString);
+    void setUserNamePassword(QString,QString);
 
     //callback from libTwit
     void OnError(QString error); 
