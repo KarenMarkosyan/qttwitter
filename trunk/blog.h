@@ -116,4 +116,8 @@ this time i did some major cleanup ..and hence this code is now free of followin
 (1)unnecessary code
 (2)porn which accidentally started piling up in this directory :P :D
 (3)open suse wallpapers 
+
+[11:29:30 AM Wednesday, December 10 2008 ] 
+finally i am working on intergating login in twitter .. i am planning to integrate laxis into this twitter client :)
+..btw public twitter is working..but for some reason it doesn't gives more than 2 twitter at any moment.
 */

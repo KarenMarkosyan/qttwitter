@@ -5,7 +5,7 @@ on open suse 10.3
 */
 #include <QApplication>
 #include "MainWindow/mainwindowimpl.h"
-#include "ui_login.h"
+#include "loginDerived.h"
 #include "ui_sendTwit.h"
 #include "twitterbackendinterface.h"
 // #include "imagebrowserimpl.h"
@@ -19,7 +19,7 @@ int main(int argc,char **argv)
 	//this is derived from ui file and the added functionality  system tray MainWindow Class
 	MainWindowImpl mainWindow;
 	QDialog containerLoginDialog,containerSendTwitDialog,containerImageBrowser;
-	Ui::loginDialog myLoginDialog;
+        Ui::loginDialogDerived myLoginDialog;
 	Ui::sendTwitDialog mySendTwitDialog;
 // 	Ui::imageBrowserimpl myImageBroswer; //not needed right now
         Backend::twitterBackend myTwitter;
@@ -34,6 +34,7 @@ int main(int argc,char **argv)
         QObject::connect(mainWindow.actionOwn,SIGNAL(triggered()),&myTwitter,SLOT(user_timeline()));
         QObject::connect(mainWindow.actionView_Images_From_Area,SIGNAL(triggered()),&containerImageBrowser,SLOT(show()));
         
+//         QObject::connect(&myLoginDialog, , );
         QObject::connect(&myTwitter,SIGNAL(public_timeline(QString)),mainWindow.textLabelMainWindow,SLOT(setText(QString)) );//connection for shwoing public timeline
 	//QObject::connect(mainWindow.action,SIGNAL(triggered()),&myTwitter,SLOT());
 	//property setting
