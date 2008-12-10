@@ -4,7 +4,7 @@
 #include <QtGui/QMessageBox>
 #include <QtCore/QUrl>
 #include <QtCore/QFile>
-#include <QDebug>
+
 //=====================================================================
 QString Core::TWITTER_HOST = "twitter.com";
 QString Core::VERIFY_CREDENTIALS_URL = "/account/verify_credentials.xml";
@@ -121,7 +121,7 @@ void Core::ReqFinished(int id, bool error)
 		case Returnables::PUBLIC_TIMELINE:
 			Returnables::PublicTimeline *pTimeline;
 			pTimeline = Decipher::Instance()->PublicTimeline(response);
-                        emit OnResponseReceived(pTimeline);
+			emit OnResponseReceived(pTimeline);
 			break;
 		case Returnables::FRIENDS_TIMELINE:
 			Returnables::FriendsTimeline *fTimeline;
