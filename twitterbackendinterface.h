@@ -12,6 +12,7 @@ class twitterBackendInterface :public QObject
 public:
     twitterBackendInterface();
     bool isLogin;
+    void DisplayList(QLinkedList<Returnables::StatusUser*> list, QString header);
 public slots:
     /*Twitter API SLots*/
     void  public_timeline ( /*int since_id*/ );//Primary

@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,24 +10,16 @@
     <height>327</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="../images/images.qrc" >
+  <property name="windowIcon">
+   <iconset resource="../images/images.qrc">
     <normaloff>:/twitter/TwitterPostIcon.png</normaloff>:/twitter/TwitterPostIcon.png</iconset>
   </property>
-  <widget class="QWidget" name="centralwidget" >
-   <property name="geometry" >
-    <rect>
-     <x>0</x>
-     <y>58</y>
-     <width>515</width>
-     <height>244</height>
-    </rect>
-   </property>
-   <widget class="QLabel" name="twitterImageLabel" >
-    <property name="geometry" >
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="twitterImageLabel">
+    <property name="geometry">
      <rect>
       <x>130</x>
       <y>80</y>
@@ -34,356 +27,351 @@
       <height>61</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string/>
     </property>
-    <property name="pixmap" >
-     <pixmap resource="../images/images.qrc" >:/twitter/Twitter.png</pixmap>
+    <property name="pixmap">
+     <pixmap resource="../images/images.qrc">:/twitter/Twitter.png</pixmap>
     </property>
    </widget>
-   <widget class="QLabel" name="textLabelMainWindow" >
-    <property name="geometry" >
+   <widget class="QLabel" name="textLabelMainWindow">
+    <property name="geometry">
      <rect>
       <x>10</x>
       <y>30</y>
-      <width>461</width>
-      <height>41</height>
+      <width>491</width>
+      <height>201</height>
      </rect>
     </property>
-    <property name="text" >
+    <property name="text">
      <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar" >
-   <property name="geometry" >
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
      <width>515</width>
-     <height>28</height>
+     <height>23</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile" >
-    <property name="title" >
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionLogin" />
-    <addaction name="actionLogout" />
-    <addaction name="actionPrint" />
-    <addaction name="separator" />
-    <addaction name="actionConfigure" />
-    <addaction name="actionExit" />
+    <addaction name="actionLogin"/>
+    <addaction name="actionLogout"/>
+    <addaction name="actionPrint"/>
+    <addaction name="separator"/>
+    <addaction name="actionConfigure"/>
+    <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuAbout" >
-    <property name="title" >
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
      <string>Timeline</string>
     </property>
-    <addaction name="actionPublic" />
-    <addaction name="actionFriends" />
-    <addaction name="actionOwn" />
+    <addaction name="actionPublic"/>
+    <addaction name="actionFriends"/>
+    <addaction name="actionOwn"/>
    </widget>
-   <widget class="QMenu" name="menuAbout_2" >
-    <property name="title" >
+   <widget class="QMenu" name="menuAbout_2">
+    <property name="title">
      <string>About</string>
     </property>
-    <addaction name="separator" />
-    <addaction name="actionIs_It_Working" />
-    <addaction name="actionAbout_Qt_Twitter" />
-    <addaction name="actionAbout_Qt" />
-    <addaction name="actionHelp" />
+    <addaction name="separator"/>
+    <addaction name="actionIs_It_Working"/>
+    <addaction name="actionAbout_Qt_Twitter"/>
+    <addaction name="actionAbout_Qt"/>
+    <addaction name="actionHelp"/>
    </widget>
-   <widget class="QMenu" name="menuOther_Services" >
-    <property name="title" >
+   <widget class="QMenu" name="menuOther_Services">
+    <property name="title">
      <string>Other Services</string>
     </property>
-    <widget class="QMenu" name="menuSet_FaceBook_Status" >
-     <property name="title" >
+    <widget class="QMenu" name="menuSet_FaceBook_Status">
+     <property name="title">
       <string>Set FaceBook Status</string>
      </property>
-     <addaction name="actionFacebook_Status_Twitter" />
+     <addaction name="actionFacebook_Status_Twitter"/>
     </widget>
-    <addaction name="menuSet_FaceBook_Status" />
-    <addaction name="actionView_Images_From_Area" />
+    <addaction name="menuSet_FaceBook_Status"/>
+    <addaction name="actionView_Images_From_Area"/>
    </widget>
-   <widget class="QMenu" name="menuTwitter" >
-    <property name="title" >
+   <widget class="QMenu" name="menuTwitter">
+    <property name="title">
      <string>Twitter</string>
     </property>
-    <addaction name="actionSet_New_Status" />
-    <addaction name="actionFollow" />
-    <addaction name="actionLeave" />
-    <addaction name="actionUser_Methods" />
-    <addaction name="actionDirect_Message_Methods" />
-    <addaction name="actionFriendship_Methods" />
-    <addaction name="actionArchive" />
-    <addaction name="actionFavorite_Methods" />
-    <addaction name="actionBlock_Methods" />
+    <addaction name="actionSet_New_Status"/>
+    <addaction name="actionFollow"/>
+    <addaction name="actionLeave"/>
+    <addaction name="actionUser_Methods"/>
+    <addaction name="actionDirect_Message_Methods"/>
+    <addaction name="actionFriendship_Methods"/>
+    <addaction name="actionArchive"/>
+    <addaction name="actionFavorite_Methods"/>
+    <addaction name="actionBlock_Methods"/>
    </widget>
-   <addaction name="menuFile" />
-   <addaction name="menuAbout" />
-   <addaction name="menuTwitter" />
-   <addaction name="menuOther_Services" />
-   <addaction name="menuAbout_2" />
+   <addaction name="menuFile"/>
+   <addaction name="menuAbout"/>
+   <addaction name="menuTwitter"/>
+   <addaction name="menuOther_Services"/>
+   <addaction name="menuAbout_2"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar" >
-   <property name="geometry" >
-    <rect>
-     <x>0</x>
-     <y>302</y>
-     <width>515</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QToolBar" name="toolBar" >
-   <property name="geometry" >
-    <rect>
-     <x>0</x>
-     <y>28</y>
-     <width>515</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="windowTitle" >
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
     <string>toolBar</string>
    </property>
-   <attribute name="toolBarArea" >
+   <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
-   <attribute name="toolBarBreak" >
+   <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionLogin" />
-   <addaction name="actionSet_New_Status" />
-   <addaction name="actionFollow" />
-   <addaction name="actionConfigure" />
-   <addaction name="actionExit" />
+   <addaction name="actionLogin"/>
+   <addaction name="actionSet_New_Status"/>
+   <addaction name="actionFollow"/>
+   <addaction name="actionConfigure"/>
+   <addaction name="actionExit"/>
   </widget>
-  <action name="actionLogin" >
-   <property name="enabled" >
+  <action name="actionLogin">
+   <property name="enabled">
     <bool>true</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/user-online.svg</normaloff>
      <normalon>:/twitter/twitter_system_tray1.png</normalon>:/twitter/user-online.svg</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Login</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Login To Twitter</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Simple Login to twitter</string>
    </property>
-   <property name="iconVisibleInMenu" >
+   <property name="iconVisibleInMenu">
     <bool>true</bool>
    </property>
   </action>
-  <action name="actionLogout" >
-   <property name="enabled" >
+  <action name="actionLogout">
+   <property name="enabled">
     <bool>false</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/user-offline.svg</normaloff>:/twitter/user-offline.svg</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Logout</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Logout From Twitter</string>
    </property>
   </action>
-  <action name="actionPrint" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionPrint">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/print.jpeg</normaloff>:/twitter/print.jpeg</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Print</string>
    </property>
   </action>
-  <action name="actionPublic" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionPublic">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/twitter_system_tray_2.0.png</normaloff>:/twitter/twitter_system_tray_2.0.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Public</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Display TimeLine's From Twitter Server</string>
    </property>
   </action>
-  <action name="actionFriends" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionFriends">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/twitter_system_tray.png</normaloff>:/twitter/twitter_system_tray.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Friends</string>
    </property>
   </action>
-  <action name="actionOwn" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionOwn">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/twhitter_btn_02.png</normaloff>:/twitter/twhitter_btn_02.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Own</string>
    </property>
   </action>
-  <action name="actionAbout_Qt_Twitter" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionAbout_Qt_Twitter">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/TwitterPostIcon.png</normaloff>:/twitter/TwitterPostIcon.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>About Qt Twitter</string>
    </property>
   </action>
-  <action name="actionAbout_Qt" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionAbout_Qt">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/qt.png</normaloff>:/twitter/qt.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>About Qt</string>
    </property>
   </action>
-  <action name="actionHelp" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/help-about.svg</normaloff>:/twitter/help-about.svg</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>New From Twitter</string>
    </property>
   </action>
-  <action name="actionExit" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/application-exit.svg</normaloff>:/twitter/application-exit.svg</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Exit</string>
    </property>
   </action>
-  <action name="actionFacebook_Status_Twitter" >
-   <property name="checkable" >
+  <action name="actionFacebook_Status_Twitter">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/icon.facebook.png</normaloff>:/twitter/icon.facebook.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Facebook Status = Twitter</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Set Facebook Status equal to Twitter's microblog from next update</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Set Facebook Status equal to Twitter's microblog from next update</string>
    </property>
-   <property name="whatsThis" >
+   <property name="whatsThis">
     <string>Set Facebook Status equal to Twitter's microblog from next update</string>
    </property>
   </action>
-  <action name="actionConfigure" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionConfigure">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/configure.svg</normaloff>:/twitter/configure.svg</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Configure</string>
    </property>
   </action>
-  <action name="actionSet_New_Status" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionSet_New_Status">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/im-status-message-edit.svg</normaloff>:/twitter/im-status-message-edit.svg</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Set New Status</string>
    </property>
   </action>
-  <action name="actionFollow" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionFollow">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/add-profile.svg</normaloff>:/twitter/add-profile.svg</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Follow</string>
    </property>
   </action>
-  <action name="actionLeave" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionLeave">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/remove-profile.svg</normaloff>:/twitter/remove-profile.svg</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Leave</string>
    </property>
   </action>
-  <action name="actionUser_Methods" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionUser_Methods">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/personal.svg</normaloff>:/twitter/personal.svg</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>User Methods</string>
    </property>
   </action>
-  <action name="actionDirect_Message_Methods" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionDirect_Message_Methods">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/message-unread.svg</normaloff>:/twitter/message-unread.svg</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Direct Message Methods</string>
    </property>
   </action>
-  <action name="actionFriendship_Methods" >
-   <property name="text" >
+  <action name="actionFriendship_Methods">
+   <property name="text">
     <string>Friendship Methods</string>
    </property>
   </action>
-  <action name="actionArchive" >
-   <property name="text" >
+  <action name="actionArchive">
+   <property name="text">
     <string>archive</string>
    </property>
   </action>
-  <action name="actionFavorite_Methods" >
-   <property name="text" >
+  <action name="actionFavorite_Methods">
+   <property name="text">
     <string>Favorite Methods</string>
    </property>
   </action>
-  <action name="actionBlock_Methods" >
-   <property name="text" >
+  <action name="actionBlock_Methods">
+   <property name="text">
     <string>Block Methods</string>
    </property>
   </action>
-  <action name="actionIs_It_Working" >
-   <property name="icon" >
-    <iconset resource="../images/images.qrc" >
+  <action name="actionIs_It_Working">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/questionmark</normaloff>:/twitter/questionmark</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Is It Working?</string>
    </property>
   </action>
-  <action name="actionView_Images_From_Area" >
-   <property name="text" >
+  <action name="actionView_Images_From_Area">
+   <property name="text">
     <string>View Images From Area</string>
    </property>
   </action>
  </widget>
  <resources>
-  <include location="../images/images.qrc" />
+  <include location="../images/images.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -392,11 +380,11 @@
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>240</x>
      <y>142</y>
     </hint>

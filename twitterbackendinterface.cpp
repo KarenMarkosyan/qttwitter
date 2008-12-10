@@ -142,10 +142,44 @@ void twitterBackendInterface::OnMessageReceived(QString message)
 }
 void twitterBackendInterface::OnStatusReceived(SERVER::RESP response)
 {
-  qDebug()<<"status recived";
+  
 }
-void twitterBackendInterface::OnResponseReceived(Returnables::Response *)
+void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 {
+//   qDebug()<<"status recived";
+  
+  if(resp)
+  {
+    switch(resp->reqID)
+    {
+      case Returnables::PUBLIC_TIMELINE:
+      {
+        Returnables::PublicTimeline *pTimeline = static_cast<Returnables::PublicTimeline *>(resp);
+        DisplayList(pTimeline->list, "Public Timeline");
+        delete pTimeline;
+        break;
+      }
+    }
+  }
+      
+  
+}
+
+void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser*> list, QString header)
+{
+  Returnables::StatusUser *statusUser = NULL;
+  QString value;
+
+  while(!list.isEmpty())
+  {
+    statusUser = list.takeFirst();
+//     value="ID:"+QString::number(statusUser->status.id) ;
+    value=statusUser->user.screenName+" twittered \" ";
+    value+=statusUser->status.text +" \" <br>";
+
+  }
+          emit(public_timeline(value));
+
 }
 
 // void twitterBackendInterface::OnLoginStatus ( bool isLoggedIn )
