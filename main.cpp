@@ -35,7 +35,7 @@ int main(int argc,char **argv)
         QObject::connect(mainWindow.actionView_Images_From_Area,SIGNAL(triggered()),&containerImageBrowser,SLOT(show()));
         
 //         QObject::connect(&myLoginDialog, , );
-        QObject::connect(&myTwitter,SIGNAL(public_timeline(QString)),mainWindow.textBrowserPT,SLOT(setText(QString)) );//connection for shwoing public timeline
+        QObject::connect(&myTwitter,SIGNAL(public_timeline(QString)), mainWindow.textBrowserPT,SLOT(append(QString)) );//connection for shwoing public timeline
 	//QObject::connect(mainWindow.action,SIGNAL(triggered()),&myTwitter,SLOT());
 	//property setting
 	myLoginDialog.setupUi(&containerLoginDialog);
