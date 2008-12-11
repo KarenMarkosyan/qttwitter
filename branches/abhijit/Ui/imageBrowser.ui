@@ -1,0 +1,143 @@
+<ui version="4.0" >
+ <class>imageBrowser</class>
+ <widget class="QWidget" name="imageBrowser" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <widget class="QFrame" name="frame" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>381</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <property name="frameShape" >
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow" >
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QWidget" name="gridLayoutWidget" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>361</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout" >
+     <item rowspan="2" row="1" column="0" >
+      <widget class="QPushButton" name="pushButtonPrevious" >
+       <property name="maximumSize" >
+        <size>
+         <width>62</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Previous</string>
+       </property>
+      </widget>
+     </item>
+     <item rowspan="2" row="1" column="2" >
+      <widget class="QPushButton" name="pushButtonNext" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>41</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Next</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" colspan="3" >
+      <widget class="QSlider" name="horizontalSliderForImage" >
+       <property name="value" >
+        <number>50</number>
+       </property>
+       <property name="sliderPosition" >
+        <number>50</number>
+       </property>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="tickPosition" >
+        <enum>QSlider::TicksBothSides</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" >
+      <widget class="QLCDNumber" name="lcdNumber" >
+       <property name="maximumSize" >
+        <size>
+         <width>16777215</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="frameShape" >
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="frameShadow" >
+        <enum>QFrame::Sunken</enum>
+       </property>
+       <property name="segmentStyle" >
+        <enum>QLCDNumber::Flat</enum>
+       </property>
+       <property name="value" stdset="0" >
+        <double>50.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item rowspan="2" row="1" column="1" >
+      <widget class="QLabel" name="label" >
+       <property name="text" >
+        <string>TextLabel</string>
+       </property>
+       <property name="alignment" >
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>horizontalSliderForImage</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lcdNumber</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>160</x>
+     <y>263</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>176</x>
+     <y>43</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

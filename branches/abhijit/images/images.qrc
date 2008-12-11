@@ -1,0 +1,24 @@
+<RCC>
+  <qresource prefix="twitter" >
+    <file>twitter_system_tray_2.0.png</file>
+    <file>personal.svg</file>
+    <file>print.jpeg</file>
+    <file>questionmark</file>
+    <file>qt.png</file>
+    <file>icon.facebook.png</file>
+    <file>twhitter_btn_03.png</file>
+    <file>remove-profile.svg</file>
+    <file>twhitter_btn_02.png</file>
+    <file>twitter_system_tray.png</file>
+    <file>add-profile.svg</file>
+    <file>application-exit.svg</file>
+    <file>configure.svg</file>
+    <file>im-status-message-edit.svg</file>
+    <file>help-about.svg</file>
+    <file>message-unread.svg</file>
+    <file>user-offline.svg</file>
+    <file>user-online.svg</file>
+    <file>Twitter.png</file>
+    <file>TwitterPostIcon.png</file>
+  </qresource>
+</RCC>
