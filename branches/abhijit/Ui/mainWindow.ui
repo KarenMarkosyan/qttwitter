@@ -54,6 +54,9 @@
     <property name="currentIndex">
      <number>2</number>
     </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Triangular</enum>
+    </property>
     <widget class="QWidget" name="tabPublicTimeline">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -232,6 +235,9 @@
       <string>You are currently viewing only your Tweets</string>
      </property>
      <attribute name="title">
+      <string>My Tweets</string>
+     </attribute>
+     <attribute name="toolTip">
       <string>My Tweets</string>
      </attribute>
      <widget class="QScrollArea" name="scrollAreaMyTweetsTimeline">
