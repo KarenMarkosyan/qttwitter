@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Qt Twitter Client</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../images/images.qrc">
@@ -85,52 +85,6 @@
      <attribute name="title">
       <string>Public Timeline</string>
      </attribute>
-     <attribute name="toolTip">
-      <string>Public Timeline</string>
-     </attribute>
-     <widget class="QLabel" name="twitterImageLabel">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>145</x>
-        <y>85</y>
-        <width>221</width>
-        <height>61</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="contextMenuPolicy">
-       <enum>Qt::NoContextMenu</enum>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Plain</enum>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="pixmap">
-       <pixmap>../images/Twitter.png</pixmap>
-      </property>
-      <property name="scaledContents">
-       <bool>false</bool>
-      </property>
-      <property name="indent">
-       <number>-1</number>
-      </property>
-      <property name="textInteractionFlags">
-       <set>Qt::NoTextInteraction</set>
-      </property>
-     </widget>
      <widget class="QScrollArea" name="scrollAreaPublicTimeline">
       <property name="geometry">
        <rect>
@@ -167,6 +121,49 @@
           <height>234</height>
          </rect>
         </property>
+		<widget class="QLabel" name="twitterImageLabel">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>145</x>
+            <y>85</y>
+            <width>221</width>
+            <height>61</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::NoContextMenu</enum>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>../images/Twitter.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+          <property name="indent">
+           <number>-1</number>
+          </property>
+          <property name="textInteractionFlags">
+           <set>Qt::NoTextInteraction</set>
+          </property>
+         </widget>
        </widget>
       </widget>
      </widget>
@@ -185,9 +182,6 @@
       <string>You are currently viewing the Friends Timeline</string>
      </property>
      <attribute name="title">
-      <string>Friends Timeline</string>
-     </attribute>
-     <attribute name="toolTip">
       <string>Friends Timeline</string>
      </attribute>
      <widget class="QScrollArea" name="scrollAreaFriendsTimeline">
@@ -244,9 +238,6 @@
       <string>You are currently viewing only your Tweets</string>
      </property>
      <attribute name="title">
-      <string>My Tweets</string>
-     </attribute>
-     <attribute name="toolTip">
       <string>My Tweets</string>
      </attribute>
      <widget class="QScrollArea" name="scrollAreaMyTweetsTimeline">
