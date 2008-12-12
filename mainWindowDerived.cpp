@@ -41,6 +41,6 @@ mainWindowDerived::mainWindowDerived()
 
 void mainWindowDerived::showMessage(QString message)
 {
-    myTrayIcon.showMessage("SomebOdy Said",message, QSystemTrayIcon::Information,5000/*duration*/);
+    myTrayIcon.showMessage("SomebOdy Said",message, QSystemTrayIcon::Information,1000/*duration*/);
 
 }

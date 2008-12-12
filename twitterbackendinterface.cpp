@@ -1,5 +1,5 @@
 #include "twitterbackendinterface.h"
-//
+#include <QDebug>
 twitterBackendInterface::twitterBackendInterface( )
         : QObject()
 {
@@ -183,6 +183,7 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser*> 
 }
 void twitterBackendInterface::setUserNamePassword(QString user , QString password)
 {
+  qDebug()<<user<<password;
 }
 
 // void twitterBackendInterface::OnLoginStatus ( bool isLoggedIn )
