@@ -146,8 +146,8 @@ void twitterBackendInterface::OnStatusReceived(SERVER::RESP response)
 }
 void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 {
-//   qDebug()<<"status recived";
-  
+  qDebug()<<"status recived"<<resp->reqID;
+
   if(resp)
   {
     switch(resp->reqID)
@@ -159,10 +159,20 @@ void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
         delete pTimeline;
         break;
       }
-    }
+    
+     case Returnables::LOGIN:
+      {
+        qDebug()<<"1reached here";
+        Returnables::Login *login = static_cast<Returnables::Login *>(resp);
+        QString authorized = login->authorized ? "true" : "false";
+//      m_plainTextEdit->appendPlainText("Authorized: "+authorized);
+        qDebug()<<"Authorized: "<<authorized;
+        delete login;
+        break;
+      }
+    } 
   }
-      
-  
+
 }
 
 void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser*> list, QString header)
@@ -183,6 +193,7 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser*> 
 }
 void twitterBackendInterface::setUserNamePassword(QString user , QString password)
 {
+  m_twitLib->Login(user,password);
   qDebug()<<user<<password;
 }
 
