@@ -1,10 +1,17 @@
 #include "loginDerived.h"
-
-LoginDialogDerived ::LoginDialogDerived()
+#include <QDebug>
+LoginDialogDerived ::LoginDialogDerived() 
 {
-//    QObject::connect(buttonBox,SIGNAL(accepted()),this,SLOT(emitUserPassword()));
+  setupUi(this);
+    QObject::connect(this,SIGNAL(accepted()),this,SLOT(emitUserPassword()));
+//   QObject::connect(this,SIGNAL(rejected()),this,SLOT(emitUserPassword()));
+
+  qDebug()<<"reached here";
+
 }
 void LoginDialogDerived ::emitUserPassword()
 {
-  emit setUserPasswrd(loginLineEdit->text(),passwordLineEdit->text());
+//   qDebug()<<loginLineEdit->text()<<passwordLineEdit->text();
+//   emit setUserPassword(loginLineEdit->text(),passwordLineEdit->text());
 }
+

@@ -18,29 +18,26 @@ int main(int argc,char **argv)
 	QApplication app(argc,argv);
 	//this is derived from ui file and the added functionality  system tray MainWindow Class
 	MainWindowImpl mainWindow;
-	QDialog containerLoginDialog,containerSendTwitDialog,containerImageBrowser;
+	QDialog containerSendTwitDialog ;
         Ui::loginDialogDerived myLoginDialog;
 	Ui::sendTwitDialog mySendTwitDialog;
-// 	Ui::imageBrowserimpl myImageBroswer; //not needed right now
         Backend::twitterBackend myTwitter;
 	
 	//connection slots
 	QObject::connect(&mainWindow,SIGNAL(quit()),&app,SLOT(quit()));//just quit when you get quit signal
-	QObject::connect(mainWindow.actionLogin,SIGNAL(triggered()),&containerLoginDialog,SLOT(show()));
+        QObject::connect(mainWindow.actionLogin,SIGNAL(triggered()),&myLoginDialog,SLOT(show()));
 	QObject::connect(mainWindow.actionSet_New_Status,SIGNAL(triggered()),&containerSendTwitDialog,SLOT(show()));	
-	//QObject::connect(&containerSendTwitDialog,SLOT(
 	QObject::connect(mainWindow.actionPublic,SIGNAL(triggered()),&myTwitter,SLOT(public_timeline()));
 	QObject::connect(mainWindow.actionFriends,SIGNAL(triggered()),&myTwitter,SLOT(friends_timeline()));
         QObject::connect(mainWindow.actionOwn,SIGNAL(triggered()),&myTwitter,SLOT(user_timeline()));
-        QObject::connect(mainWindow.actionView_Images_From_Area,SIGNAL(triggered()),&containerImageBrowser,SLOT(show()));
         
-//         QObject::connect(&myLoginDialog, , );
+        
+        QObject::connect(&myLoginDialog,SIGNAL(setUserPassword(QString,QString)) ,&myTwitter ,SLOT(setUserNamePassword(QString,QString)) );/**login connection */
         QObject::connect(&myTwitter,SIGNAL(public_timeline(QString)),mainWindow.textLabelMainWindow,SLOT(setText(QString)) );//connection for shwoing public timeline
 	//QObject::connect(mainWindow.action,SIGNAL(triggered()),&myTwitter,SLOT());
 	//property setting
-	myLoginDialog.setupUi(&containerLoginDialog);
+
         mySendTwitDialog.setupUi(&containerSendTwitDialog);
-//     myImageBroswer.setupUi(&containerImageBrowser);
 	mainWindow.show();
 	return app.exec();
 }

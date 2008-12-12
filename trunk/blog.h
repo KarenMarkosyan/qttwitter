@@ -120,4 +120,8 @@ this time i did some major cleanup ..and hence this code is now free of followin
 [11:29:30 AM Wednesday, December 10 2008 ] 
 finally i am working on intergating login in twitter .. i am planning to integrate laxis into this twitter client :)
 ..btw public twitter is working..but for some reason it doesn't gives more than 2 twitter at any moment.
+
+[03:26:03 PM Friday, December 12 2008] even murli has joined us in our little project :D
+adn apart from that this little project has now two types of ui..
+though i am still working on stiching ui to backend..uhhh..it's real pain in arse
 */

@@ -1,19 +1,20 @@
 #ifndef LOGINDERIVED_H
 #define LOGINDERIVED_H
+#include <QDialog>
 #include "ui_login.h"
 
-class LoginDialogDerived : public QDialog  , public Ui::loginDialog
+class LoginDialogDerived : public QDialog , public Ui::loginDialog
 {
-    Q_OBJECT
-
-    public :
-    LoginDialogDerived();
+Q_OBJECT
     
-    public slots:
+public:
+    LoginDialogDerived();
+
+public slots:
     void emitUserPassword();
 
-     signals:
-     void setUserPasswrd(QString user, QString password);
+signals:
+     void setUserPassword(QString user, QString password);
 };
 
 
