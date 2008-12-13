@@ -35,12 +35,25 @@ int main(int argc,char **argv)
         QObject::connect(mainWindow.actionView_Images_From_Area,SIGNAL(triggered()),&containerImageBrowser,SLOT(show()));
         
 //         QObject::connect(&myLoginDialog, , );
-        QObject::connect(&myTwitter,SIGNAL(public_timeline(QString)), mainWindow.textBrowserPT,SLOT(append(QString)) );//connection for shwoing public timeline
+
+        //Displaying the Public Timeline messages to the respective tab via SIGNAL-SLOT implementation
+        QObject::connect(&myTwitter,SIGNAL(public_timeline(QString)), mainWindow.textBrowserPT,SLOT(append(QString)) );
+
+        //Raising the tab when the respective message is displayed, but this is just a temporary action
+        QObject::connect(&myTwitter, SIGNAL(public_timeline(QString)), mainWindow.tabPublicTimeline, SLOT(raise()));
+
 	//QObject::connect(mainWindow.action,SIGNAL(triggered()),&myTwitter,SLOT());
 	//property setting
 	myLoginDialog.setupUi(&containerLoginDialog);
         mySendTwitDialog.setupUi(&containerSendTwitDialog);
 //     myImageBroswer.setupUi(&containerImageBrowser);
+
+        //trying to make the QTabWidget::tabWidgetTweetWindow transparent
+        mainWindow.tabWidgetTweetWindow->setWindowOpacity(0.4);
+
+        //just a temporary putting of a lot of text to the public timeline to check the transparency
+        mainWindow.textBrowserPT->append("la jlfjalsd kjflasklsdkj lsdlfj lasdkjflksjdlfkjlaskdjflkjasldkfjlaksjflkjaslkdfjlaksjdflkjsldkjflkajsdlfkjlaskjflkjasld fioewjcodjflakdsfjc ladskjfl kadslfkjladsfljldskjflkjaslfjalsdkfjlksjdflajslfjlajsfoepwfijofkdnfk gjfdksjgh kjkjdfhgkjfhg kdfhg; akd;h ;  ahadskgh orit erihv ierh ierh ieru hgierghikj skdkdfjgkdfjgh wpeiorhg ierwohghaakhdhadfkjh kjhagjkhgperi adgfk jhgkja gdkjhg akdhierhiurethkhkljadgh kajhgkalh irht iert herth rkejth kajdfg kjadkgh ahfrithwieruthkj ghlskjdfh a;kdfh;gf oierth eiruh tkjdghdskj gkladjghkrehiwerh ver r       weriutiowuert ioertrt eroitoir tewrutpowieurtoiuweorituowruotiowurtoiwurtoiwer   eri toiurtoie ri or towiert oeur hfkjghskdfjghk kjdfhgk jhdsfkjghdfkghskldghwiorthweortkjhkdjfgkjdshfkghkdjfhgklsjdgh kljsdfhgkjlsdfghipoerhgksjdfgkshdf gkjdfshgkl jsdfgio diog erpohpwerohgklsjdfhgkjshdfklgkldsjfghsdifgh sidhg skdfh glkshg");
+
 	mainWindow.show();
 	return app.exec();
 }
