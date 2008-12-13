@@ -1,10 +1,13 @@
 #include "twitterbackendinterface.h"
-//
+
 twitterBackendInterface::twitterBackendInterface( )
         : QObject()
 {
     m_twitLib = new QTwitLib ;
     isLogin = false;
+    timerPublicTweet = new QTimer( this );
+    timerPublicTweet->setInterval( 5000 ); //This shall be the timeout for tweet retrieval
+    connect(timerPublicTweet, SIGNAL( timeout() ), this, SLOT( public_timeline() ) );
     connect(m_twitLib,SIGNAL(OnResponseReceived(Returnables::Response *)),this,SLOT(OnResponseReceived(Returnables::Response *)));
 }
 
@@ -144,6 +147,8 @@ void twitterBackendInterface::OnStatusReceived(SERVER::RESP response)
 {
   
 }
+
+//Abhijeet thinks This is the message handler here that handles all the messages from the qDebug() module
 void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 {
 //   qDebug()<<"status recived";
@@ -165,17 +170,18 @@ void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
   
 }
 
-void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser*> list, QString header)
+void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *> list, QString header)
 {
   Returnables::StatusUser *statusUser = NULL;
   QString value;
 
+  //Process the list here to extract information like UserStatus and the UserTweetText
   while(!list.isEmpty())
   {
     statusUser = list.takeFirst();
-//     value="ID:"+QString::number(statusUser->status.id) ;
-    value=statusUser->user.screenName+" twittered \" ";
-    value+=statusUser->status.text +" \" <br>";
+    //value="ID:"+QString::number(statusUser->status.id) ;
+    value = statusUser->user.screenName+"\n says \" ";
+    value += statusUser->status.text +"\"\n\n";
 
   }
           emit(public_timeline(value));
