@@ -19,9 +19,9 @@ mainWindowDerived::mainWindowDerived()
 {
 	 minimizeAction = new QAction(tr("Mi&nimize"), this);
 	 maximizeAction = new QAction(tr("Ma&ximize"), this);
-     restoreAction = new QAction(tr("&Restore"), this);
-     quitAction = new QAction(tr("&Quit"), this);
-     myTrayIconMenu = new QMenu(this);
+         restoreAction = new QAction(tr("&Restore"), this);
+         quitAction = new QAction(tr("&Quit"), this);
+         myTrayIconMenu = new QMenu(this);
      
     connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
     connect(maximizeAction, SIGNAL(triggered()), this, SLOT(showMaximized()));
