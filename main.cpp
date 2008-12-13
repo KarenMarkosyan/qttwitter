@@ -14,10 +14,12 @@ on open suse 10.3
 
 int main(int argc,char **argv)
 {
-	//declarations
-	QApplication app(argc,argv);
+        //declarations
+        QApplication app(argc,argv);
+
 	//this is derived from ui file and the added functionality  system tray MainWindow Class
-	MainWindowImpl mainWindow;
+        MainWindowImpl mainWindow;
+
 	QDialog containerLoginDialog,containerSendTwitDialog,containerImageBrowser;
         Ui::loginDialogDerived myLoginDialog;
 	Ui::sendTwitDialog mySendTwitDialog;
@@ -29,7 +31,7 @@ int main(int argc,char **argv)
 	QObject::connect(mainWindow.actionLogin,SIGNAL(triggered()),&containerLoginDialog,SLOT(show()));
 	QObject::connect(mainWindow.actionSet_New_Status,SIGNAL(triggered()),&containerSendTwitDialog,SLOT(show()));	
 	//QObject::connect(&containerSendTwitDialog,SLOT(
-	QObject::connect(mainWindow.actionPublic,SIGNAL(triggered()),&myTwitter,SLOT(public_timeline()));
+        QObject::connect(mainWindow.actionPublic,SIGNAL(triggered()),myTwitter.timerPublicTweet,SLOT(start()));
 	QObject::connect(mainWindow.actionFriends,SIGNAL(triggered()),&myTwitter,SLOT(friends_timeline()));
         QObject::connect(mainWindow.actionOwn,SIGNAL(triggered()),&myTwitter,SLOT(user_timeline()));
         QObject::connect(mainWindow.actionView_Images_From_Area,SIGNAL(triggered()),&containerImageBrowser,SLOT(show()));
@@ -52,7 +54,7 @@ int main(int argc,char **argv)
         mainWindow.tabWidgetTweetWindow->setWindowOpacity(0.4);
 
         //just a temporary putting of a lot of text to the public timeline to check the transparency
-        mainWindow.textBrowserPT->append("la jlfjalsd kjflasklsdkj lsdlfj lasdkjflksjdlfkjlaskdjflkjasldkfjlaksjflkjaslkdfjlaksjdflkjsldkjflkajsdlfkjlaskjflkjasld fioewjcodjflakdsfjc ladskjfl kadslfkjladsfljldskjflkjaslfjalsdkfjlksjdflajslfjlajsfoepwfijofkdnfk gjfdksjgh kjkjdfhgkjfhg kdfhg; akd;h ;  ahadskgh orit erihv ierh ierh ieru hgierghikj skdkdfjgkdfjgh wpeiorhg ierwohghaakhdhadfkjh kjhagjkhgperi adgfk jhgkja gdkjhg akdhierhiurethkhkljadgh kajhgkalh irht iert herth rkejth kajdfg kjadkgh ahfrithwieruthkj ghlskjdfh a;kdfh;gf oierth eiruh tkjdghdskj gkladjghkrehiwerh ver r       weriutiowuert ioertrt eroitoir tewrutpowieurtoiuweorituowruotiowurtoiwurtoiwer   eri toiurtoie ri or towiert oeur hfkjghskdfjghk kjdfhgk jhdsfkjghdfkghskldghwiorthweortkjhkdjfgkjdshfkghkdjfhgklsjdgh kljsdfhgkjlsdfghipoerhgksjdfgkshdf gkjdfshgkl jsdfgio diog erpohpwerohgklsjdfhgkjshdfklgkldsjfghsdifgh sidhg skdfh glkshg");
+        /*mainWindow.textBrowserPT->append("la jlfjalsd kjflasklsdkj lsdlfj lasdkjflksjdlfkjlaskdjflkjasldkfjlaksjflkjaslkdfjlaksjdflkjsldkjflkajsdlfkjlaskjflkjasld fioewjcodjflakdsfjc ladskjfl kadslfkjladsfljldskjflkjaslfjalsdkfjlksjdflajslfjlajsfoepwfijofkdnfk gjfdksjgh kjkjdfhgkjfhg kdfhg; akd;h ;  ahadskgh orit erihv ierh ierh ieru hgierghikj skdkdfjgkdfjgh wpeiorhg ierwohghaakhdhadfkjh kjhagjkhgperi adgfk jhgkja gdkjhg akdhierhiurethkhkljadgh kajhgkalh irht iert herth rkejth kajdfg kjadkgh ahfrithwieruthkj ghlskjdfh a;kdfh;gf oierth eiruh tkjdghdskj gkladjghkrehiwerh ver r       weriutiowuert ioertrt eroitoir tewrutpowieurtoiuweorituowruotiowurtoiwurtoiwer   eri toiurtoie ri or towiert oeur hfkjghskdfjghk kjdfhgk jhdsfkjghdfkghskldghwiorthweortkjhkdjfgkjdshfkghkdjfhgklsjdgh kljsdfhgkjlsdfghipoerhgksjdfgkshdf gkjdfshgkl jsdfgio diog erpohpwerohgklsjdfhgkjshdfklgkldsjfghsdifgh sidhg skdfh glkshg");*/
 
 	mainWindow.show();
 	return app.exec();

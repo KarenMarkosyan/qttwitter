@@ -4,6 +4,7 @@
 #include <QDebug>
 // #include <twitlib/ITwitReply.h>
 #include <twitlib/QTwitLib.h>
+#include <QTimer>
 
 class twitterBackendInterface :public QObject
 {
@@ -13,6 +14,7 @@ public:
     twitterBackendInterface();
     bool isLogin;
     void DisplayList(QLinkedList<Returnables::StatusUser*> list, QString header);
+    QTimer *timerPublicTweet;
 public slots:
     /*Twitter API SLots*/
     void  public_timeline ( /*int since_id*/ );//Primary
