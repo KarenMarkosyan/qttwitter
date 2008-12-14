@@ -32,7 +32,7 @@
    <string>Qwitter Book - A Qt-based Twitter and Facebook Client</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../images/images.qrc">
     <normaloff>:/twitter/TwitterPostIcon.png</normaloff>:/twitter/TwitterPostIcon.png</iconset>
   </property>
   <property name="autoFillBackground">
@@ -95,10 +95,10 @@
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="toolTip">
-      <string>Public Timeline</string>
+      <string/>
      </property>
      <property name="statusTip">
-      <string>You are currently viewing the Public Timeline</string>
+      <string>Right now you are walking through the Public Tweet-Space-Time Continuum</string>
      </property>
      <property name="accessibleName">
       <string/>
@@ -146,10 +146,13 @@
          </rect>
         </property>
         <property name="autoFillBackground">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
         </property>
        </widget>
       </widget>
@@ -163,10 +166,10 @@
       </sizepolicy>
      </property>
      <property name="toolTip">
-      <string>Friends Timeline</string>
+      <string/>
      </property>
      <property name="statusTip">
-      <string>You are currently viewing the Friends Timeline</string>
+      <string>Enjoy the stroll in the Tweet-Spacetime with your friends!!</string>
      </property>
      <attribute name="title">
       <string>Friends Timeline</string>
@@ -219,10 +222,10 @@
       </sizepolicy>
      </property>
      <property name="toolTip">
-      <string>My Tweets</string>
+      <string/>
      </property>
      <property name="statusTip">
-      <string>You are currently viewing only your Tweets</string>
+      <string>Oh! So now you wish to go into the reverie within your own Tweet(Multi)verse</string>
      </property>
      <attribute name="title">
       <string>My Tweets</string>
@@ -368,7 +371,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/user-online.svg</normaloff>
      <normalon>:/twitter/twitter_system_tray1.png</normalon>:/twitter/user-online.svg</iconset>
    </property>
@@ -390,7 +393,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/user-offline.svg</normaloff>:/twitter/user-offline.svg</iconset>
    </property>
    <property name="text">
@@ -402,7 +405,7 @@
   </action>
   <action name="actionPrint">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/print.jpeg</normaloff>:/twitter/print.jpeg</iconset>
    </property>
    <property name="text">
@@ -411,7 +414,7 @@
   </action>
   <action name="actionPublic">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/twitter_system_tray_2.0.png</normaloff>:/twitter/twitter_system_tray_2.0.png</iconset>
    </property>
    <property name="text">
@@ -423,7 +426,7 @@
   </action>
   <action name="actionFriends">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/twitter_system_tray.png</normaloff>:/twitter/twitter_system_tray.png</iconset>
    </property>
    <property name="text">
@@ -432,7 +435,7 @@
   </action>
   <action name="actionOwn">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/twhitter_btn_02.png</normaloff>:/twitter/twhitter_btn_02.png</iconset>
    </property>
    <property name="text">
@@ -441,7 +444,7 @@
   </action>
   <action name="actionAbout_Qt_Twitter">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/TwitterPostIcon.png</normaloff>:/twitter/TwitterPostIcon.png</iconset>
    </property>
    <property name="text">
@@ -450,7 +453,7 @@
   </action>
   <action name="actionAbout_Qt">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/qt.png</normaloff>:/twitter/qt.png</iconset>
    </property>
    <property name="text">
@@ -459,7 +462,7 @@
   </action>
   <action name="actionHelp">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/help-about.svg</normaloff>:/twitter/help-about.svg</iconset>
    </property>
    <property name="text">
@@ -468,7 +471,7 @@
   </action>
   <action name="actionExit">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/application-exit.svg</normaloff>:/twitter/application-exit.svg</iconset>
    </property>
    <property name="text">
@@ -480,7 +483,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/icon.facebook.png</normaloff>:/twitter/icon.facebook.png</iconset>
    </property>
    <property name="text">
@@ -498,7 +501,7 @@
   </action>
   <action name="actionConfigure">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/configure.svg</normaloff>:/twitter/configure.svg</iconset>
    </property>
    <property name="text">
@@ -507,7 +510,7 @@
   </action>
   <action name="actionSet_New_Status">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/im-status-message-edit.svg</normaloff>:/twitter/im-status-message-edit.svg</iconset>
    </property>
    <property name="text">
@@ -516,7 +519,7 @@
   </action>
   <action name="actionFollow">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/add-profile.svg</normaloff>:/twitter/add-profile.svg</iconset>
    </property>
    <property name="text">
@@ -525,7 +528,7 @@
   </action>
   <action name="actionLeave">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/remove-profile.svg</normaloff>:/twitter/remove-profile.svg</iconset>
    </property>
    <property name="text">
@@ -534,7 +537,7 @@
   </action>
   <action name="actionUser_Methods">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/personal.svg</normaloff>:/twitter/personal.svg</iconset>
    </property>
    <property name="text">
@@ -543,7 +546,7 @@
   </action>
   <action name="actionDirect_Message_Methods">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/message-unread.svg</normaloff>:/twitter/message-unread.svg</iconset>
    </property>
    <property name="text">
@@ -572,7 +575,7 @@
   </action>
   <action name="actionIs_It_Working">
    <property name="icon">
-    <iconset>
+    <iconset resource="../images/images.qrc">
      <normaloff>:/twitter/questionmark</normaloff>:/twitter/questionmark</iconset>
    </property>
    <property name="text">
