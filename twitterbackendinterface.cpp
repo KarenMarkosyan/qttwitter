@@ -5,6 +5,8 @@ twitterBackendInterface::twitterBackendInterface( )
 {
     m_twitLib = new QTwitLib ;
     isLogin = false;
+    lastTweeter = "";
+    lastTweet = "";
     timerPublicTweet = new QTimer( this );
     timerPublicTweet->setInterval( 5000 ); //This shall be the timeout for tweet retrieval
     connect(timerPublicTweet, SIGNAL( timeout() ), this, SLOT( public_timeline() ) );
@@ -173,18 +175,30 @@ void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *> list, QString header)
 {
   Returnables::StatusUser *statusUser = NULL;
-  QString value;
+  QString value = "";
+  QString tweeter = statusUser->user.screenName, tweet = statusUser->status.text;
 
   //Process the list here to extract information like UserStatus and the UserTweetText
   while(!list.isEmpty())
   {
-    statusUser = list.takeFirst();
-    //value="ID:"+QString::number(statusUser->status.id) ;
-    value = statusUser->user.screenName+"\n says \" ";
-    value += statusUser->status.text +"\"\n\n";
+    statusUser = list.takeFirst(); //taking the first status and user information from the list.
+
+    //Here check for ducplicate entries, and if Unique send to the parser for formatting the tweet
+    //The parser has not yet been implemented, so currently only sending the unformatted text
+    if( tweeter != lastTweeter && tweet != lastTweet ){
+        value = tweeter + " says\n\"" + tweet + "\"\n";
+        lastTweeter = tweeter;
+        lastTweet = tweet;
+
+        //The emit signal has been shifted here to see if still the signal crashes
+        emit (public_timeline(value));
+    }
+
+    //value="ID:"+QString::number(statusUser->status.id) ; //this line was supposed to be inside the if block
 
   }
-          emit(public_timeline(value));
+
+  // The emit Signal was initially here, but now moved to the IF block. The program used to crash until now. Pluasible reason being an empty 'value' getting passed
 
 }
 void twitterBackendInterface::setUserNamePassword(QString user , QString password)

@@ -65,6 +65,8 @@ signals:
 private:
     QString sendMessage;
     QTwitLib  *m_twitLib;
+    QString lastTweeter;
+    QString lastTweet;
 };
 
 namespace Backend
