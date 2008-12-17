@@ -11,7 +11,7 @@ LoginDialogDerived ::LoginDialogDerived()
 }
 void LoginDialogDerived ::emitUserPassword()
 {
-//   qDebug()<<loginLineEdit->text()<<passwordLineEdit->text();
+//   qDebug()<<"loginDeribved"<<loginLineEdit->text()<<passwordLineEdit->text();
   emit setUserPassword(loginLineEdit->text(),passwordLineEdit->text());
 }
 

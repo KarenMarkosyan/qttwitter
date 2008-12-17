@@ -22,6 +22,7 @@ void  twitterBackendInterface::friends_timeline()
 
 void  twitterBackendInterface::user_timeline()
 {
+  m_twitLib->GetUsersTimeline();
     qDebug() << "user ";
 }
 
@@ -44,10 +45,12 @@ void  twitterBackendInterface::destroy()
 
 void  twitterBackendInterface::friends()
 {
+  m_twitLib->GetFriends();
 }
 
 void  twitterBackendInterface::followers()
 {
+  m_twitLib->GetFollowers();
 }
 
 void  twitterBackendInterface::featured()
@@ -60,6 +63,7 @@ void  twitterBackendInterface::showUser()
 
 void  twitterBackendInterface::direct_messages()
 {
+  m_twitLib->GetSentDirectMessages();
 }
 
 void  twitterBackendInterface::sent()
@@ -128,6 +132,7 @@ void  twitterBackendInterface::destroyBlockage()
 
 void  twitterBackendInterface::test()
 {
+  m_twitLib->IsTwitterUp();
 }
 
 void  twitterBackendInterface::downtime_schedule()
@@ -146,7 +151,8 @@ void twitterBackendInterface::OnStatusReceived(SERVER::RESP response)
 }
 void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 {
-  qDebug()<<"status recived"<<resp->reqID;
+//   qDebug()<<"status recived"<<resp->reqID;
+  qDebug()<<"i am here inOneResponserecived \n";
 
   if(resp)
   {
@@ -178,13 +184,13 @@ void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser*> list, QString header)
 {
   Returnables::StatusUser *statusUser = NULL;
-  QString value;
+  QString value="";
 
-  while(!list.isEmpty())
+  while(list.isEmpty() == FALSE )
   {
-    statusUser = list.takeFirst();
+    statusUser = list.takeLast ();
 //     value="ID:"+QString::number(statusUser->status.id) ;
-    value=statusUser->user.screenName+" twittered \" ";
+    value+="<b>"+statusUser->user.screenName+ "</b>"" twittered \" ";
     value+=statusUser->status.text +" \" <br>";
 
   }
@@ -194,7 +200,7 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser*> 
 void twitterBackendInterface::setUserNamePassword(QString user , QString password)
 {
   m_twitLib->Login(user,password);
-  qDebug()<<user<<password;
+//   qDebug()<<user<<password;
 }
 
 // void twitterBackendInterface::OnLoginStatus ( bool isLoggedIn )

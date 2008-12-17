@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>515</width>
-    <height>327</height>
+    <width>657</width>
+    <height>416</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,9 +39,15 @@
      <rect>
       <x>10</x>
       <y>30</y>
-      <width>491</width>
-      <height>201</height>
+      <width>641</width>
+      <height>301</height>
      </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
     </property>
     <property name="text">
      <string/>
@@ -58,6 +64,9 @@
     <property name="wordWrap">
      <bool>true</bool>
     </property>
+    <property name="openExternalLinks">
+     <bool>true</bool>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -65,7 +74,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>515</width>
+     <width>657</width>
      <height>23</height>
     </rect>
    </property>
