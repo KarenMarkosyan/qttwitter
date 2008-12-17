@@ -124,4 +124,10 @@ finally i am working on intergating login in twitter .. i am planning to integra
 [03:26:03 PM Friday, December 12 2008] even murli has joined us in our little project :D
 adn apart from that this little project has now two types of ui..
 though i am still working on stiching ui to backend..uhhh..it's real pain in arse
+
+[ 02:29:37 PM Wednesday, December 17 2008 ] working from offie in this projetc
+i am working while i ahev time from visual bookshelf thingie :D
+
+[03:05:06 PM Wednesday, December 17 2008 ]
+damn '+'..hehe i did a veyr classical mistake of doing value= instead of value += hence i was getting isngle public twit..now the problem has been solved tso thet world can sleep in peace...:D
 */

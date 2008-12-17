@@ -16,6 +16,7 @@ INCLUDEPATH += . \
 QT += gui \
     network \
     xml
+CONFIG += qt debug
 
 # Input
 HEADERS += blog.h \
