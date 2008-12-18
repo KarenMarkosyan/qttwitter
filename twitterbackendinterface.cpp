@@ -17,12 +17,13 @@ void twitterBackendInterface::public_timeline ( /*int since_id*/ )
 
 void  twitterBackendInterface::friends_timeline()
 {
+  m_twitLib->GetFriends();
     qDebug() << " friends";
 }
 
 void  twitterBackendInterface::user_timeline()
 {
-  m_twitLib->GetUsersTimeline();
+  m_twitLib->GetFriendsTimeline();
     qDebug() << "user ";
 }
 
@@ -176,6 +177,15 @@ void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
         delete login;
         break;
       }
+      case Returnables::FRIENDS_TIMELINE:
+      {
+        Returnables::FriendsTimeline *fTimeline = static_cast<Returnables::FriendsTimeline *>(resp);
+        DisplayList(fTimeline->list, "Friends Timeline");
+        delete fTimeline;
+        break;
+      }
+    
+    
     } 
   }
 
