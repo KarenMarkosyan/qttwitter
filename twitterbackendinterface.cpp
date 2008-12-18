@@ -17,13 +17,13 @@ void twitterBackendInterface::public_timeline ( /*int since_id*/ )
 
 void  twitterBackendInterface::friends_timeline()
 {
-  m_twitLib->GetFriends();
-    qDebug() << " friends";
+  m_twitLib->GetFriendsTimeline();
+  qDebug() << " friends";
 }
 
 void  twitterBackendInterface::user_timeline()
 {
-  m_twitLib->GetFriendsTimeline();
+  m_twitLib->GetUsersTimeline();
     qDebug() << "user ";
 }
 
@@ -184,6 +184,13 @@ void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
         delete fTimeline;
         break;
       }
+      case Returnables::USER_TIMELINE:
+      {
+        Returnables::UserTimeline *userTimeline = static_cast<Returnables::UserTimeline *>(resp);
+        DisplayList(userTimeline->list, "Users Timeline");
+        delete userTimeline;
+        break;
+      }
     
     
     } 
@@ -198,7 +205,7 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser*> 
 
   while(list.isEmpty() == FALSE )
   {
-    statusUser = list.takeLast ();
+    statusUser = list.takeFirst ();
 //     value="ID:"+QString::number(statusUser->status.id) ;
     value+="<b>"+statusUser->user.screenName+ "</b>"" twittered \" ";
     value+=statusUser->status.text +" \" <br>";
