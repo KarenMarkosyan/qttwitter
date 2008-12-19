@@ -6,7 +6,7 @@ on open suse 10.3
 #include <QApplication>
 #include "MainWindow/mainwindowimpl.h"
 #include "loginDerived.h"
-#include "ui_sendTwit.h"
+#include "sendTwitDerived.h"
 #include "twitterbackendinterface.h"
 // #include "imagebrowserimpl.h"
 #include <QDialog>
@@ -20,7 +20,7 @@ int main(int argc,char **argv)
 	MainWindowImpl mainWindow;
 	QDialog containerSendTwitDialog ;
         Ui::loginDialogDerived myLoginDialog;
-	Ui::sendTwitDialog mySendTwitDialog;
+        Ui::sendTwitDerived mySendTwitDialog;
         Backend::twitterBackend myTwitter;
 	
 	//connection slots
