@@ -133,4 +133,12 @@ damn '+'..hehe i did a veyr classical mistake of doing value= instead of value +
 
 [02:49:09 PM Thursday, December 18 2008]
 all timelines are working now..huraaah:)
+
+[01:11:49 PM Friday, December 19 2008]
+backup
+QT += gui \
+    network \
+    xml
+CONFIG += qt debug
+
 */
