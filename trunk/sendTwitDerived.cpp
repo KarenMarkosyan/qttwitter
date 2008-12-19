@@ -3,9 +3,14 @@
 
 SendTwitDerived::SendTwitDerived()
 {
+  qDebug()<<"hi";
+//   setupUi(this);
+  QObject::connect(pushButton, SIGNAL(clicked()), this, SLOT(recieveTwit()));
 }
 
 
-void SendTwitDerived::recieveTwit(QString value)
+void SendTwitDerived::recieveTwit()
 {
+  qDebug()<<label->text();
+  emit sendTwit(label->text());
 }
