@@ -1,12 +1,15 @@
 #include "twitterbackendinterface.h"
+#include <QDebug>
 
 twitterBackendInterface::twitterBackendInterface( )
         : QObject()
 {
     m_twitLib = new QTwitLib ;
     isLogin = false;
-    lastTweeter = "";
-    lastTweet = "";
+    lastTweeter = new QString();
+    lastTweet = new QString();
+
+    //Creating a timer to fetch the public timeline periodically, this can be later made to fetch at a user specified interval
     timerPublicTweet = new QTimer( this );
     timerPublicTweet->setInterval( 5000 ); //This shall be the timeout for tweet retrieval
     connect(timerPublicTweet, SIGNAL( timeout() ), this, SLOT( public_timeline() ) );
@@ -22,11 +25,13 @@ void twitterBackendInterface::public_timeline ( /*int since_id*/ )
 
 void  twitterBackendInterface::friends_timeline()
 {
+    m_twitLib->GetFriendsTimeline();
     qDebug() << " friends";
 }
 
 void  twitterBackendInterface::user_timeline()
 {
+    m_twitLib->GetUsersTimeline();
     qDebug() << "user ";
 }
 
@@ -49,10 +54,12 @@ void  twitterBackendInterface::destroy()
 
 void  twitterBackendInterface::friends()
 {
+    m_twitLib->GetFriends();
 }
 
 void  twitterBackendInterface::followers()
 {
+    m_twitLib->GetFollowers();
 }
 
 void  twitterBackendInterface::featured()
@@ -65,6 +72,7 @@ void  twitterBackendInterface::showUser()
 
 void  twitterBackendInterface::direct_messages()
 {
+    m_twitLib->GetSentDirectMessages();
 }
 
 void  twitterBackendInterface::sent()
@@ -133,6 +141,7 @@ void  twitterBackendInterface::destroyBlockage()
 
 void  twitterBackendInterface::test()
 {
+    m_twitLib->IsTwitterUp();
 }
 
 void  twitterBackendInterface::downtime_schedule()
@@ -153,7 +162,8 @@ void twitterBackendInterface::OnStatusReceived(SERVER::RESP response)
 //Abhijeet thinks This is the message handler here that handles all the messages from the qDebug() module
 void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 {
-//   qDebug()<<"status recived";
+//   qDebug()<<"status recived"<<resp->reqID;
+
   
   if(resp)
   {
@@ -169,40 +179,106 @@ void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
     }
   }
       
+
+
+
+
+
+
+
+
+
   
 }
 
+
 void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *> list, QString header)
 {
-  Returnables::StatusUser *statusUser = NULL;
+
+
+
+
+
+
+ /* Returnables::StatusUser *statusUser = NULL;
   QString value = "";
-  QString tweeter = statusUser->user.screenName, tweet = statusUser->status.text;
+<<<<<<< .mine
+  QString tweeter = "";
+  qDebug() << statusUser->user.screenName;
+  tweeter += (statusUser->user).screenName;
+  QString tweet = "";
+  tweet += (statusUser->status).text;
+=======
+  QString tweeter = lis->user.screenName;QString tweet = list->status.text;
+
+
+
+
+>>>>>>> .theirs
 
   //Process the list here to extract information like UserStatus and the UserTweetText
   while(!list.isEmpty())
   {
+
+
+
+
+
     statusUser = list.takeFirst(); //taking the first status and user information from the list.
 
     //Here check for ducplicate entries, and if Unique send to the parser for formatting the tweet
     //The parser has not yet been implemented, so currently only sending the unformatted text
-    if( tweeter != lastTweeter && tweet != lastTweet ){
-        value = tweeter + " says\n\"" + tweet + "\"\n";
-        lastTweeter = tweeter;
-        lastTweet = tweet;
+<<<<<<< .mine
+    if( tweeter.compare(*lastTweeter, Qt::CaseSensitive) && tweet.compare(*lastTweet, Qt::CaseSensitive) ){
+        value += tweeter + " says\n\"" + tweet + "\"\n";
+        *lastTweeter = tweeter;
+        *lastTweet = tweet;
 
+
+
+=======
+  //  if( tweeter != lastTweeter && tweet != lastTweet ){
+   //     value = tweeter + " says\n\"" + tweet + "\"\n";
+    //    lastTweeter = tweeter;
+      //  lastTweet = tweet;
+          value+=statusUser->status.text+"<br>";    
+>>>>>>> .theirs
         //The emit signal has been shifted here to see if still the signal crashes
-        emit (public_timeline(value));
-    }
+//      emit (public_timeline(value));
+   //} 
+    emit (public_timeline(value));
 
     //value="ID:"+QString::number(statusUser->status.id) ; //this line was supposed to be inside the if block
 
   }
 
+
+
   // The emit Signal was initially here, but now moved to the IF block. The program used to crash until now. Pluasible reason being an empty 'value' getting passed
+*/
+
+/** my handy wrok starts here where my=shanky*/
+
+  Returnables::StatusUser *statusUser = NULL;
+  QString value="";
+
+  while(list.isEmpty() == FALSE )
+  {
+    statusUser = list.takeLast ();
+     value="ID:"+QString::number(statusUser->status.id) ;//if you''l change value= to value+= you will get all the timeline 
+         value+="<b>"+statusUser->user.screenName+ "</b>"" twittered \" ";
+             value+=statusUser->status.text +" \" <br>";
+
+  }
+                       emit(public_timeline(value));
+
+
 
 }
 void twitterBackendInterface::setUserNamePassword(QString user , QString password)
 {
+
+
 }
 
 // void twitterBackendInterface::OnLoginStatus ( bool isLoggedIn )
