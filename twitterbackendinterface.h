@@ -5,6 +5,7 @@
 // #include <twitlib/ITwitReply.h>
 #include <twitlib/QTwitLib.h>
 #include <QTimer>
+#include <QString>
 
 class twitterBackendInterface :public QObject
 {
@@ -65,8 +66,8 @@ signals:
 private:
     QString sendMessage;
     QTwitLib  *m_twitLib;
-    QString lastTweeter;
-    QString lastTweet;
+    QString *lastTweeter;
+    QString *lastTweet;
 };
 
 namespace Backend
