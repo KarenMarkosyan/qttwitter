@@ -5,7 +5,7 @@ SendTwitDerived::SendTwitDerived()
 {
   qDebug()<<"hi";
 //   setupUi(this);
-  QObject::connect(pushButton, SIGNAL(clicked()), this, SLOT(recieveTwit()));
+//   QObject::connect(pushButton, SIGNAL(clicked()), this, SLOT(recieveTwit()));
 }
 
 
