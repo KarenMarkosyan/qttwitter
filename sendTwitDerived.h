@@ -2,7 +2,7 @@
 #define SENDTWIT_DERIVED
 #include "ui_sendTwit.h"
 #include <QDebug>
-class SendTwitDerived : public QWidget , public Ui::sendTwitDialog
+class SendTwitDerived : public QDialog , public Ui::sendTwitDialog
 {
   Q_OBJECT
 
