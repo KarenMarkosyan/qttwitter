@@ -5,7 +5,7 @@
 #include "mainWindowDerived.h"
 #include "ui_mainWindow.h"
 //
-class MainWindowImpl : public mainWindowDerived, public Ui::MainWindow 
+class MainWindowImpl : public mainWindowDerived, public Ui::MainWindow
 {
 Q_OBJECT
 public:
@@ -20,14 +20,9 @@ signals:
 	void showPublicTimeline();
 	void showOwnTimeline();
 	void showFollowerTimeline();
-        void showFriendsline();
+    void showFriendsline();
 //     void showImageBrowser();//just show the image browser mode
 
 
 };
 #endif
-
-
-
-
-

@@ -120,4 +120,27 @@ this time i did some major cleanup ..and hence this code is now free of followin
 [11:29:30 AM Wednesday, December 10 2008 ] 
 finally i am working on intergating login in twitter .. i am planning to integrate laxis into this twitter client :)
 ..btw public twitter is working..but for some reason it doesn't gives more than 2 twitter at any moment.
+[03:26:03 PM Friday, December 12 2008] even murli has joined us in our little project :D
+adn apart from that this little project has now two types of ui..
+though i am still working on stiching ui to backend..uhhh..it's real pain in arse
+
+[ 02:29:37 PM Wednesday, December 17 2008 ] working from offie in this projetc
+i am working while i ahev time from visual bookshelf thingie :D
+
+[03:05:06 PM Wednesday, December 17 2008 ]
+damn '+'..hehe i did a veyr classical mistake of doing value= instead of value += hence i was getting isngle public twit..now the problem has been solved tso thet world can sleep in peace...:D
+
+[02:49:09 PM Thursday, December 18 2008]
+all timelines are working now..huraaah:)
+
+[01:11:49 PM Friday, December 19 2008]
+backup
+QT += gui \
+    network \
+    xml
+CONFIG += qt debug
+
+[02:21:52 PM Tuesday, December 23 2008]
+wtf why is  QObject::connect(this, SIGNAL(accepted()), this, SLOT(recieveTwit())) not working..in sendTwitDerived.cpp
+fuk fuk fuk.......going back to office work and marble.. will see qtwtitter later
 */

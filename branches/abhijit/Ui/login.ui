@@ -1,7 +1,11 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>loginDialog</class>
- <widget class="QDialog" name="loginDialog" >
-  <property name="geometry" >
+ <widget class="QDialog" name="loginDialog">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,27 +13,44 @@
     <height>211</height>
    </rect>
   </property>
-  <property name="sizePolicy" >
-   <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="maximumSize" >
+  <property name="maximumSize">
    <size>
     <width>282</width>
     <height>211</height>
    </size>
   </property>
-  <property name="windowTitle" >
-   <string>Dialog</string>
+  <property name="font">
+   <font>
+    <family>Lucida Grande</family>
+    <pointsize>8</pointsize>
+    <weight>75</weight>
+    <bold>true</bold>
+   </font>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="../images/images.qrc" >
-    <normaloff>:/twitter/twitter_system_tray1.png</normaloff>:/twitter/twitter_system_tray1.png</iconset>
+  <property name="focusPolicy">
+   <enum>Qt::NoFocus</enum>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget" >
-   <property name="geometry" >
+  <property name="windowTitle">
+   <string>Twitter Login</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../images/images.qrc">
+    <normaloff>:/twitter/user-online.svg</normaloff>:/twitter/user-online.svg</iconset>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
@@ -37,57 +58,72 @@
      <height>191</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout" >
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label_2" >
-      <property name="text" >
+     <widget class="QLabel" name="label_2">
+      <property name="text">
        <string>Enter You Login Name:</string>
       </property>
-      <property name="scaledContents" >
+      <property name="scaledContents">
        <bool>false</bool>
       </property>
-      <property name="alignment" >
+      <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="loginLineEdit" />
+     <widget class="QLineEdit" name="loginLineEdit"/>
     </item>
     <item>
-     <widget class="QLabel" name="label" >
-      <property name="text" >
+     <widget class="QLabel" name="label">
+      <property name="text">
        <string>Enter Your Password:</string>
       </property>
-      <property name="alignment" >
+      <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="passwordLineEdit" >
-      <property name="echoMode" >
+     <widget class="QLineEdit" name="passwordLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="echoMode">
        <enum>QLineEdit::Password</enum>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="rememberPasswordCheckBox" >
-      <property name="layoutDirection" >
+     <widget class="QCheckBox" name="rememberPasswordCheckBox">
+      <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
-      <property name="text" >
-       <string>Remeber Password</string>
+      <property name="text">
+       <string>I will remember your Password</string>
       </property>
-      <property name="tristate" >
+      <property name="tristate">
        <bool>false</bool>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QDialogButtonBox" name="buttonBox" >
-      <property name="standardButtons" >
+     <widget class="QDialogButtonBox" name="buttonBox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="standardButtons">
        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+      <property name="centerButtons">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -95,7 +131,7 @@
   </widget>
  </widget>
  <resources>
-  <include location="../images/images.qrc" />
+  <include location="../images/images.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -104,11 +140,11 @@
    <receiver>loginDialog</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>302</x>
      <y>276</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>327</x>
      <y>-2</y>
     </hint>
@@ -120,11 +156,11 @@
    <receiver>loginDialog</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>346</x>
      <y>274</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>410</x>
      <y>3</y>
     </hint>
