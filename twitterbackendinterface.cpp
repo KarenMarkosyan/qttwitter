@@ -11,12 +11,15 @@ twitterBackendInterface::twitterBackendInterface( )
 
     //Creating a timer to fetch the public timeline periodically, this can be later made to fetch at a user specified interval
     timerPublicTweet = new QTimer( this );
-    timerPublicTweet->setInterval( 5000 ); //This shall be the timeout for tweet retrieval
+    timerPublicTweet->setInterval( 5000 ); //This shall be the timeout for tweet retrieval in milliseconds
     connect(timerPublicTweet, SIGNAL( timeout() ), this, SLOT( public_timeline() ) );
+
+    //On similar pattern the timer for the other two timelines can be created viz. timerFriendsTweet and timerUserTweet
+
+
     connect(m_twitLib,SIGNAL(OnResponseReceived(Returnables::Response *)),this,SLOT(OnResponseReceived(Returnables::Response *)));
 }
 
-//
 void twitterBackendInterface::public_timeline ( /*int since_id*/ )
 {
     m_twitLib->GetPublicTimeline();
@@ -156,50 +159,59 @@ void twitterBackendInterface::OnMessageReceived(QString message)
 }
 void twitterBackendInterface::OnStatusReceived(SERVER::RESP response)
 {
-  
+
 }
 
-//Abhijeet thinks This is the message handler here that handles all the messages from the qDebug() module
+//Abhijeet thinks This is the message handler here that handles all the messages
 void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 {
 //   qDebug()<<"status recived"<<resp->reqID;
+    qDebug()<<"i am here inOneResponserecived \n";
 
-  
+
   if(resp)
   {
     switch(resp->reqID)
     {
-      case Returnables::PUBLIC_TIMELINE:
-      {
+    case Returnables::PUBLIC_TIMELINE:
+        {
         Returnables::PublicTimeline *pTimeline = static_cast<Returnables::PublicTimeline *>(resp);
         DisplayList(pTimeline->list, "Public Timeline");
         delete pTimeline;
         break;
-      }
     }
+    case Returnables::LOGIN:
+        {
+            qDebug()<<"1reached here";
+            Returnables::Login *login = static_cast<Returnables::Login *>(resp);
+            QString authorized = login->authorized ? "true" : "false";
+            //m_plainTextEdit->appendPlainText("Authorized: "+authorized);
+            qDebug()<<"Authorized: "<<authorized;
+            delete login;
+            break;
+    }
+    case Returnables::FRIENDS_TIMELINE:
+        {
+            Returnables::FriendsTimeline *fTimeline = static_cast<Returnables::FriendsTimeline *>(resp);
+            DisplayList(fTimeline->list, "Friends Timeline");
+            delete fTimeline;
+            break;
+    }
+    case Returnables::USER_TIMELINE:
+        {
+            Returnables::UserTimeline *userTimeline = static_cast<Returnables::UserTimeline *>(resp);
+        DisplayList(userTimeline->list, "Users Timeline");
+        delete userTimeline;
+        break;
+    }
+    }
+
   }
-      
-
-
-
-
-
-
-
-
-
-  
 }
 
 
 void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *> list, QString header)
 {
-
-
-
-
-
-
  /* Returnables::StatusUser *statusUser = NULL;
   QString value = "";
 <<<<<<< .mine
@@ -241,11 +253,11 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
    //     value = tweeter + " says\n\"" + tweet + "\"\n";
     //    lastTweeter = tweeter;
       //  lastTweet = tweet;
-          value+=statusUser->status.text+"<br>";    
+          value+=statusUser->status.text+"<br>";
 >>>>>>> .theirs
         //The emit signal has been shifted here to see if still the signal crashes
 //      emit (public_timeline(value));
-   //} 
+   //}
     emit (public_timeline(value));
 
     //value="ID:"+QString::number(statusUser->status.id) ; //this line was supposed to be inside the if block
@@ -264,19 +276,19 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
 
   while(list.isEmpty() == FALSE )
   {
-    statusUser = list.takeLast ();
-     value="ID:"+QString::number(statusUser->status.id) ;//if you''l change value= to value+= you will get all the timeline 
-         value+="<b>"+statusUser->user.screenName+ "</b>"" twittered \" ";
-             value+=statusUser->status.text +" \" <br>";
+    statusUser = list.takeFirst();
+     //value="ID:"+QString::number(statusUser->status.id) ;//if you''l change value= to value+= you will get all the timeline
+         value += "<b>" + statusUser->user.screenName + "</b>" + " twittered \" ";
+             value += statusUser->status.text + " \" <br>";
 
   }
-                       emit(public_timeline(value));
-
-
-
+  emit(public_timeline(value));
 }
+
 void twitterBackendInterface::setUserNamePassword(QString user , QString password)
 {
+    m_twitLib->Login(user, password);
+    //qDebug()<<user<<password;
 
 
 }

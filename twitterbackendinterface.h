@@ -16,6 +16,9 @@ public:
     bool isLogin;
     void DisplayList(QLinkedList<Returnables::StatusUser*> list, QString header);
     QTimer *timerPublicTweet;
+    // QTimer *timerFriendsTweet;
+    // QTimer *timerUserTweet;
+
 public slots:
     /*Twitter API SLots*/
     void  public_timeline ( /*int since_id*/ );//Primary
