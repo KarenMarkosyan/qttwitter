@@ -45,6 +45,80 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>236</red>
+         <green>233</green>
+         <blue>216</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </disabled>
+    </palette>
+   </property>
+   <widget class="QLabel" name="twitterBgLogo">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>155</x>
+      <y>110</y>
+      <width>210</width>
+      <height>49</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>210</width>
+      <height>49</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>210</width>
+      <height>49</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../images/Twitter.png</pixmap>
+    </property>
+   </widget>
    <widget class="QTabWidget" name="tabWidgetTweetWindow">
     <property name="enabled">
      <bool>true</bool>
@@ -63,6 +137,70 @@
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="0">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="0">
+          <red>236</red>
+          <green>233</green>
+          <blue>216</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="0">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="0">
+          <red>236</red>
+          <green>233</green>
+          <blue>216</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="0">
+          <red>236</red>
+          <green>233</green>
+          <blue>216</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="Window">
+        <brush brushstyle="SolidPattern">
+         <color alpha="0">
+          <red>236</red>
+          <green>233</green>
+          <blue>216</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
     <property name="focusPolicy">
      <enum>Qt::TabFocus</enum>
     </property>
@@ -72,14 +210,14 @@
     <property name="statusTip">
      <string/>
     </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
     <property name="tabPosition">
      <enum>QTabWidget::North</enum>
     </property>
     <property name="tabShape">
      <enum>QTabWidget::Triangular</enum>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tabPublicTimeline">
      <property name="sizePolicy">
@@ -278,7 +416,7 @@
      <x>0</x>
      <y>0</y>
      <width>515</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -292,7 +430,10 @@
     <addaction name="actionConfigure"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuAbout">
+   <widget class="QMenu" name="menuTimeline">
+    <property name="statusTip">
+     <string>View various Twitter Timelines</string>
+    </property>
     <property name="title">
      <string>Timeline</string>
     </property>
@@ -300,11 +441,10 @@
     <addaction name="actionFriends"/>
     <addaction name="actionOwn"/>
    </widget>
-   <widget class="QMenu" name="menuAbout_2">
+   <widget class="QMenu" name="menuAbout">
     <property name="title">
      <string>About</string>
     </property>
-    <addaction name="separator"/>
     <addaction name="actionIs_It_Working"/>
     <addaction name="actionAbout_Qt_Twitter"/>
     <addaction name="actionAbout_Qt"/>
@@ -338,10 +478,10 @@
     <addaction name="actionBlock_Methods"/>
    </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuAbout"/>
+   <addaction name="menuTimeline"/>
    <addaction name="menuTwitter"/>
    <addaction name="menuOther_Services"/>
-   <addaction name="menuAbout_2"/>
+   <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -421,7 +561,7 @@
     <string>Public</string>
    </property>
    <property name="statusTip">
-    <string>Display TimeLine's From Twitter Server</string>
+    <string>Display Public TimeLine From Twitter Server</string>
    </property>
   </action>
   <action name="actionFriends">
@@ -432,6 +572,9 @@
    <property name="text">
     <string>Friends</string>
    </property>
+   <property name="statusTip">
+    <string>Display Friends' TimeLine From Twitter Server</string>
+   </property>
   </action>
   <action name="actionOwn">
    <property name="icon">
@@ -440,6 +583,9 @@
    </property>
    <property name="text">
     <string>Own</string>
+   </property>
+   <property name="statusTip">
+    <string>Display Your Own TimeLine From Twitter Server</string>
    </property>
   </action>
   <action name="actionAbout_Qt_Twitter">
@@ -589,9 +735,6 @@
   </action>
  </widget>
  <resources>
-  <include location="../images/images.qrc"/>
-  <include location="../images/images.qrc"/>
-  <include location="../images/images.qrc"/>
   <include location="../images/images.qrc"/>
  </resources>
  <connections>
