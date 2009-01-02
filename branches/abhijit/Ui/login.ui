@@ -111,7 +111,7 @@
     <item>
      <widget class="QDialogButtonBox" name="buttonBox">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="autoFillBackground">
        <bool>false</bool>
