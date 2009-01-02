@@ -82,43 +82,6 @@
      </disabled>
     </palette>
    </property>
-   <widget class="QLabel" name="twitterBgLogo">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>155</x>
-      <y>110</y>
-      <width>210</width>
-      <height>49</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>210</width>
-      <height>49</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>210</width>
-      <height>49</height>
-     </size>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../images/Twitter.png</pixmap>
-    </property>
-   </widget>
    <widget class="QTabWidget" name="tabWidgetTweetWindow">
     <property name="enabled">
      <bool>true</bool>
@@ -142,7 +105,7 @@
       <active>
        <colorrole role="Base">
         <brush brushstyle="SolidPattern">
-         <color alpha="0">
+         <color alpha="255">
           <red>255</red>
           <green>255</green>
           <blue>255</blue>
@@ -151,7 +114,7 @@
        </colorrole>
        <colorrole role="Window">
         <brush brushstyle="SolidPattern">
-         <color alpha="0">
+         <color alpha="255">
           <red>236</red>
           <green>233</green>
           <blue>216</blue>
@@ -162,7 +125,7 @@
       <inactive>
        <colorrole role="Base">
         <brush brushstyle="SolidPattern">
-         <color alpha="0">
+         <color alpha="255">
           <red>255</red>
           <green>255</green>
           <blue>255</blue>
@@ -171,7 +134,7 @@
        </colorrole>
        <colorrole role="Window">
         <brush brushstyle="SolidPattern">
-         <color alpha="0">
+         <color alpha="255">
           <red>236</red>
           <green>233</green>
           <blue>216</blue>
@@ -182,7 +145,7 @@
       <disabled>
        <colorrole role="Base">
         <brush brushstyle="SolidPattern">
-         <color alpha="0">
+         <color alpha="255">
           <red>236</red>
           <green>233</green>
           <blue>216</blue>
@@ -191,7 +154,7 @@
        </colorrole>
        <colorrole role="Window">
         <brush brushstyle="SolidPattern">
-         <color alpha="0">
+         <color alpha="255">
           <red>236</red>
           <green>233</green>
           <blue>216</blue>
@@ -271,10 +234,23 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <widget class="QTextBrowser" name="textBrowserPT">
-        <property name="enabled">
-         <bool>true</bool>
+       <widget class="QLabel" name="twitterBgLogo_1">
+        <property name="geometry">
+         <rect>
+          <x>155</x>
+          <y>90</y>
+          <width>210</width>
+          <height>49</height>
+         </rect>
         </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../images/images.qrc">:/twitter/Twitter.png</pixmap>
+        </property>
+       </widget>
+       <widget class="QTextBrowser" name="textBrowserPT">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -283,14 +259,42 @@
           <height>234</height>
          </rect>
         </property>
-        <property name="autoFillBackground">
-         <bool>true</bool>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Sunken</enum>
+        <property name="palette">
+         <palette>
+          <active>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="150">
+              <red>255</red>
+              <green>255</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="150">
+              <red>255</red>
+              <green>255</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>236</red>
+              <green>233</green>
+              <blue>216</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
+         </palette>
         </property>
        </widget>
       </widget>
@@ -339,7 +343,23 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <widget class="QTextBrowser" name="textBrowseFT">
+       <widget class="QLabel" name="twitterBgLogo_2">
+        <property name="geometry">
+         <rect>
+          <x>155</x>
+          <y>90</y>
+          <width>210</width>
+          <height>49</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../images/images.qrc">:/twitter/Twitter.png</pixmap>
+        </property>
+       </widget>
+       <widget class="QTextBrowser" name="textBrowserFT">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -347,6 +367,43 @@
           <width>508</width>
           <height>234</height>
          </rect>
+        </property>
+        <property name="palette">
+         <palette>
+          <active>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="150">
+              <red>255</red>
+              <green>255</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="150">
+              <red>255</red>
+              <green>255</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>236</red>
+              <green>233</green>
+              <blue>216</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
+         </palette>
         </property>
        </widget>
       </widget>
@@ -395,6 +452,22 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <widget class="QLabel" name="twitterBgLogo_3">
+        <property name="geometry">
+         <rect>
+          <x>155</x>
+          <y>90</y>
+          <width>210</width>
+          <height>49</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../images/images.qrc">:/twitter/Twitter.png</pixmap>
+        </property>
+       </widget>
        <widget class="QTextBrowser" name="textBrowserMTT">
         <property name="geometry">
          <rect>
@@ -403,6 +476,43 @@
           <width>508</width>
           <height>234</height>
          </rect>
+        </property>
+        <property name="palette">
+         <palette>
+          <active>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="150">
+              <red>255</red>
+              <green>255</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="150">
+              <red>255</red>
+              <green>255</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>236</red>
+              <green>233</green>
+              <blue>216</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
+         </palette>
         </property>
        </widget>
       </widget>
@@ -428,7 +538,7 @@
     <addaction name="actionPrint"/>
     <addaction name="separator"/>
     <addaction name="actionConfigure"/>
-    <addaction name="actionExit"/>
+    <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuTimeline">
     <property name="statusTip">
@@ -483,7 +593,13 @@
    <addaction name="menuOther_Services"/>
    <addaction name="menuAbout"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="font">
+    <font>
+     <pointsize>7</pointsize>
+    </font>
+   </property>
+  </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
@@ -731,6 +847,21 @@
   <action name="actionView_Images_From_Area">
    <property name="text">
     <string>View Images From Area</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/application-exit.svg</normaloff>:/twitter/application-exit.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
    </property>
   </action>
  </widget>
