@@ -144,4 +144,10 @@ CONFIG += qt debug
 [02:21:52 PM Tuesday, December 23 2008]
 wtf why is  QObject::connect(this, SIGNAL(accepted()), this, SLOT(recieveTwit())) not working..in sendTwitDerived.cpp
 fuk fuk fuk.......going back to office work and marble.. will see qtwtitter later
+
+[Sat Jan 3 03:59:38 2009]
+back to qttweitter after a long time 
+
+[Sun Jan 4 07:13:17 2009]
+did some corerctions in sendtwit..lets hope now it will work :)..if send twit will work this is going to be our first release once murli is down with his UI skin using css..
 */
