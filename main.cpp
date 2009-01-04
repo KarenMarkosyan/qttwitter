@@ -34,7 +34,7 @@ int main(int argc,char **argv)
         QObject::connect(&myLoginDialog,SIGNAL(setUserPassword(QString,QString)) ,&myTwitter ,SLOT(setUserNamePassword(QString,QString)) );/**login connection */
         QObject::connect(&myTwitter,SIGNAL(public_timeline(QString)),mainWindow.textLabelMainWindow,SLOT(setText(QString))
         );//connection for shwoing public timeline
-        QObject::connect(&mySendTwitDialog,SIGNAL(sendTwit()),&myTwitter,SLOT());
+        QObject::connect(&mySendTwitDialog,SIGNAL(sendTwit(QString)),&myTwitter,SLOT(update(QString)));
         //QObject::connect(mainWindow.action,SIGNAL(triggered()),&myTwitter,SLOT());
         //property setting
 
