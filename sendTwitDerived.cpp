@@ -10,6 +10,6 @@ SendTwitDerived::SendTwitDerived()
 
 void SendTwitDerived::recieveTwit()
 {
-  qDebug()<<label->text();
-  emit sendTwit(label->text());
+//   qDebug()<<label->text();
+  emit sendTwit(twitLineEdit->text());
 }
