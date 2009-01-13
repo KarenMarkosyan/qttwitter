@@ -40,3 +40,5 @@ RESOURCES += images/images.qrc
 QT += gui \
     network \
     xml
+DISTFILES += styleSheet.qss
+
