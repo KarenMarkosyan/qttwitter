@@ -8,6 +8,7 @@ on open suse 10.3
 #include "loginDerived.h"
 #include "sendTwitDerived.h"
 #include "twitterbackendinterface.h"
+#include "styleSheet.qss"
 // #include "imagebrowserimpl.h"
 #include <QDialog>
 
@@ -21,7 +22,7 @@ int main(int argc,char **argv)
         Ui::loginDialogDerived myLoginDialog;
         Ui::sendTwitDerived mySendTwitDialog;
         Backend::twitterBackend myTwitter;
-
+	
         //connection slots
         QObject::connect(&mainWindow,SIGNAL(quit()),&app,SLOT(quit()));//just quit when you get quit signal
         QObject::connect(mainWindow.actionLogin,SIGNAL(triggered()),&myLoginDialog,SLOT(show()));
@@ -37,7 +38,7 @@ int main(int argc,char **argv)
         QObject::connect(&mySendTwitDialog,SIGNAL(sendTwit(QString)),&myTwitter,SLOT(update(QString)));
         //QObject::connect(mainWindow.action,SIGNAL(triggered()),&myTwitter,SLOT());
         //property setting
-
+	app.setStyleSheet(globalStyle);
 //         mySendTwitDialog.setupUi(&containerSendTwitDialog);
         mainWindow.show();
         return app.exec();
