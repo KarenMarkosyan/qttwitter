@@ -39,12 +39,12 @@ QDialog,QMainWindow{\
   font-size: 10pt;\
   min-width: 150px;\
 }\
-QMenuBar{\
+QMenuBar,QMainWindow{\
   background: url(:/globalStyle/work_area.png) no-repeat top left;\
   border: none;\
   font-size: 10pt;\
 }\
-QToolBar{\
+QToolBar,QMainWindow{\
   background: url(:/globalStyle/background.png) no-repeat top left;\
   border: none;\
   font-size: 10pt;\
