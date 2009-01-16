@@ -8,7 +8,7 @@ on open suse 10.3
 #include "loginDerived.h"
 #include "sendTwitDerived.h"
 #include "twitterbackendinterface.h"
-#include "styleSheet.qss"
+#include "styleSheet.h"
 // #include "imagebrowserimpl.h"
 #include <QDialog>
 
