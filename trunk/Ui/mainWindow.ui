@@ -17,8 +17,14 @@
    <iconset resource="../images/images.qrc">
     <normaloff>:/twitter/TwitterPostIcon.png</normaloff>:/twitter/TwitterPostIcon.png</iconset>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
   <property name="autoFillBackground">
    <bool>true</bool>
+  </property>
+  <property name="styleSheet">
+   <string/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="twitterImageLabel">
@@ -78,7 +84,7 @@
      <x>0</x>
      <y>0</y>
      <width>609</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="autoFillBackground">
@@ -163,11 +169,17 @@
    <property name="windowTitle">
     <string notr="true">toolBar</string>
    </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
    <property name="movable">
-    <bool>false</bool>
+    <bool>true</bool>
+   </property>
+   <property name="floatable">
+    <bool>true</bool>
    </property>
    <attribute name="toolBarArea">
-    <enum>LeftToolBarArea</enum>
+    <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>

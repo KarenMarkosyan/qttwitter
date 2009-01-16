@@ -1,61 +1,61 @@
 QString globalStyle =" QPushButton { \
-  border: 1px solid #313131; \
-  border-radius: 4px;\
-  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
-    stop: 0 #a5a5a5, stop: 0.8 #4d4d4d, stop: 1 #545454);\
-  padding: 4px 12px;\
-  color: #eeeeee;\
-  font-weight: bold;\
-}\
-    QPushButton:disabled,\
-    QPushButton:default:disabled {\
-    color: rgba(255,255,255,80);\
-    border: 1px solid rgba(0,0,0,80);\
-    background: none;\
-  }\
-     QPushButton:default:pressed,   QPushButton:pressed {\
-    border: 1px solid #0e5a00;\
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
-      stop: 0 #4d8e0d, stop: 1 #5aa50f);\
-  }\
-      QPushButton:hover {\
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
-      stop: 0 #a5a5a5, stop: 0.7 #4d4d4d, stop: 1 #747474);\
-    color: white;\
-  }\
-     QPushButton:default {\
-    border: 1px solid #0e5a00;\
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
-      stop: 0 #75ce1f, stop: 0.8 #4d8e0d, stop: 1 #5aa50f);\
-  }\
-     QPushButton:default:hover {\
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
-      stop: 0 #75ce1f, stop: 0.7 #4d8e0d, stop: 1 #7ac52f);\
-  }\
-QDialog,QMainWindow{\
-  padding: 3.5em 2em 1em 1em;\
-  background: url(:/globalStyle/work_area.png) no-repeat top left;\
-  border: none;\
-  font-size: 10pt;\
-  min-width: 150px;\
-}\
-QMenuBar,QMainWindow{\
-  background: url(:/globalStyle/work_area.png) no-repeat top left;\
-  border: none;\
-  font-size: 10pt;\
-}\
-QToolBar,QMainWindow{\
-  background: url(:/globalStyle/background.png) no-repeat top left;\
-  border: none;\
-  font-size: 10pt;\
-}\
-QMenu::item:selected { \
-             background-color: white;\
-             color: black;\
-}\
-QLabel{\
-	color: rgb(255, 255, 255);\
-}";
+                     border: 1px solid #313131; \
+                     border-radius: 4px;\
+                     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
+                     stop: 0 #a5a5a5, stop: 0.8 #4d4d4d, stop: 1 #545454);\
+                     padding: 4px 12px;\
+                     color: #eeeeee;\
+                     font-weight: bold;\
+                     }\
+                     QPushButton:disabled,\
+                     QPushButton:default:disabled {\
+                     color: rgba(255,255,255,80);\
+                     border: 1px solid rgba(0,0,0,80);\
+                     background: none;\
+                     }\
+                     QPushButton:default:pressed,   QPushButton:pressed {\
+                     border: 1px solid #0e5a00;\
+                     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
+                     stop: 0 #4d8e0d, stop: 1 #5aa50f);\
+                     }\
+                     QPushButton:hover {\
+                     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
+                     stop: 0 #a5a5a5, stop: 0.7 #4d4d4d, stop: 1 #747474);\
+                     color: white;\
+                     }\
+                     QPushButton:default {\
+                     border: 1px solid #0e5a00;\
+                     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
+                     stop: 0 #75ce1f, stop: 0.8 #4d8e0d, stop: 1 #5aa50f);\
+                     }\
+                     QPushButton:default:hover {\
+                     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
+                     stop: 0 #75ce1f, stop: 0.7 #4d8e0d, stop: 1 #7ac52f);\
+                     }\
+                     QDialog{\
+                     padding: 3.5em 2em 1em 1em;\
+                     background: url(:/globalStyle/work_area.png) no-repeat top left;\
+                     border: none;\
+                     font-size: 10pt;\
+                     min-width: 150px;\
+                     }\
+                     QMenuBar{\
+                     background: url(:/globalStyle/work_area.png) no-repeat top left;\
+                     border: none;\
+                     font-size: 10pt;\
+                     }\
+                     QToolBar{\
+                     background: url(:/globalStyle/background.png) no-repeat top left;\
+                     border: none;\
+                     font-size: 10pt;\
+                     }";
+//                      QMenu::item:selected { \
+//                      background-color: white;\
+//                      color: black;\
+//                      }\
+//                      QLabel{\
+//                      color: rgb(255, 255, 255);\
+//                      }";
 
 //   /* odd dropdown button widget */
 //      QPushButton::menu-indicator {
@@ -69,13 +69,13 @@ QLabel{\
 //        border: 1px solid #222222;
 //        color: white;
 //      }
-// 
+//
 //         QPushButton::menu-indicator {
 //        image: url(arr_down.png);
-       /*
-         subcontrol-origin: padding;
-         subcontrol-position: bottom right;
-       */
+/*
+  subcontrol-origin: padding;
+  subcontrol-position: bottom right;
+*/
 //      }
 
 //         QPushButton::menu-indicator:pressed, QPushButton::menu-indicator:open {
