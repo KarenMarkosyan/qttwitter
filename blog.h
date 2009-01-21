@@ -154,7 +154,13 @@ back to qttweitter after a long time
 
 [Sun Jan 4 07:13:17 2009]
 did some corerctions in sendtwit..lets hope now it will work :)..if send twit will work this is going to be our first release once murli is down with his UI skin using css..
+<<<<<<< .mine
+[Sun Jan 4 07:52:14 2009]
+qttwitter iss finally able to send twitter mesages ..yehaaaaaaaaaaaaw
+ :D
+*/=======
 
 [12:02 Pm january 12 2009]
 oh was emiititing wrong thisg..now qttwitter is finally working .. :)
 */
+>>>>>>> .r55

@@ -22,6 +22,7 @@
     <file>TwitterPostIcon.png</file>
   </qresource>
   <qresource prefix="globalStyle" >
+    <file>Fileclose.png</file>
     <file>background.png</file>
     <file>work_area.png</file>
   </qresource>
