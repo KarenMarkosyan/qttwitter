@@ -31,24 +31,8 @@ QString globalStyle =" QPushButton { \
                      QPushButton:default:hover {\
                      background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
                      stop: 0 #75ce1f, stop: 0.7 #4d8e0d, stop: 1 #7ac52f);\
-                     }\
-                     QDialog{\
-                     padding: 3.5em 2em 1em 1em;\
-                     background: url(:/globalStyle/work_area.png) no-repeat top left;\
-                     border: none;\
-                     font-size: 10pt;\
-                     min-width: 150px;\
-                     }\
-                     QMenuBar{\
-                     background: url(:/globalStyle/work_area.png) no-repeat top left;\
-                     border: none;\
-                     font-size: 10pt;\
-                     }\
-                     QToolBar{\
-                     background: url(:/globalStyle/background.png) no-repeat top left;\
-                     border: none;\
-                     font-size: 10pt;\
                      }";
+              
 //                      QMenu::item:selected { \
 //                      background-color: white;\
 //                      color: black;\
@@ -83,3 +67,9 @@ QString globalStyle =" QPushButton { \
 //          top: 1px; left: 1px; /* shift the arrow by 1 px */
 //      }
 // ";*/
+/*
+      QMenuBar{\
+                     background: url(:/globalStyle/work_area.png) no-repeat top left;\
+                     border: none;\
+                     font-size: 10pt;\
+                     }*/
