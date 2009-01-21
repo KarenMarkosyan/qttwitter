@@ -164,7 +164,6 @@
    <addaction name="menuOther_Services"/>
    <addaction name="menuAbout_2"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string notr="true">toolBar</string>
