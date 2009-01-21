@@ -61,7 +61,7 @@
       </widget>
      </item>
      <item row="1" column="0" colspan="2" >
-      <widget class="QLineEdit" name="twitLineEdit" >
+      <widget class="LineEdit" name="twitLineEdit" >
        <property name="maxLength" >
         <number>140</number>
        </property>
@@ -93,6 +93,13 @@
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global" >lineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

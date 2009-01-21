@@ -52,7 +52,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="loginLineEdit" />
+     <widget class="LineEdit" name="loginLineEdit" />
     </item>
     <item>
      <widget class="QLabel" name="label" >
@@ -65,7 +65,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="passwordLineEdit" >
+     <widget class="LineEdit" name="passwordLineEdit" >
       <property name="echoMode" >
        <enum>QLineEdit::Password</enum>
       </property>
@@ -108,10 +108,16 @@
    <zorder>label</zorder>
    <zorder>passwordLineEdit</zorder>
    <zorder>rememberPasswordCheckBox</zorder>
-   <zorder>pushButton</zorder>
    <zorder></zorder>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global" >lineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../images/images.qrc" />
  </resources>
