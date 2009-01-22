@@ -25,7 +25,7 @@ public slots:
     void  friends_timeline();//Primary
     void  user_timeline();//Primary
     void  showStatus();
-    void  update();//Primary
+    void  update(QString status);//Primary ...this updates the status of user
     void  replies();
     void  destroy();
     void  friends();

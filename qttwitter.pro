@@ -33,7 +33,8 @@ HEADERS += blog.h \
     Ui/mainWindow.h \
     Ui/sendTwit.h \
     sendTwitDerived.h \
-    loginDerived.h
+    loginDerived.h \
+    styleSheet.h
 FORMS += Ui/imageBrowser.ui \
     Ui/login.ui \
     Ui/mainWindow.ui \
