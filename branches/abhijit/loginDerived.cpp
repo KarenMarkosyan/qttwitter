@@ -4,21 +4,16 @@ LoginDialogDerived::LoginDialogDerived()
 {
     setupUi(this);
 
-    //Disabling the Ok button at the start
-    //buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-    buttonBox->setEnabled(false);
-
-    //buttonBox->setEnabled(false);
-    qDebug() << "Is the buttonBox Enabled? " << buttonBox->isEnabled();
+    qDebug() << "Is the loginButton Enabled? " << loginButton->isEnabled();
 
     // Accept Reject from the OK Cancel buttons
     QObject::connect(this, SIGNAL(accepted()), this, SLOT(emitUserPassword()));
-    //QObject::connect(this, SIGNAL(rejected()), this, SLOT(emitUserPassword()));
+    QObject::connect(this, SIGNAL(rejected()), this, SLOT(clearOnCancel()));
 
     //Enable the password field only if login ID has been entered in the loginLineEdit field
     QObject::connect(loginLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(enablePasswordField(const QString &)));
 
-    //Enable the buttonBox only if the password has also been entered
+    //Enable the loginButton only if the password has also been entered
     QObject::connect(passwordLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(enableLoginButton(const QString &)));
 
     qDebug()<<"reached here in LoginDialogDerived, all connections established";
@@ -38,15 +33,22 @@ void LoginDialogDerived::emitUserPassword()
 void LoginDialogDerived::enablePasswordField(const QString &text)
 {
     passwordLineEdit->setEnabled(!text.isEmpty());
-    //passwordLineEdit->setVisible(!text.isEmpty());
-    //verticalLayoutWidget->setVisible(true);
+    passwordLineEdit->setText("");
     qDebug() << "Is the passwordLineEdit Enabled in the enablePasswordField slot? " << passwordLineEdit->isEnabled() << passwordLineEdit->isReadOnly() << passwordLineEdit->isHidden() << passwordLineEdit->isVisible();
 }
 
 //Implementing the slot enableLoginButton(const QString &)
 void LoginDialogDerived::enableLoginButton(const QString &text)
 {
-    //buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!text.isEmpty());
-    buttonBox->setEnabled(!text.isEmpty());
-    qDebug() << "Is the buttonBox Enabled in the enableLoginButton slot? " << buttonBox->isEnabled();
+    //loginButton->button(QDialogloginButton::Ok)->setEnabled(!text.isEmpty());
+    loginButton->setEnabled(!text.isEmpty() && passwordLineEdit->isEnabled());
+    qDebug() << "Is the loginButton Enabled in the enableLoginButton slot? " << loginButton->isEnabled();
+}
+
+//Implementing the slot clearOnCancel() to remove all the texts from the fields on close
+void LoginDialogDerived::clearOnCancel()
+{
+    loginLineEdit->setText("");
+    passwordLineEdit->setText("");
+    loginLineEdit->setFocus();
 }

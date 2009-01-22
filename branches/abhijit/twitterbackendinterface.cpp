@@ -43,8 +43,10 @@ void  twitterBackendInterface::showStatus()
 
 }
 
-void twitterBackendInterface::update()
+void twitterBackendInterface::update(QString status)
 {
+    qDebug() << "In the method update() status";
+    m_twitLib->PostNewStatus(status);
 }
 
 void  twitterBackendInterface::replies()

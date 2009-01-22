@@ -5,15 +5,16 @@
 class LoginDialogDerived : public QDialog, public Ui::loginDialog
 {
     Q_OBJECT
-// 
+//
 public:
     LoginDialogDerived();
-//     
+//
 public slots:
     void emitUserPassword();
     void enablePasswordField(const QString &text);
     void enableLoginButton(const QString &text);
-// 
+    void clearOnCancel();
+//
 signals:
     void setUserPassword(QString user, QString password);
 };
