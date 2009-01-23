@@ -5,8 +5,8 @@ SendTwitDerived::SendTwitDerived()
 {
     qDebug()<<"Reached the SendTwitDerived class";
     setupUi(this);
-    QObject::connect(this, SIGNAL(accepted()), this, SLOT(recieveTwit()));//FIXME why the fuck is this connect not working..
-    // QObject::connect(pushButton, SIGNAL(clicked()), this, SLOT(recieveTwit()));
+    QObject::connect(this, SIGNAL(accepted()), this, SLOT(recieveTwit()));
+    QObject::connect(this, SIGNAL(rejected()), twitLineEdit, SLOT(setFocus()));
 
     //Enable the Send tweet button only if the text has also been entered
     QObject::connect(twitLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(enableSendButton(const QString &)));
@@ -32,6 +32,7 @@ void SendTwitDerived::recieveTwit()
 
   twitLineEdit->setText("");
   delete tweet;
+  twitLineEdit->setFocus();
   qDebug() << "After clearing, tweet=" << tweet << " twitLineEdit=" << twitLineEdit->text();
   //Somehow even after deleting the tweet pointer the thing is existing in the memory
 }

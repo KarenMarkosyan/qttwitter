@@ -17,20 +17,20 @@ void mainWindowDerived::closeEvent(QCloseEvent *event)
 
 mainWindowDerived::mainWindowDerived()
 {
-	 minimizeAction = new QAction(tr("Mi&nimize"), this);
-	 maximizeAction = new QAction(tr("Ma&ximize"), this);
+     minimizeAction = new QAction(tr("Mi&nimize"), this);
+     maximizeAction = new QAction(tr("Ma&ximize"), this);
      restoreAction = new QAction(tr("&Restore"), this);
      quitAction = new QAction(tr("&Quit"), this);
      myTrayIconMenu = new QMenu(this);
-     
+
     connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
     connect(maximizeAction, SIGNAL(triggered()), this, SLOT(showMaximized()));
     connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
     connect(quitAction, SIGNAL(triggered()), this, SIGNAL(quit()));
 
-	myTrayIcon.setIcon(QIcon(":/twitter/twhitter_btn_03.png"));
-	myTrayIcon.show();
-	
+    myTrayIcon.setIcon(QIcon(":/twitter/trayIcon"));
+    myTrayIcon.show();
+
     myTrayIconMenu->addAction(minimizeAction);
     myTrayIconMenu->addAction(maximizeAction);
     myTrayIconMenu->addAction(restoreAction);
