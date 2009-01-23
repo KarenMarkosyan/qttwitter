@@ -87,10 +87,10 @@
     </rect>
    </property>
    <property name="autoFillBackground" >
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="styleSheet" >
-    <string notr="true" >font: 75 italic 10pt "Utopia";
+    <string notr="true" >font: 75 italic 10pt "Utopia"; background-color: #cec6bd;
 </string>
    </property>
    <property name="defaultUp" >
