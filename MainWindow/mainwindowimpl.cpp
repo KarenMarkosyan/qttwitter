@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QMessageBox>
 //
-MainWindowImpl::MainWindowImpl( ) 
+MainWindowImpl::MainWindowImpl(QWidget *parent ,Qt::WindowFlags flags ) : mainWindowDerived (parent , flags)
 {
 	setupUi(this);
 	//defining the menu actions of main windwos here.

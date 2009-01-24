@@ -14,7 +14,7 @@ class mainWindowDerived : public QMainWindow
 {
 	Q_OBJECT
 	public:
-	mainWindowDerived();
+	mainWindowDerived(QWidget *parent ,Qt::WindowFlags flags);
 	protected:
 	void closeEvent(QCloseEvent *event);
 	private:
