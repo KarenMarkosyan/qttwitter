@@ -15,7 +15,6 @@ MainWindowImpl::MainWindowImpl( )
     connect(actionAbout_Qt, SIGNAL(triggered()), this, SLOT(showAboutQt()));
     connect(actionAbout_Qt_Twitter, SIGNAL(triggered()), this, SLOT(showAboutQtTwitter()));
     // connect(actionView_Images_From_Area,SIGNAL(triggered() ),this ,SIGNAL(showImageBrowser()));
-    // (actionExit, SIGNAL(triggered())already handled in Ui File
 
     //Here Comes Timeline Menu
 
@@ -24,7 +23,7 @@ void MainWindowImpl::doPrint()
 {
     QPrinter myPrinter;
     QPrintDialog *dialog = new QPrintDialog(&myPrinter, this);
-     dialog->setWindowTitle(tr("Print Document"));
+    dialog->setWindowTitle(tr("Print Document"));
     // dialog-->show();
 
 }
@@ -35,8 +34,15 @@ void MainWindowImpl::showAboutQt()
 }
 void MainWindowImpl::showAboutQtTwitter()
 {
-    QMessageBox temp;
-    temp.about(this,"About QtTwitter Program","HI this should be where i say about my progam");
+    QMessageBox::about(this,"About Qwitter Book Program",
+                       tr("<h2>Qwitter Book 1.0</h2>"
+                       "<h5>Copyright &copy; 2008-09, Techfreaks4u Inc.</h5>"
+                       "<p>This program is based on the Open Source GPL version of Qt 4, and the Twitter APIs "
+                       "implemented in the open QTwitLib class. Also in the future, Facebook capabilities will be embedded, "
+                       "where you can have your face in our Good Books :-)."
+                       "<p>This program is being jointly developed by:"
+                       "\n\t<h4>Abhijeet Anand (mailto:abhijeet.juit@gmail.com)</h4>"
+                       "\n\t<h4>Shashank Singh (mailto:shashank.personal@gmail.com)</h4>"
+                       ));
 }
 //
-

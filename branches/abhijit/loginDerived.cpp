@@ -4,8 +4,6 @@ LoginDialogDerived::LoginDialogDerived()
 {
     setupUi(this);
 
-    qDebug() << "Is the loginButton Enabled? " << loginButton->isEnabled();
-
     // Accept Reject from the OK Cancel buttons
     QObject::connect(this, SIGNAL(accepted()), this, SLOT(emitUserPassword()));
     QObject::connect(this, SIGNAL(rejected()), this, SLOT(clearOnCancel()));
@@ -22,7 +20,6 @@ LoginDialogDerived::LoginDialogDerived()
 
 void LoginDialogDerived::emitUserPassword()
 {
-    //qDebug()<<"loginDeribved"<<loginLineEdit->text()<<passwordLineEdit->text();
     emit setUserPassword(loginLineEdit->text(),passwordLineEdit->text());
     loginLineEdit->setText("");
     passwordLineEdit->setText("");
@@ -34,15 +31,12 @@ void LoginDialogDerived::enablePasswordField(const QString &text)
 {
     passwordLineEdit->setEnabled(!text.isEmpty());
     passwordLineEdit->setText("");
-    qDebug() << "Is the passwordLineEdit Enabled in the enablePasswordField slot? " << passwordLineEdit->isEnabled() << passwordLineEdit->isReadOnly() << passwordLineEdit->isHidden() << passwordLineEdit->isVisible();
 }
 
 //Implementing the slot enableLoginButton(const QString &)
 void LoginDialogDerived::enableLoginButton(const QString &text)
 {
-    //loginButton->button(QDialogloginButton::Ok)->setEnabled(!text.isEmpty());
     loginButton->setEnabled(!text.isEmpty() && passwordLineEdit->isEnabled());
-    qDebug() << "Is the loginButton Enabled in the enableLoginButton slot? " << loginButton->isEnabled();
 }
 
 //Implementing the slot clearOnCancel() to remove all the texts from the fields on close

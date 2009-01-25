@@ -24,11 +24,8 @@
         <file>coiserv.png</file>
     </qresource>
     <qresource prefix="/globalStyle" >
-        <file>background.png</file>
         <file>work_area.png</file>
         <file>Fileclose.png</file>
-        <file>Metal_Background.png</file>
-        <file>Metal_Background_Horizontol.png</file>
         <file alias="BG_DARK" >Brushed_Background_Dark.png</file>
         <file alias="BG_LIGHT" >Brushed_Background_Light.png</file>
     </qresource>
