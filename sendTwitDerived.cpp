@@ -24,17 +24,13 @@ void SendTwitDerived::recieveTwit()
   //removing all the extra whitespace in the tweet using the QString method 'simplified()'
   QString *tweet = new QString(twitLineEdit->text().simplified());
 
-  qDebug() << "tweet=" << *tweet << " twitLineEdit=" << twitLineEdit->text();
-
   emit sendTwit(*tweet);
-
-  qDebug() << "After emitting, tweet=" << tweet << " twitLineEdit=" << twitLineEdit->text();
 
   twitLineEdit->setText("");
   delete tweet;
   twitLineEdit->setFocus();
-  qDebug() << "After clearing, tweet=" << tweet << " twitLineEdit=" << twitLineEdit->text();
-  //Somehow even after deleting the tweet pointer the thing is existing in the memory
+
+  //Somehow even after deleting the tweet pointer the object is existing in the memory
 }
 
 void SendTwitDerived::enableSendButton(const QString &text)

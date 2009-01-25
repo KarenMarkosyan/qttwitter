@@ -34,7 +34,8 @@ HEADERS += blog.h \
     Ui/sendTwit.h \
     sendTwitDerived.h \
     loginDerived.h \
-    styleSheet.h
+    styleSheet.h \
+    lineedit.h
 FORMS += Ui/imageBrowser.ui \
     Ui/login.ui \
     Ui/mainWindow.ui \
@@ -47,5 +48,6 @@ SOURCES += main.cpp \
     twitlib/Decipher.cpp \
     twitlib/QTwitLib.cpp \
     loginDerived.cpp \
-    sendTwitDerived.cpp
+    sendTwitDerived.cpp \
+    lineedit.cpp
 RESOURCES += images/images.qrc

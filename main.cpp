@@ -22,9 +22,7 @@ int main(int argc,char **argv)
     MainWindowImpl mainWindow;
 
     // These containers are not required and are ambiguous
-    // QDialog containerSendTwitDialog;
     QDialog containerImageBrowser;
-    // QDialog containerLoginDialog;
 
     Ui::loginDialogDerived myLoginDialog;
 
@@ -69,23 +67,9 @@ int main(int argc,char **argv)
     //Raising the tab when the respective message is displayed, but this is just a temporary action, (wont work probably)
     QObject::connect(mainWindow.actionPublic, SIGNAL(triggered()), mainWindow.tabPublicTimeline, SLOT(raise()));
 
-
-    //QObject::connect(mainWindow.action,SIGNAL(triggered()),&myTwitter,SLOT());
-    //property setting
-    app.setStyleSheet(globalStyle);
-    //temporarily disabling the setupUi thing for the LOgin Dialog
-    //Disabling this unnecessary thing actually made the Loging Box thing work where the password box remained disabled
-    //even after calling setEnabled thing. So I propose that even this ambiguous container for sendTwit is not reqd.
-    // myLoginDialog.setupUi(&containerLoginDialog);
-    // mySendTwitDialog.setupUi(&containerSendTwitDialog);
     QObject::connect(mainWindow.actionQuit, SIGNAL(triggered()), &app, SLOT(quit()));
 
-    //just a temporary putting of a lot of text to the public timeline to check the transparency
-    mainWindow.textBrowserPT->append("la jlfjalsd kjflasklsdkj lsdlfj lasdkjflksjdlfkjlaskdjflkjasldkfjlaksjflkjaslkdfjlaksjdflkjsldkjflkajsdlfkjlaskjflkjasld fioewjcodjflakdsfjc ladskjfl kadslfkjladsfljldskjflkjaslfjalsdkfjlksjdflajslfjlajsfoepwfijofkdnfk gjfdksjgh kjkjdfhgkjfhg kdfhg; akd;h ;  ahadskgh orit erihv ierh ierh ieru hgierghikj skdkdfjgkdfjgh wpeiorhg ierwohghaakhdhadfkjh kjhagjkhgperi adgfk jhgkja gdkjhg akdhierhiurethkhkljadgh kajhgkalh irht iert herth rkejth kajdfg kjadkgh ahfrithwieruthkj ghlskjdfh a;kdfh;gf oierth eiruh tkjdghdskj gkladjghkrehiwerh ver r       weriutiowuert ioertrt eroitoir tewrutpowieurtoiuweorituowruotiowurtoiwurtoiwer   eri toiurtoie ri or towiert oeur hfkjghskdfjghk kjdfhgk jhdsfkjghdfkghskldghwiorthweortkjhkdjfgkjdshfkghkdjfhgklsjdgh kljsdfhgkjlsdfghipoerhgksjdfgkshdf gkjdfshgkl jsdfgio diog erpohpwerohgklsjdfhgkjshdfklgkldsjfghsdifgh sidhg skdfh glkshg");
-    mainWindow.textBrowserPT->append("la jlfjalsd kjflasklsdkj lsdlfj lasdkjflksjdlfkjlaskdjflkjasldkfjlaksjflkjaslkdfjlaksjdflkjsldkjflkajsdlfkjlaskjflkjasld fioewjcodjflakdsfjc ladskjfl kadslfkjladsfljldskjflkjaslfjalsdkfjlksjdflajslfjlajsfoepwfijofkdnfk gjfdksjgh kjkjdfhgkjfhg kdfhg; akd;h ;  ahadskgh orit erihv ierh ierh ieru hgierghikj skdkdfjgkdfjgh wpeiorhg ierwohghaakhdhadfkjh kjhagjkhgperi adgfk jhgkja gdkjhg akdhierhiurethkhkljadgh kajhgkalh irht iert herth rkejth kajdfg kjadkgh ahfrithwieruthkj ghlskjdfh a;kdfh;gf oierth eiruh tkjdghdskj gkladjghkrehiwerh ver r       weriutiowuert ioertrt eroitoir tewrutpowieurtoiuweorituowruotiowurtoiwurtoiwer   eri toiurtoie ri or towiert oeur hfkjghskdfjghk kjdfhgk jhdsfkjghdfkghskldghwiorthweortkjhkdjfgkjdshfkghkdjfhgklsjdgh kljsdfhgkjlsdfghipoerhgksjdfgkshdf gkjdfshgkl jsdfgio diog erpohpwerohgklsjdfhgkjshdfklgkldsjfghsdifgh sidhg skdfh glkshg");
-    mainWindow.textBrowserPT->append("<b>la jlfjalsd kjflasklsdkj lsdlfj lasdkjflksjdlfkjlaskdjflkjasldkfjlaksjflkjaslkdfjlaksjdflkjsldkjflkajsdlfkjlaskjflkjasld fioewjcodjflakdsfjc ladskjfl kadslfkjladsfljldskjflkjaslfjalsdkfjlksjdflajslfjlajsfoepwfijofkdnfk gjfdksjgh kjkjdfhgkjfhg kdfhg; akd;h ;  ahadskgh orit erihv ierh ierh ieru hgierghikj skdkdfjgkdfjgh wpeiorhg ierwohghaakhdhadfkjh kjhagjkhgperi adgfk jhgkja gdkjhg akdhierhiurethkhkljadgh kajhgkalh irht iert herth rkejth kajdfg kjadkgh ahfrithwieruthkj ghlskjdfh a;kdfh;gf oierth eiruh tkjdghdskj gkladjghkrehiwerh ver r       weriutiowuert ioertrt eroitoir tewrutpowieurtoiuweorituowruotiowurtoiwurtoiwer   eri toiurtoie ri or towiert oeur hfkjghskdfjghk kjdfhgk jhdsfkjghdfkghskldghwiorthweortkjhkdjfgkjdshfkghkdjfhgklsjdgh kljsdfhgkjlsdfghipoerhgksjdfgkshdf gkjdfshgkl jsdfgio diog erpohpwerohgklsjdfhgkjshdfklgkldsjfghsdifgh sidhg skdfh glkshg</b>");
-    mainWindow.textBrowserPT->append("<b>la jlfjalsd kjflasklsdkj lsdlfj lasdkjflksjdlfkjlaskdjflkjasldkfjlaksjflkjaslkdfjlaksjdflkjsldkjflkajsdlfkjlaskjflkjasld fioewjcodjflakdsfjc ladskjfl kadslfkjladsfljldskjflkjaslfjalsdkfjlksjdflajslfjlajsfoepwfijofkdnfk gjfdksjgh kjkjdfhgkjfhg kdfhg; akd;h ;  ahadskgh orit erihv ierh ierh ieru hgierghikj skdkdfjgkdfjgh wpeiorhg ierwohghaakhdhadfkjh kjhagjkhgperi adgfk jhgkja gdkjhg akdhierhiurethkhkljadgh kajhgkalh irht iert herth rkejth kajdfg kjadkgh ahfrithwieruthkj ghlskjdfh a;kdfh;gf oierth eiruh tkjdghdskj gkladjghkrehiwerh ver r       weriutiowuert ioertrt eroitoir tewrutpowieurtoiuweorituowruotiowurtoiwurtoiwer   eri toiurtoie ri or towiert oeur hfkjghskdfjghk kjdfhgk jhdsfkjghdfkghskldghwiorthweortkjhkdjfgkjdshfkghkdjfhgklsjdgh kljsdfhgkjlsdfghipoerhgksjdfgkshdf gkjdfshgkl jsdfgio diog erpohpwerohgklsjdfhgkjshdfklgkldsjfghsdifgh sidhg skdfh glkshg</b>");
-
+    app.setStyleSheet(globalStyle);
     mainWindow.show();
     return app.exec();
 }

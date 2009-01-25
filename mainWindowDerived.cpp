@@ -17,30 +17,44 @@ void mainWindowDerived::closeEvent(QCloseEvent *event)
 
 mainWindowDerived::mainWindowDerived()
 {
-     minimizeAction = new QAction(tr("Mi&nimize"), this);
-     maximizeAction = new QAction(tr("Ma&ximize"), this);
-     restoreAction = new QAction(tr("&Restore"), this);
-     quitAction = new QAction(tr("&Quit"), this);
-     myTrayIconMenu = new QMenu(this);
+    minimizeAction = new QAction(tr("Mi&nimize"), this);
+    maximizeAction = new QAction(tr("Ma&ximize"), this);
+    restoreAction = new QAction(tr("&Restore"), this);
+    quitAction = new QAction(tr("&Quit"), this);
+    myTrayIconMenu = new QMenu(this);
 
     connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
     connect(maximizeAction, SIGNAL(triggered()), this, SLOT(showMaximized()));
     connect(restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
     connect(quitAction, SIGNAL(triggered()), this, SIGNAL(quit()));
 
-    myTrayIcon.setIcon(QIcon(":/twitter/trayIcon"));
-    myTrayIcon.show();
+    //conecting system tray icon activated signal to handle double-clicks and single-left-click
+    connect(&myTrayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(trayIconClicked(QSystemTrayIcon::ActivationReason)));
 
     myTrayIconMenu->addAction(minimizeAction);
     myTrayIconMenu->addAction(maximizeAction);
     myTrayIconMenu->addAction(restoreAction);
     myTrayIconMenu->addSeparator();
     myTrayIconMenu->addAction(quitAction);
+
     myTrayIcon.setContextMenu(myTrayIconMenu);
+    myTrayIcon.setIcon(QIcon(":/twitter/trayIcon"));
+
+    //Showing the system tray icon
+    myTrayIcon.show();
 }
 
 void mainWindowDerived::showMessage(QString message)
 {
-    myTrayIcon.showMessage("SomebOdy Said",message, QSystemTrayIcon::Information,5000/*duration*/);
+    myTrayIcon.showMessage("Somebody Said",message, QSystemTrayIcon::Information,5000/*duration*/);
 
+}
+
+void mainWindowDerived::trayIconClicked(QSystemTrayIcon::ActivationReason reason)
+{
+    if(reason == QSystemTrayIcon::DoubleClick)
+    {
+        this->showNormal();
+        this->activateWindow();
+    }
 }
