@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>609</width>
-    <height>429</height>
+    <width>767</width>
+    <height>767</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -77,6 +77,8 @@
     </property>
    </widget>
   </widget>
+
+
   <widget class="QMenuBar" name="menubar" >
    <property name="geometry" >
     <rect>
@@ -85,16 +87,12 @@
      <width>609</width>
      <height>28</height>
     </rect>
-   </property>
-   <property name="autoFillBackground" >
-    <bool>true</bool>
-   </property>
-   <property name="styleSheet" >
-    <string notr="true" >font: 75 italic 10pt "Utopia"; background-color: #cec6bd;
+   
+</property>
+      <property name="styleSheet" >
+	      <string notr="true" >font: 75 italic 10pt "Utopia"; background-color: white; background-image: url(:./images/work_area2.png);
 </string>
-   </property>
-   <property name="defaultUp" >
-    <bool>false</bool>
+
    </property>
    <widget class="QMenu" name="menuFile" >
     <property name="title" >
@@ -178,13 +176,14 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet" >
-    <string notr="true" />
+	   <string notr="true" >background-color: white; background-image: url(:/images/work_area2.png);
+	   </string>
    </property>
    <property name="movable" >
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="floatable" >
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <attribute name="toolBarArea" >
     <enum>BottomToolBarArea</enum>
