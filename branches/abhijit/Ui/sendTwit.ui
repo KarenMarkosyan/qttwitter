@@ -36,6 +36,9 @@
     <normaloff>:/twitter/im-status-message-edit.svg</normaloff>:/twitter/im-status-message-edit.svg</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMinimumSize</enum>
+   </property>
    <item row="0" column="0" colspan="3">
     <widget class="QLabel" name="label">
      <property name="text">
