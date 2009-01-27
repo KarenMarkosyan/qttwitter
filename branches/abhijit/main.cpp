@@ -67,7 +67,68 @@ int main(int argc,char **argv)
     //Raising the tab when the respective message is displayed, but this is just a temporary action, (wont work probably)
     QObject::connect(mainWindow.actionPublic, SIGNAL(triggered()), mainWindow.tabPublicTimeline, SLOT(raise()));
 
+    //Quit completely from the app. Shortcut is Ctrl-Q
     QObject::connect(mainWindow.actionQuit, SIGNAL(triggered()), &app, SLOT(quit()));
+
+    //Now adding few junk code for debugging purposes only. This whole block can be removed later
+    {
+        mainWindow.textBrowserPT->setFontFamily("Terminal");
+        mainWindow.textBrowserPT->append("                                           \n"
+                                         "     QQQQQQQQQ               tttt          \n"
+                                         "   QQ:::::::::QQ          ttt:::t          \n"
+                                         " QQ:::::::::::::QQ        t:::::t          \n"
+                                         "Q:::::::QQQ:::::::Q       t:::::t          \n"
+                                         "Q::::::O   Q::::::Q ttttttt:::::ttttttt    \n"
+                                         "Q:::::O     Q:::::Q t:::::::::::::::::t    \n"
+                                         "Q:::::O     Q:::::Q t:::::::::::::::::t    \n"
+                                         "Q:::::O     Q:::::Q tttttt:::::::tttttt    \n"
+                                         "Q:::::O     Q:::::Q       t:::::t          \n"
+                                         "Q:::::O     Q:::::Q       t:::::t          \n"
+                                         "Q:::::O  QQQQ:::::Q       t:::::t          \n"
+                                         "Q::::::O Q::::::::Q       t:::::t    tttttt\n"
+                                         "Q:::::::QQ::::::::Q       t::::::tttt:::::t\n"
+                                         " QQ::::::::::::::Q        tt::::::::::::::t\n"
+                                         "   QQ:::::::::::Q           tt:::::::::::tt\n"
+                                         "     QQQQQQQQ::::QQ           ttttttttttt  \n"
+                                         "             Q:::::Q                       \n"
+                                         "              QQQQQQ                       \n"
+                                         "                                           \n");
+        mainWindow.textBrowserPT->append("\n\n\n"
+                                         "     #####                                           #         ###   \n"
+                                         "    #     # #    # # ##### ##### ###### #####       ##        #   #  \n"
+                                         "    #     # #    # #   #     #   #      #    #     # #       #     # \n"
+                                         "    #     # #    # #   #     #   #####  #    #       #       #     # \n"
+                                         "    #   # # # ## # #   #     #   #      #####        #   ### #     # \n"
+                                         "    #    #  ##  ## #   #     #   #      #   #        #   ###  #   #  \n"
+                                         "     #### # #    # #   #     #   ###### #    #     ##### ###   ###   \n"
+                                         "                                                                     \n"
+                                         "\n\n\n    Banner Art by ..::==Abhijeet Anand==::..\n");
+
+        mainWindow.textBrowserFT->setFontFamily("Lucida Console");
+        mainWindow.textBrowserFT->append("\n\n\n\n\n\n"
+                                         "     #####                                           #         ###   \n"
+                                         "    #     # #    # # ##### ##### ###### #####       ##        #   #  \n"
+                                         "    #     # #    # #   #     #   #      #    #     # #       #     # \n"
+                                         "    #     # #    # #   #     #   #####  #    #       #       #     # \n"
+                                         "    #   # # # ## # #   #     #   #      #####        #   ### #     # \n"
+                                         "    #    #  ##  ## #   #     #   #      #   #        #   ###  #   #  \n"
+                                         "     #### # #    # #   #     #   ###### #    #     ##### ###   ###   \n"
+                                         "                                                                     \n"
+                                         "    Banner Art by ..::==Abhijeet Anand==::..\n");
+
+        mainWindow.textBrowserMTT->setFontFamily("Terminal");
+        mainWindow.textBrowserMTT->append("\n\n\n\n\n\n"
+                                         "     #####                                           #         ###   \n"
+                                         "    #     # #    # # ##### ##### ###### #####       ##        #   #  \n"
+                                         "    #     # #    # #   #     #   #      #    #     # #       #     # \n"
+                                         "    #     # #    # #   #     #   #####  #    #       #       #     # \n"
+                                         "    #   # # # ## # #   #     #   #      #####        #   ### #     # \n"
+                                         "    #    #  ##  ## #   #     #   #      #   #        #   ###  #   #  \n"
+                                         "     #### # #    # #   #     #   ###### #    #     ##### ###   ###   \n"
+                                         "                                                                     \n"
+                                         "    Banner Art by ..::==Abhijeet Anand==::..\n");
+        mainWindow.resize(800, 600);
+    }//This removable block ends here
 
     app.setStyleSheet(globalStyle);
     mainWindow.show();

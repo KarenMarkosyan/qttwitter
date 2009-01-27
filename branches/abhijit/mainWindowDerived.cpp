@@ -4,14 +4,16 @@
 
 void mainWindowDerived::closeEvent(QCloseEvent *event)
 {
-    if (myTrayIcon.isVisible()) {
-        QMessageBox::information(this, tr("Systray"),
+    if (myTrayIcon.isVisible())
+    {
+        /*QMessageBox::information(this, tr("Systray"),
                                  tr("The program will keep running in the "
                                     "system tray. To terminate the program, "
                                     "choose <b>Quit</b> in the context menu "
                                     "of the system tray entry."));
-        hide();
-        event->ignore();
+        */
+    hide();
+    event->ignore();
     }
 }
 
