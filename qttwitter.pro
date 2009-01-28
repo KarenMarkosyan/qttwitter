@@ -40,3 +40,8 @@ SOURCES += lineedit.cpp \
            twitlib/Decipher.cpp \
            twitlib/QTwitLib.cpp
 RESOURCES += images/images.qrc
+
+
+QT += gui \
+    network \
+    xml
