@@ -61,16 +61,16 @@
      </property>
      <layout class="QGridLayout" name="gridLayout" >
       <item row="0" column="1" >
-       <widget class="QLineEdit" name="lineEdit" />
+       <widget class="LineEdit" name="lineEdit" />
       </item>
       <item row="1" column="1" >
-       <widget class="QLineEdit" name="lineEdit_2" />
+       <widget class="LineEdit" name="lineEdit_2" />
       </item>
       <item row="2" column="1" >
-       <widget class="QLineEdit" name="lineEdit_3" />
+       <widget class="LineEdit" name="lineEdit_3" />
       </item>
       <item row="3" column="1" >
-       <widget class="QLineEdit" name="lineEdit_4" />
+       <widget class="LineEdit" name="lineEdit_4" />
       </item>
       <item row="0" column="0" >
        <widget class="QLabel" name="label_2" >
@@ -123,6 +123,13 @@
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global" >lineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
