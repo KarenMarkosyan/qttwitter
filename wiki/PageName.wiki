@@ -9,6 +9,7 @@ this wiki is supposed to hold imporatant link deemed important  by devel-team
 
 [ http://in.youtube.com/watch?v=xHmLb65GxUM&feature=related ]
 == ==
-Demo showing how to use *style sheets* with a example app : KTiny, the Qt/KDE client for TinyERP. http://sf.net/projects/ktiny http://www.nan-tic.com
-
-<object width="640" height="505"><param name="movie" value="http://www.youtube.com/v/xHmLb65GxUM&hl=en&fs=1&rel=0&color1=0x234900&color2=0x4e9e00"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/xHmLb65GxUM&hl=en&fs=1&rel=0&color1=0x234900&color2=0x4e9e00" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="505"></embed></object>
+Demo showing how to use *style sheets* with a example app : KTiny, the Qt/KDE client for TinyERP. 
+=== ===
+http://sf.net/projects/ktiny 
+<wiki:video url="http://in.youtube.com/watch?v=xHmLb65GxUM"/>
