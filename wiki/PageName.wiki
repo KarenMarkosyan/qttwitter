@@ -1,4 +1,4 @@
-#summary Important Link
+#summary Important Links
 #labels Phase-Design
 
 = Introduction =
@@ -8,4 +8,4 @@ this wiki is supposed to hold imporatant link deemed important  by devel-team
 = Details =
 
 [ http://in.youtube.com/watch?v=xHmLb65GxUM&feature=related ]
-Demo showing how to use style sheets with KTiny, the Qt/KDE client for TinyERP. http://sf.net/projects/ktiny http://www.nan-tic.com
+Demo showing how to use *style sheets* with a example app : KTiny, the Qt/KDE client for TinyERP. http://sf.net/projects/ktiny http://www.nan-tic.com
