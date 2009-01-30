@@ -6,10 +6,8 @@
 this wiki is supposed to hold imporatant link deemed important  by devel-team
 
 = Details =
-
-[ http://in.youtube.com/watch?v=xHmLb65GxUM&feature=related ]
+<wiki:video url="http://in.youtube.com/watch?v=xHmLb65GxUM"/>
 == ==
 Demo showing how to use *style sheets* with a example app : KTiny, the Qt/KDE client for TinyERP. 
 === ===
 http://sf.net/projects/ktiny 
-<wiki:video url="http://in.youtube.com/watch?v=xHmLb65GxUM"/>
