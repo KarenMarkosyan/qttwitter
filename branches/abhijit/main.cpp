@@ -18,7 +18,6 @@ extern twitterBackendInterface *myTwitter = new twitterBackendInterface();
 
 int main(int argc,char **argv)
 {
-    //declarations
     QApplication app(argc,argv);
 
     //this is derived from ui file and the added functionality  system tray MainWindow Class

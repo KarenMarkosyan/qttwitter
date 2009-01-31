@@ -42,18 +42,22 @@ QString globalStyle = "\
     QMenuBar{\
         border: none;\
         font-size: 10pt;\
+        background-color: rgb(0, 0, 0);\
+        color: rgb(255, 255, 255);\
+        selection-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(212, 212, 212, 240), stop:0.477273 rgba(127, 127, 127, 250), stop:1 rgba(212, 212, 212, 240));\
     }\
     QMenu{\
         color: rgb(255, 255, 255);\
         alternate-background-color: rgb(127, 127, 127);\
         background: url(:/globalStyle/BG_DARK) top left;\
-        selection-color: rgb(255, 255, 255);\
-        selection-background-color: rgb(125, 125, 125);\
+        selection-color: rgb(0, 0, 0);\
+        selection-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(212, 212, 212, 240), stop:0.477273 rgba(127, 127, 127, 250), stop:1 rgba(212, 212, 212, 240));\
     }\
     QToolBar{\
         background: url(:/globalStyle/BG_DARK) top left;\
         border: none;\
         font-size: 10pt;\
+        selection-background-color: rgba(127, 127, 127, 200);\
     }\
     QWidget#centralwidget{\
         background-image: url(:/globalStyle/BG_DARK);\
