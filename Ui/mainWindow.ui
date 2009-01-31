@@ -219,7 +219,7 @@
              <x>0</x>
              <y>0</y>
              <width>577</width>
-             <height>284</height>
+             <height>283</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -321,8 +321,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>59</height>
+             <width>577</width>
+             <height>283</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -421,8 +421,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>59</height>
+             <width>577</width>
+             <height>283</height>
             </rect>
            </property>
            <property name="sizePolicy">
@@ -498,7 +498,7 @@
      <x>0</x>
      <y>0</y>
      <width>585</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -512,7 +512,7 @@
      <bool>true</bool>
     </property>
     <property name="title">
-     <string>File</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="actionLogin"/>
     <addaction name="actionLogout"/>
@@ -526,7 +526,7 @@
      <string>View various Twitter Timelines</string>
     </property>
     <property name="title">
-     <string>Timeline</string>
+     <string>&amp;Timeline</string>
     </property>
     <addaction name="actionPublic"/>
     <addaction name="actionFriends"/>
@@ -534,7 +534,7 @@
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
-     <string>About</string>
+     <string>&amp;About</string>
     </property>
     <addaction name="actionIs_It_Working"/>
     <addaction name="actionAbout_Qt_Twitter"/>
@@ -543,11 +543,11 @@
    </widget>
    <widget class="QMenu" name="menuOther_Services">
     <property name="title">
-     <string>Other Services</string>
+     <string>&amp;Other Services</string>
     </property>
     <widget class="QMenu" name="menuSet_FaceBook_Status">
      <property name="title">
-      <string>Set FaceBook Status</string>
+      <string>&amp;Set FaceBook Status</string>
      </property>
      <addaction name="actionFacebook_Status_Twitter"/>
     </widget>
@@ -556,7 +556,7 @@
    </widget>
    <widget class="QMenu" name="menuTwitter">
     <property name="title">
-     <string>Twitter</string>
+     <string>T&amp;witter</string>
     </property>
     <addaction name="actionSet_New_Status"/>
     <addaction name="actionFollow"/>
@@ -614,7 +614,7 @@
      <normalon>:/twitter/twitter_system_tray1.png</normalon>:/twitter/user-online.svg</iconset>
    </property>
    <property name="text">
-    <string>Login</string>
+    <string>&amp;Login</string>
    </property>
    <property name="toolTip">
     <string>Login To Twitter</string>
@@ -648,7 +648,7 @@
      <normalon>:/twitter/print.png</normalon>:/twitter/print.jpeg</iconset>
    </property>
    <property name="text">
-    <string>Print</string>
+    <string>&amp;Print</string>
    </property>
   </action>
   <action name="actionPublic">
@@ -657,7 +657,7 @@
      <normaloff>:/twitter/twitter_system_tray_2.0.png</normaloff>:/twitter/twitter_system_tray_2.0.png</iconset>
    </property>
    <property name="text">
-    <string>Public</string>
+    <string>&amp;Public</string>
    </property>
    <property name="statusTip">
     <string>Display Public TimeLine From Twitter Server</string>
@@ -669,7 +669,7 @@
      <normaloff>:/twitter/twitter_system_tray.png</normaloff>:/twitter/twitter_system_tray.png</iconset>
    </property>
    <property name="text">
-    <string>Friends</string>
+    <string>&amp;Friends</string>
    </property>
    <property name="statusTip">
     <string>Display Friends' TimeLine From Twitter Server</string>
@@ -681,7 +681,7 @@
      <normaloff>:/twitter/twhitter_btn_02.png</normaloff>:/twitter/twhitter_btn_02.png</iconset>
    </property>
    <property name="text">
-    <string>Own</string>
+    <string>&amp;Own</string>
    </property>
    <property name="statusTip">
     <string>Display Your Own TimeLine From Twitter Server</string>
@@ -693,7 +693,7 @@
      <normaloff>:/twitter/TwitterPostIcon.png</normaloff>:/twitter/TwitterPostIcon.png</iconset>
    </property>
    <property name="text">
-    <string>About Qt Twitter</string>
+    <string>About Qt &amp;Twitter</string>
    </property>
   </action>
   <action name="actionAbout_Qt">
@@ -702,7 +702,7 @@
      <normaloff>:/twitter/qt.png</normaloff>:/twitter/qt.png</iconset>
    </property>
    <property name="text">
-    <string>About Qt</string>
+    <string>About &amp;Qt</string>
    </property>
   </action>
   <action name="actionHelp">
@@ -711,7 +711,7 @@
      <normaloff>:/twitter/help-about.svg</normaloff>:/twitter/help-about.svg</iconset>
    </property>
    <property name="text">
-    <string>New From Twitter</string>
+    <string>&amp;New From Twitter</string>
    </property>
   </action>
   <action name="action">
@@ -732,7 +732,7 @@
      <normaloff>:/twitter/icon.facebook.png</normaloff>:/twitter/icon.facebook.png</iconset>
    </property>
    <property name="text">
-    <string>Facebook Status = Twitter</string>
+    <string>&amp;Facebook Status = Twitter</string>
    </property>
    <property name="toolTip">
     <string>Set Facebook Status equal to Twitter's microblog from next update</string>
@@ -750,7 +750,7 @@
      <normaloff>:/twitter/configure.svg</normaloff>:/twitter/configure.svg</iconset>
    </property>
    <property name="text">
-    <string>Configure</string>
+    <string>&amp;Configure</string>
    </property>
   </action>
   <action name="actionSet_New_Status">
@@ -759,7 +759,7 @@
      <normaloff>:/twitter/im-status-message-edit.svg</normaloff>:/twitter/im-status-message-edit.svg</iconset>
    </property>
    <property name="text">
-    <string>Set New Status</string>
+    <string>&amp;Set New Status</string>
    </property>
   </action>
   <action name="actionFollow">
@@ -768,7 +768,7 @@
      <normaloff>:/twitter/add-profile.svg</normaloff>:/twitter/add-profile.svg</iconset>
    </property>
    <property name="text">
-    <string>Follow</string>
+    <string>&amp;Follow</string>
    </property>
   </action>
   <action name="actionLeave">
@@ -777,7 +777,7 @@
      <normaloff>:/twitter/remove-profile.svg</normaloff>:/twitter/remove-profile.svg</iconset>
    </property>
    <property name="text">
-    <string>Leave</string>
+    <string>&amp;Leave</string>
    </property>
   </action>
   <action name="actionUser_Methods">
@@ -786,7 +786,7 @@
      <normaloff>:/twitter/personal.svg</normaloff>:/twitter/personal.svg</iconset>
    </property>
    <property name="text">
-    <string>User Methods</string>
+    <string>&amp;User Methods</string>
    </property>
   </action>
   <action name="actionDirect_Message_Methods">
@@ -795,27 +795,27 @@
      <normaloff>:/twitter/message-unread.svg</normaloff>:/twitter/message-unread.svg</iconset>
    </property>
    <property name="text">
-    <string>Direct Message Methods</string>
+    <string>&amp;Direct Message Methods</string>
    </property>
   </action>
   <action name="actionFriendship_Methods">
    <property name="text">
-    <string>Friendship Methods</string>
+    <string>F&amp;riendship Methods</string>
    </property>
   </action>
   <action name="actionArchive">
    <property name="text">
-    <string>archive</string>
+    <string>&amp;Archive</string>
    </property>
   </action>
   <action name="actionFavorite_Methods">
    <property name="text">
-    <string>Favorite Methods</string>
+    <string>Fa&amp;vorite Methods</string>
    </property>
   </action>
   <action name="actionBlock_Methods">
    <property name="text">
-    <string>Block Methods</string>
+    <string>&amp;Block Methods</string>
    </property>
   </action>
   <action name="actionIs_It_Working">
@@ -824,12 +824,12 @@
      <normaloff>:/twitter/questionmark.png</normaloff>:/twitter/questionmark.png</iconset>
    </property>
    <property name="text">
-    <string>Is It Working?</string>
+    <string>&amp;Is It Working?</string>
    </property>
   </action>
   <action name="actionView_Images_From_Area">
    <property name="text">
-    <string>View Images From Area</string>
+    <string>&amp;View Images From Area</string>
    </property>
   </action>
   <action name="actionQuit">
@@ -838,7 +838,7 @@
      <normaloff>:/twitter/appQuitIcon</normaloff>:/twitter/appQuitIcon</iconset>
    </property>
    <property name="text">
-    <string>Quit</string>
+    <string>&amp;Quit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>

@@ -38,13 +38,13 @@ void MainWindowImpl::showAboutQtTwitter()
 {
     QMessageBox::about(this,"About Qwitter Book Program",
                        tr("<h2>Qwitter Book 1.0</h2>"
-                       "<h5>Copyright &copy; 2008-09, Techfreaks4u Inc.</h5>"
+                       "<h5>Copyright &copy; 2008-09, <a href=http://techfreaks4u.com>Techfreaks4u Inc.</a></h5>"
                        "<p>This program is based on the Open Source GPL version of Qt 4, and the Twitter APIs "
                        "implemented in the open QTwitLib class. Also in the future, Facebook capabilities will be embedded, "
                        "where you can have your face in our Good Books :-)."
                        "<p>This program is being jointly developed by:"
-                       "\n\t<h4>Abhijeet Anand (mailto:abhijeet.juit@gmail.com)</h4>"
-                       "\n\t<h4>Shashank Singh (mailto:shashank.personal@gmail.com)</h4>"
+                       "\n\t<h4>Abhijeet Anand (<a href=mailto:abhijeet.juit@gmail.com>abhijeet.juit@gmail.com</a>)</h4>"
+                       "\n\t<h4>Shashank Singh (<a href=mailto:shashank.personal@gmail.com>shashank.personal@gmail.com</a>)</h4>"
                        ));
 }
 
