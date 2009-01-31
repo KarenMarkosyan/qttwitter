@@ -47,6 +47,8 @@ QString globalStyle = "\
         color: rgb(255, 255, 255);\
         alternate-background-color: rgb(127, 127, 127);\
         background: url(:/globalStyle/BG_DARK) top left;\
+        selection-color: rgb(255, 255, 255);\
+        selection-background-color: rgb(125, 125, 125);\
     }\
     QToolBar{\
         background: url(:/globalStyle/BG_DARK) top left;\

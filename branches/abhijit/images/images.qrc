@@ -22,6 +22,7 @@
         <file>print.png</file>
         <file alias="trayIcon" >systemTrayIcon_Normal.png</file>
         <file>coiserv.png</file>
+        <file alias="appQuitIcon" >application-quit-normal.png</file>
     </qresource>
     <qresource prefix="/globalStyle" >
         <file>work_area.png</file>

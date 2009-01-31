@@ -14,6 +14,8 @@ public slots:
 	void doPrint();
 	void showAboutQt();
 	void showAboutQtTwitter();
+        void showSendDialog();
+        void showLoginDialog();
 signals:
 	void showLoginScreen();//signal specifies the window to show login screen and do login work
 	void doLogout();//signal is there to make logout work

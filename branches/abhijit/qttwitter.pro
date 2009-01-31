@@ -29,9 +29,6 @@ HEADERS += blog.h \
     twitlib/Returnables.h \
     twitlib/Server.h \
     Ui/imageBrowser.h \
-    Ui/login.h \
-    Ui/mainWindow.h \
-    Ui/sendTwit.h \
     sendTwitDerived.h \
     loginDerived.h \
     styleSheet.h \
@@ -51,3 +48,4 @@ SOURCES += main.cpp \
     sendTwitDerived.cpp \
     lineedit.cpp
 RESOURCES += images/images.qrc
+RC_FILE = images/App-Icon.rc
