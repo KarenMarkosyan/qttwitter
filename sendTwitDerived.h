@@ -8,6 +8,11 @@ class SendTwitDerived : public QDialog , public Ui::sendTwitDialog
 
   public:
     SendTwitDerived();
+
+    //Creating a static function to create the send tweet dialog only when needed
+    //And then destroy it after usage
+    static void showDialog();
+
   public slots:
     void recieveTwit();
     void enableSendButton( const QString & );

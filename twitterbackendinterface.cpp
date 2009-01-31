@@ -16,7 +16,6 @@ twitterBackendInterface::twitterBackendInterface( )
 
     //On similar pattern the timer for the other two timelines can be created viz. timerFriendsTweet and timerUserTweet
 
-
     connect(m_twitLib,SIGNAL(OnResponseReceived(Returnables::Response *)),this,SLOT(OnResponseReceived(Returnables::Response *)));
 }
 
@@ -164,51 +163,50 @@ void twitterBackendInterface::OnStatusReceived(SERVER::RESP response)
 
 }
 
-//Abhijeet thinks This is the message handler here that handles all the messages
+//This is the response handler from the QTwitLib handling all the enums from Returnables::
 void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 {
-//   qDebug()<<"status recived"<<resp->reqID;
-    qDebug()<<"i am here inOneResponserecived \n";
+    //qDebug()<<"status recived"<<resp->reqID;
+    qDebug()<<"i am here in OnResponseRecived()";
 
-
-  if(resp)
-  {
-    switch(resp->reqID)
+    if(resp)
     {
-    case Returnables::PUBLIC_TIMELINE:
+        switch(resp->reqID)
         {
-        Returnables::PublicTimeline *pTimeline = static_cast<Returnables::PublicTimeline *>(resp);
-        DisplayList(pTimeline->list, "Public Timeline");
-        delete pTimeline;
-        break;
+            case Returnables::PUBLIC_TIMELINE:
+            {
+                Returnables::PublicTimeline *pTimeline = static_cast<Returnables::PublicTimeline *>(resp);
+                DisplayList(pTimeline->list, "Public Timeline");
+                delete pTimeline;
+                break;
+            }
+            case Returnables::LOGIN:
+            {
+                qDebug()<<"reached here in Login case";
+                Returnables::Login *login = static_cast<Returnables::Login *>(resp);
+                QString authorized = login->authorized ? "true" : "false";
+                //m_plainTextEdit->appendPlainText("Authorized: "+authorized);
+                qDebug()<<"Authorized: "<<authorized;
+                delete login;
+                break;
+            }
+            case Returnables::FRIENDS_TIMELINE:
+            {
+                Returnables::FriendsTimeline *fTimeline = static_cast<Returnables::FriendsTimeline *>(resp);
+                DisplayList(fTimeline->list, "Friends Timeline");
+                delete fTimeline;
+                break;
+            }
+            case Returnables::USER_TIMELINE:
+            {
+                Returnables::UserTimeline *userTimeline = static_cast<Returnables::UserTimeline *>(resp);
+                DisplayList(userTimeline->list, "Users Timeline");
+                delete userTimeline;
+                break;
+            }
+            //Other cases to be implemented soon
+        }
     }
-    case Returnables::LOGIN:
-        {
-            qDebug()<<"1reached here";
-            Returnables::Login *login = static_cast<Returnables::Login *>(resp);
-            QString authorized = login->authorized ? "true" : "false";
-            //m_plainTextEdit->appendPlainText("Authorized: "+authorized);
-            qDebug()<<"Authorized: "<<authorized;
-            delete login;
-            break;
-    }
-    case Returnables::FRIENDS_TIMELINE:
-        {
-            Returnables::FriendsTimeline *fTimeline = static_cast<Returnables::FriendsTimeline *>(resp);
-            DisplayList(fTimeline->list, "Friends Timeline");
-            delete fTimeline;
-            break;
-    }
-    case Returnables::USER_TIMELINE:
-        {
-            Returnables::UserTimeline *userTimeline = static_cast<Returnables::UserTimeline *>(resp);
-        DisplayList(userTimeline->list, "Users Timeline");
-        delete userTimeline;
-        break;
-    }
-    }
-
-  }
 }
 
 
@@ -222,53 +220,35 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
   tweeter += (statusUser->user).screenName;
   QString tweet = "";
   tweet += (statusUser->status).text;
-=======
-  QString tweeter = lis->user.screenName;QString tweet = list->status.text;
 
-
-
-
->>>>>>> .theirs
+  QString tweeter = list->user.screenName;QString tweet = list->status.text;
 
   //Process the list here to extract information like UserStatus and the UserTweetText
   while(!list.isEmpty())
   {
-
-
-
-
-
     statusUser = list.takeFirst(); //taking the first status and user information from the list.
-
     //Here check for ducplicate entries, and if Unique send to the parser for formatting the tweet
     //The parser has not yet been implemented, so currently only sending the unformatted text
-<<<<<<< .mine
     if( tweeter.compare(*lastTweeter, Qt::CaseSensitive) && tweet.compare(*lastTweet, Qt::CaseSensitive) ){
         value += tweeter + " says\n\"" + tweet + "\"\n";
         *lastTweeter = tweeter;
         *lastTweet = tweet;
-
-
-
-=======
-  //  if( tweeter != lastTweeter && tweet != lastTweet ){
-   //     value = tweeter + " says\n\"" + tweet + "\"\n";
-    //    lastTweeter = tweeter;
-      //  lastTweet = tweet;
-          value+=statusUser->status.text+"<br>";
->>>>>>> .theirs
-        //The emit signal has been shifted here to see if still the signal crashes
-//      emit (public_timeline(value));
-   //}
+    if( tweeter != lastTweeter && tweet != lastTweet ){
+       value = tweeter + " says\n\"" + tweet + "\"\n";
+       lastTweeter = tweeter;
+       lastTweet = tweet;
+       value+=statusUser->status.text+"<br>";
+       //The emit signal has been shifted here to see if still the signal crashes
+       emit (public_timeline(value));
+   }
     emit (public_timeline(value));
 
     //value="ID:"+QString::number(statusUser->status.id) ; //this line was supposed to be inside the if block
 
   }
 
-
-
-  // The emit Signal was initially here, but now moved to the IF block. The program used to crash until now. Pluasible reason being an empty 'value' getting passed
+    //The emit Signal was initially here, but now moved to the IF block.
+    //The program used to crash until now. Pluasible reason being an empty 'value' getting passed
 */
 
 /** my handy wrok starts here where my=shanky*/
@@ -279,9 +259,9 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
   while(list.isEmpty() == FALSE )
   {
     statusUser = list.takeFirst();
-     //value="ID:"+QString::number(statusUser->status.id) ;//if you''l change value= to value+= you will get all the timeline
-         value += "<b>" + statusUser->user.screenName + "</b>" + " twittered \" ";
-             value += statusUser->status.text + " \" <br>";
+    //value="ID:"+QString::number(statusUser->status.id) ;//if you''l change value= to value+= you will get all the timeline
+    value += "<b>" + statusUser->user.screenName + "</b>" + " twittered \" ";
+    value += statusUser->status.text + " \" <br>";
 
   }
   emit(public_timeline(value));
@@ -290,19 +270,18 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
 void twitterBackendInterface::setUserNamePassword(QString user , QString password)
 {
     m_twitLib->Login(user, password);
-    //qDebug()<<user<<password;
-
-
 }
 
-// void twitterBackendInterface::OnLoginStatus ( bool isLoggedIn )
-// {
-//     if ( isLoggedIn )
-//     {
-//         isLogin = TRUE;
-//     }
-//     else
-//     {
-//         isLogin = FALSE;
-//     }
-// }
+/*
+void twitterBackendInterface::OnLoginStatus ( bool isLoggedIn )
+{
+    if ( isLoggedIn )
+    {
+        isLogin = TRUE;
+    }
+    else
+    {
+        isLogin = FALSE;
+    }
+}
+*/

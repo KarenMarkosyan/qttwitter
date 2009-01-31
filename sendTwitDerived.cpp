@@ -4,6 +4,7 @@
 SendTwitDerived::SendTwitDerived()
 {
     qDebug()<<"Reached the SendTwitDerived class";
+    this->setAttribute(Qt::WA_DeleteOnClose);
     setupUi(this);
     QObject::connect(this, SIGNAL(accepted()), this, SLOT(recieveTwit()));
     QObject::connect(this, SIGNAL(rejected()), twitLineEdit, SLOT(setFocus()));
@@ -41,4 +42,11 @@ void SendTwitDerived::enableSendButton(const QString &text)
 void SendTwitDerived::updateCharsLeft(const QString &text)
 {
     charsLeft->setText(QString::number(text.length()).rightJustified(3, '0') + " of " + QString::number(twitLineEdit->maxLength()));
+}
+
+//Implementing the static function to prevent application level persistent obhect creation of this class
+void SendTwitDerived::showDialog()
+{
+    SendTwitDerived *sendDialog = new SendTwitDerived();
+    sendDialog->show();
 }

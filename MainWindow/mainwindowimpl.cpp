@@ -3,7 +3,9 @@
 #include <QPrintDialog>
 #include <QDebug>
 #include <QMessageBox>
-//
+#include "sendTwitDerived.h"
+#include "loginDerived.h"
+
 MainWindowImpl::MainWindowImpl( )
 {
     setupUi(this);
@@ -45,4 +47,13 @@ void MainWindowImpl::showAboutQtTwitter()
                        "\n\t<h4>Shashank Singh (mailto:shashank.personal@gmail.com)</h4>"
                        ));
 }
-//
+
+void MainWindowImpl::showSendDialog()
+{
+    SendTwitDerived::showDialog();
+}
+
+void MainWindowImpl::showLoginDialog()
+{
+    LoginDialogDerived::showDialog();
+}

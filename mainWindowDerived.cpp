@@ -6,14 +6,17 @@ void mainWindowDerived::closeEvent(QCloseEvent *event)
 {
     if (myTrayIcon.isVisible())
     {
-        /*QMessageBox::information(this, tr("Systray"),
+        /*
+        This stub will make sure that the message box onCloseEvent only appears once
+        QSettings globalSettings
+        */
+        QMessageBox::warning(this, tr("Systray"),
                                  tr("The program will keep running in the "
                                     "system tray. To terminate the program, "
                                     "choose <b>Quit</b> in the context menu "
                                     "of the system tray entry."));
-        */
-    hide();
-    event->ignore();
+        hide();
+        event->ignore();
     }
 }
 
