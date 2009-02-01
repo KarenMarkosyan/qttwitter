@@ -50,6 +50,9 @@ int main(int argc,char **argv)
     //QObject::connect(mainWindow.actionSet_New_Status,SIGNAL(triggered()),&mySendTwitDialog,SLOT(show()));
     QObject::connect(mainWindow.actionSet_New_Status, SIGNAL(triggered()), &mainWindow, SLOT(showSendDialog()));
 
+    //For displaying the configuration box
+    QObject::connect(mainWindow.actionConfigure, SIGNAL(triggered()), &mainWindow, SLOT(showConfigDialog()));
+
     //Connecting the Timeline Menu Actions to respective timelime fetching methods
     QObject::connect(mainWindow.actionPublic, SIGNAL(triggered()), myTwitter, SLOT(public_timeline()));
     QObject::connect(mainWindow.actionFriends, SIGNAL(triggered()), myTwitter, SLOT(friends_timeline()));
@@ -127,10 +130,10 @@ int main(int argc,char **argv)
                                          "     #### # #    # #   #     #   ###### #    #     ##### ###   ###   \n"
                                          "                                                                     \n"
                                          "    Banner Art by ..::==Abhijeet Anand==::..\n");
-        mainWindow.resize(800, 600);
     }//This removable block ends here
 */
     app.setStyleSheet(globalStyle);
+    mainWindow.resize(800, 600);
     mainWindow.show();
     return app.exec();
 }

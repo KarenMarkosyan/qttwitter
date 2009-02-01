@@ -3,8 +3,6 @@
 #include <QPrintDialog>
 #include <QDebug>
 #include <QMessageBox>
-#include "sendTwitDerived.h"
-#include "loginDerived.h"
 
 MainWindowImpl::MainWindowImpl( )
 {
@@ -56,4 +54,9 @@ void MainWindowImpl::showSendDialog()
 void MainWindowImpl::showLoginDialog()
 {
     LoginDialogDerived::showDialog();
+}
+
+void MainWindowImpl::showConfigDialog()
+{
+    ConfigDialogDerived::showDialog();
 }

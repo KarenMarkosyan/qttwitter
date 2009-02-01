@@ -42,16 +42,28 @@ QString globalStyle = "\
     QMenuBar{\
         border: none;\
         font-size: 10pt;\
-        background-color: rgb(0, 0, 0);\
         color: rgb(255, 255, 255);\
-        selection-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(212, 212, 212, 240), stop:0.477273 rgba(127, 127, 127, 250), stop:1 rgba(212, 212, 212, 240));\
+        background-color: qlineargradient(spread:reflect, x1:0.5, y1:0.9, x2:0.5, y2:0,\
+                                          stop:0 rgba(0, 75, 0, 255),\
+                                          stop:0.5 rgba(20, 20, 20, 255));\
+        selection-background-color: qlineargradient(spread:reflect, x1:0.5, y1:0.7, x2:0.5, y2:0,\
+                                          stop:0 rgba(0, 75, 0, 255),\
+                                          stop:0.3 rgba(21, 170, 28, 255));\
     }\
     QMenu{\
-        color: rgb(255, 255, 255);\
+        color: rgb(230, 230, 230);\
         alternate-background-color: rgb(127, 127, 127);\
         background: url(:/globalStyle/BG_DARK) top left;\
         selection-color: rgb(0, 0, 0);\
-        selection-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(212, 212, 212, 240), stop:0.477273 rgba(127, 127, 127, 250), stop:1 rgba(212, 212, 212, 240));\
+        selection-background-color: qlineargradient(spread:pad, x1:0.5, y1:0.96, x2:0.5, y2:0,\
+                                        stop:0 rgba(209, 209, 209, 252),\
+                                        stop:0.065 rgba(157, 157, 157, 255),\
+                                        stop:0.130 rgba(89, 89, 89, 255),\
+                                        stop:0.92 rgba(250, 250, 250, 255),\
+                                        stop:1 rgba(210, 210, 210, 255));\
+    }\
+    QMenu:disabled{\
+        color: rgb(140, 140, 140);\
     }\
     QToolBar{\
         background: url(:/globalStyle/BG_DARK) top left;\
