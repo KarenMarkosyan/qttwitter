@@ -1,4 +1,4 @@
-/*
+/*btw just you all know blog.h is mostly written by shashank singh [shashank.singh@geodesic.com]]
 [Mon Mar 10 01:45:45 2008]
 still to do:: 
 (1)make things work...connection of derived ui class is not wokring that's why when linedit change no data is end to backend..
@@ -158,9 +158,13 @@ did some corerctions in sendtwit..lets hope now it will work :)..if send twit wi
 [Sun Jan 4 07:52:14 2009]
 qttwitter iss finally able to send twitter mesages ..yehaaaaaaaaaaaaw
  :D
-*/=======
+
 
 [12:02 Pm january 12 2009]
 oh was emiititing wrong thisg..now qttwitter is finally working .. :)
+
+[Sun Feb 1 18:18:03 2009]
+working on addding proxy support 
+
 */
->>>>>>> .r55
+
