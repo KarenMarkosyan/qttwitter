@@ -144,4 +144,10 @@ CONFIG += qt debug
 wtf why is  QObject::connect(this, SIGNAL(accepted()), this, SLOT(recieveTwit())) not working..in sendTwitDerived.cpp
 fuk fuk fuk.......going back to office work and marble.. will see qtwtitter later
 selection-background-color: rgb(125, 125, 125);\
+selection-background-color: qlineargradient(spread:pad, x1:0.5, y1:0.7, x2:0.5, y2:0,\
+                                    stop:0 rgba(212, 212, 212, 240),\
+                                    stop:0.5 rgba(127, 127, 127, 250),\
+                                    stop:1 rgba(212, 212, 212, 240));\
+
+
 */

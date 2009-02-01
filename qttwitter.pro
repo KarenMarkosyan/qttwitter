@@ -21,22 +21,22 @@ QT += gui \
 HEADERS += blog.h \
     mainWindowDerived.h \
     twitterbackendinterface.h \
-    blog/blog.h \
     MainWindow/mainwindowimpl.h \
     twitlib/Core.h \
     twitlib/Decipher.h \
     twitlib/QTwitLib.h \
     twitlib/Returnables.h \
     twitlib/Server.h \
-    Ui/imageBrowser.h \
     sendTwitDerived.h \
     loginDerived.h \
     styleSheet.h \
-    lineedit.h
+    lineedit.h \
+    configDerived.h
 FORMS += Ui/imageBrowser.ui \
     Ui/login.ui \
     Ui/mainWindow.ui \
-    Ui/sendTwit.ui
+    Ui/sendTwit.ui \
+    Ui/config.ui
 SOURCES += main.cpp \
     mainWindowDerived.cpp \
     twitterbackendinterface.cpp \
@@ -46,6 +46,7 @@ SOURCES += main.cpp \
     twitlib/QTwitLib.cpp \
     loginDerived.cpp \
     sendTwitDerived.cpp \
-    lineedit.cpp
+    lineedit.cpp \
+    configDerived.cpp
 RESOURCES += images/images.qrc
 RC_FILE = images/App-Icon.rc
