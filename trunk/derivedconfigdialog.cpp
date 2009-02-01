@@ -32,7 +32,7 @@ void derivedConfigDialog::reject()
 
 void derivedConfigDialog::accept()
 {
-//qDebug()<<proxyUrl->text();
+qDebug()<<"i reached in derive config dialog"<<proxyUrl->text();
 bool conversionStatus;
 int port = (proxyPort->text()).toInt(&conversionStatus);
  QNetworkProxy proxy;
