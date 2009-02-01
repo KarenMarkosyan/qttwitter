@@ -3,6 +3,7 @@
 
 SendTwitDerived::SendTwitDerived()
 {
+  qDebug()<<"hi";
   setupUi(this);
   QObject::connect(this, SIGNAL(accepted()), this, SLOT(recieveTwit()));
 }

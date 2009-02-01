@@ -9,7 +9,7 @@ class MainWindowImpl : public mainWindowDerived, public Ui::MainWindow
 {
 Q_OBJECT
 public:
-	MainWindowImpl( QWidget *parent ,Qt::WindowFlags flags);
+	MainWindowImpl( QWidget *parent ,Qt::WindowFlags flags = 0 );
 public slots:
 	void doPrint();
 	void showAboutQt();

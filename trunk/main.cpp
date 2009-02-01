@@ -20,7 +20,7 @@ int main(int argc,char **argv)
         QApplication app(argc,argv);
 		QDialog container;
         //this is derived from ui file and the added functionality  system tray MainWindow Class
-        MainWindowImpl mainWindow(NULL,Qt::FramelessWindowHint);
+        MainWindowImpl mainWindow(NULL/*,Qt::FramelessWindowHint*/);
         Ui::loginDialogDerived myLoginDialog;
         Ui::sendTwitDerived mySendTwitDialog;
 		Ui::configDialog myConfigDialog;
