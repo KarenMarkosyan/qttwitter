@@ -32,20 +32,25 @@ void derivedConfigDialog::reject()
 
 void derivedConfigDialog::accept()
 {
-qDebug()<<proxyUrl->text();
-
-QNetworkProxy proxy;
+//qDebug()<<proxyUrl->text();
+bool conversionStatus;
+int port = (proxyPort->text()).toInt(&conversionStatus);
+ QNetworkProxy proxy;
+if ((userName->text()).isEmpty() == FALSE)
+{
  proxy.setType(QNetworkProxy::Socks5Proxy);
+
  proxy.setHostName(proxyUrl->text());
-/* proxy.setPort();
-*/
+
+ proxy.setPort(port);
+
 if((userName->text()).isEmpty() == FALSE && (password->text()).isEmpty() == FALSE )
 {
  proxy.setUser(userName->text());
  proxy.setPassword(password->text());
 }
  QNetworkProxy::setApplicationProxy(proxy);
-
+}
 
         QDialog::accept();
 }
