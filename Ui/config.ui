@@ -33,7 +33,7 @@
     <rect>
      <x>0</x>
      <y>10</y>
-     <width>391</width>
+     <width>401</width>
      <height>231</height>
     </rect>
    </property>
@@ -60,44 +60,141 @@
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout" >
-      <item row="0" column="1" >
+      <item row="1" column="1" >
        <widget class="LineEdit" name="proxyUrl" />
       </item>
-      <item row="1" column="1" >
+      <item row="2" column="1" >
        <widget class="LineEdit" name="proxyPort" />
       </item>
-      <item row="2" column="1" >
+      <item row="3" column="1" >
        <widget class="LineEdit" name="userName" />
       </item>
-      <item row="3" column="1" >
+      <item row="4" column="1" >
        <widget class="LineEdit" name="password" />
       </item>
-      <item row="0" column="0" >
+      <item row="1" column="0" >
        <widget class="QLabel" name="label_2" >
         <property name="text" >
          <string>proxy URL</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0" >
+      <item row="2" column="0" >
        <widget class="QLabel" name="label_3" >
         <property name="text" >
          <string>Proxy Port</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0" >
+      <item row="3" column="0" >
        <widget class="QLabel" name="label_4" >
         <property name="text" >
          <string>UserName</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0" >
+      <item row="4" column="0" >
        <widget class="QLabel" name="label_5" >
         <property name="text" >
          <string>Password</string>
         </property>
+       </widget>
+      </item>
+      <item row="0" column="0" >
+       <widget class="QLabel" name="label_6" >
+        <property name="text" >
+         <string>Proxy Type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QComboBox" name="comboBox" >
+        <property name="toolTip" >
+         <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
+&lt;table border="1" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;" width="100%" cellspacing="1" cellpadding="2">
+&lt;tr>
+&lt;td width="25%">
+&lt;p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600; color:#000000;">Constant&lt;/p>&lt;/td>
+&lt;td width="15%">
+&lt;p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600; color:#000000;">Value&lt;/p>&lt;/td>
+&lt;td width="60%">
+&lt;p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600; color:#000000;">Description&lt;/p>&lt;/td>&lt;/tr>
+&lt;tr>
+&lt;td style=" vertical-align:top;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;span style=" font-family:'Courier New,courier';">QNetworkProxy::NoProxy&lt;/span>&lt;/p>&lt;/td>
+&lt;td style=" vertical-align:top;">
+&lt;p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;span style=" font-family:'Courier New,courier';">2&lt;/span>&lt;/p>&lt;/td>
+&lt;td style=" vertical-align:top;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">No proxying is used&lt;/p>&lt;/td>&lt;/tr>
+&lt;tr>
+&lt;td style=" vertical-align:top;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;span style=" font-family:'Courier New,courier';">QNetworkProxy::DefaultProxy&lt;/span>&lt;/p>&lt;/td>
+&lt;td style=" vertical-align:top;">
+&lt;p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;span style=" font-family:'Courier New,courier';">0&lt;/span>&lt;/p>&lt;/td>
+&lt;td style=" vertical-align:top;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">Proxy is determined based on the application proxy set using &lt;a href="qnetworkproxy.html#setApplicationProxy">&lt;span style=" text-decoration: underline; color:#004faf;">setApplicationProxy&lt;/span>&lt;/a>()&lt;/p>&lt;/td>&lt;/tr>
+&lt;tr>
+&lt;td style=" vertical-align:top;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;span style=" font-family:'Courier New,courier';">QNetworkProxy::Socks5Proxy&lt;/span>&lt;/p>&lt;/td>
+&lt;td style=" vertical-align:top;">
+&lt;p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;span style=" font-family:'Courier New,courier';">1&lt;/span>&lt;/p>&lt;/td>
+&lt;td style=" vertical-align:top;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;a href="qnetworkproxy.html#socks5">&lt;span style=" text-decoration: underline; color:#004faf;">Socks5&lt;/span>&lt;/a> proxying is used&lt;/p>&lt;/td>&lt;/tr>
+&lt;tr>
+&lt;td style=" vertical-align:top;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;span style=" font-family:'Courier New,courier';">QNetworkProxy::HttpProxy&lt;/span>&lt;/p>&lt;/td>
+&lt;td style=" vertical-align:top;">
+&lt;p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;span style=" font-family:'Courier New,courier';">3&lt;/span>&lt;/p>&lt;/td>
+&lt;td style=" vertical-align:top;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">HTTP transparent proxying is used&lt;/p>&lt;/td>&lt;/tr>
+&lt;tr>
+&lt;td style=" vertical-align:top;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;span style=" font-family:'Courier New,courier';">QNetworkProxy::HttpCachingProxy&lt;/span>&lt;/p>&lt;/td>
+&lt;td style=" vertical-align:top;">
+&lt;p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;span style=" font-family:'Courier New,courier';">4&lt;/span>&lt;/p>&lt;/td>
+&lt;td style=" vertical-align:top;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">Proxying for HTTP requests only&lt;/p>&lt;/td>&lt;/tr>
+&lt;tr>
+&lt;td style=" vertical-align:top;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;span style=" font-family:'Courier New,courier';">QNetworkProxy::FtpCachingProxy&lt;/span>&lt;/p>&lt;/td>
+&lt;td style=" vertical-align:top;">
+&lt;p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">&lt;span style=" font-family:'Courier New,courier';">5&lt;/span>&lt;/p>&lt;/td>
+&lt;td style=" vertical-align:top;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#000000;">Proxying for FTP requests only&lt;/p>&lt;/td>&lt;/tr>&lt;/table>&lt;/body>&lt;/html></string>
+        </property>
+        <item>
+         <property name="text" >
+          <string>QNetworkProxy::NoProxy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>QNetworkProxy::DefaultProxy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>QNetworkProxy::Socks5Proxy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>QNetworkProxy::HttpProxy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>QNetworkProxy::HttpCachingProxy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>QNetworkProxy::FtpCachingProxy</string>
+         </property>
+        </item>
        </widget>
       </item>
      </layout>
@@ -112,7 +209,7 @@
       <rect>
        <x>100</x>
        <y>60</y>
-       <width>151</width>
+       <width>181</width>
        <height>101</height>
       </rect>
      </property>

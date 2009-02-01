@@ -165,6 +165,6 @@ oh was emiititing wrong thisg..now qttwitter is finally working .. :)
 
 [Sun Feb 1 18:18:03 2009]
 working on addding proxy support 
-
+[Mon Feb 2 00:18:56 2009] still working on proxy support ..asked chirag to test it..seems it's still not working..for people who want to see it's in derivedconfigdialog.cpp in ::accept()
 */
 
