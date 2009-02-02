@@ -77,7 +77,16 @@ QString globalStyle = "\
     QTextBrowser{\
         font-size: 10pt;\
         background-image: url(:/globalStyle/BG_LIGHT);\
-    }";
+    }\
+    QLineEdit{\
+        border: 3px solid rgba(0, 0, 0, 215);\
+        border-radius: 10px;\
+        padding: 0 6px;\
+    }\
+    QLineEdit:focus {\
+        border: 3px solid rgb(39, 95, 160);\
+    }\
+    ";
 
 /*
     QMenu::item:selected { \
