@@ -20,7 +20,7 @@ void mainWindowDerived::closeEvent(QCloseEvent *event)
     }
 }
 
-mainWindowDerived::mainWindowDerived()
+mainWindowDerived::mainWindowDerived(QWidget *parent, Qt::WindowFlags flags): QMainWindow(parent, flags)
 {
     minimizeAction = new QAction(tr("Mi&nimize"), this);
     maximizeAction = new QAction(tr("Ma&ximize"), this);

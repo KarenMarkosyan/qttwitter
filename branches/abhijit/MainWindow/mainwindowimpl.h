@@ -7,12 +7,13 @@
 #include "sendTwitDerived.h"
 #include "loginDerived.h"
 #include "configDerived.h"
+#include "flickcharm.h"
 //
 class MainWindowImpl : public mainWindowDerived, public Ui::MainWindow
 {
 Q_OBJECT
 public:
-	MainWindowImpl( );
+        MainWindowImpl(QWidget *parent = 0, Qt::WindowFlags flags = 0);
 public slots:
 	void doPrint();
 	void showAboutQt();
@@ -26,8 +27,10 @@ signals:
 	void showPublicTimeline();
 	void showOwnTimeline();
 	void showFollowerTimeline();
-    void showFriendsline();
-//     void showImageBrowser();//just show the image browser mode
+        void showFriendsline();
+//      void showImageBrowser();//just show the image browser mode
+private:
+        FlickCharm flickScroll;
 
 
 };

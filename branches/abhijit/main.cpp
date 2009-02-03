@@ -21,7 +21,7 @@ int main(int argc,char **argv)
     QApplication app(argc,argv);
 
     //this is derived from ui file and the added functionality  system tray MainWindow Class
-    MainWindowImpl mainWindow;
+    MainWindowImpl mainWindow(NULL, Qt::Window);
 
     // These containers are not required and are ambiguous
     QDialog containerImageBrowser;
@@ -74,7 +74,7 @@ int main(int argc,char **argv)
     QObject::connect(mainWindow.actionView_Images_From_Area,SIGNAL(triggered()),&containerImageBrowser,SLOT(show()));
 
     //Now adding few junk code for debugging purposes only. This whole block can be removed later
-/*    {
+    for(int i = 0; i < 10; i++){
         mainWindow.textBrowserPT->setFontFamily("Lucida Console");
         mainWindow.textBrowserPT->append("                                           \n"
                                          "     QQQQQQQQQ               tttt          \n"
@@ -108,7 +108,7 @@ int main(int argc,char **argv)
                                          "\n\n\n    Banner Art by ..::==Abhijeet Anand==::..\n");
 
         mainWindow.textBrowserFT->setFontFamily("Lucida Console");
-        mainWindow.textBrowserFT->append("\n\n\n\n\n\n"
+        mainWindow.textBrowserPT->append("\n\n\n\n\n\n"
                                          "     #####                                           #         ###   \n"
                                          "    #     # #    # # ##### ##### ###### #####       ##        #   #  \n"
                                          "    #     # #    # #   #     #   #      #    #     # #       #     # \n"
@@ -120,7 +120,7 @@ int main(int argc,char **argv)
                                          "    Banner Art by ..::==Abhijeet Anand==::..\n");
 
         mainWindow.textBrowserMTT->setFontFamily("Terminal");
-        mainWindow.textBrowserMTT->append("\n\n\n\n\n\n"
+        mainWindow.textBrowserPT->append("\n\n\n\n\n\n"
                                          "     #####                                           #         ###   \n"
                                          "    #     # #    # # ##### ##### ###### #####       ##        #   #  \n"
                                          "    #     # #    # #   #     #   #      #    #     # #       #     # \n"
@@ -131,7 +131,7 @@ int main(int argc,char **argv)
                                          "                                                                     \n"
                                          "    Banner Art by ..::==Abhijeet Anand==::..\n");
     }//This removable block ends here
-*/
+
     app.setStyleSheet(globalStyle);
     mainWindow.resize(800, 600);
     mainWindow.show();
