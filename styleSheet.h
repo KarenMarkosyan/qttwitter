@@ -52,7 +52,6 @@ QString globalStyle = "\
     }\
     QMenu{\
         color: rgb(230, 230, 230);\
-        alternate-background-color: rgb(127, 127, 127);\
         background: url(:/globalStyle/BG_DARK) top left;\
         selection-color: rgb(0, 0, 0);\
         selection-background-color: qlineargradient(spread:pad, x1:0.5, y1:0.96, x2:0.5, y2:0,\
