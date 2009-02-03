@@ -31,7 +31,8 @@ HEADERS += blog.h \
     loginDerived.h \
     styleSheet.h \
     lineedit.h \
-    configDerived.h
+    configDerived.h \
+    flickcharm.h
 FORMS += Ui/imageBrowser.ui \
     Ui/login.ui \
     Ui/mainWindow.ui \
@@ -47,6 +48,7 @@ SOURCES += main.cpp \
     loginDerived.cpp \
     sendTwitDerived.cpp \
     lineedit.cpp \
-    configDerived.cpp
+    configDerived.cpp \
+    flickcharm.cpp
 RESOURCES += images/images.qrc
 RC_FILE = images/App-Icon.rc

@@ -4,11 +4,12 @@
 #include <QDebug>
 #include <QMessageBox>
 
-MainWindowImpl::MainWindowImpl( )
+MainWindowImpl::MainWindowImpl(QWidget *parent, Qt::WindowFlags flags): mainWindowDerived(parent, flags)
 {
     setupUi(this);
-    //defining the menu actions of main windwos here.
+    flickScroll.activateOn(textBrowserPT);
 
+    //defining the menu actions of main windwos here.
     //Here Comes File Menu
     //connect(actionLogout, SIGNAL(triggered()), this, SIGNAL(doLogout()));
     connect(actionPrint, SIGNAL(triggered()), this, SLOT(doPrint()));
