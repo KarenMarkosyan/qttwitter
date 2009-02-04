@@ -188,21 +188,6 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="mouseTracking">
-        <bool>false</bool>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="toolTip">
-        <string/>
-       </property>
-       <property name="statusTip">
-        <string>Right now you are walking through the Public Tweet-Space-Time Continuum</string>
-       </property>
-       <property name="accessibleName">
-        <string/>
-       </property>
        <attribute name="title">
         <string>Public Timeline</string>
        </attribute>
@@ -274,12 +259,6 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="toolTip">
-        <string/>
-       </property>
-       <property name="statusTip">
-        <string>Enjoy the stroll in the Tweet-Spacetime with your friends!!</string>
-       </property>
        <attribute name="title">
         <string>Friends Timeline</string>
        </attribute>
@@ -350,12 +329,6 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="toolTip">
-        <string/>
-       </property>
-       <property name="statusTip">
-        <string>Oh! So now you wish to go into the reverie within your own Tweet(Multi)verse</string>
        </property>
        <attribute name="title">
         <string>My Tweets</string>
@@ -521,6 +494,9 @@
    </property>
    <property name="movable">
     <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::TopToolBarArea</set>
    </property>
    <property name="floatable">
     <bool>false</bool>

@@ -74,6 +74,7 @@ int main(int argc,char **argv)
     QObject::connect(mainWindow.actionView_Images_From_Area,SIGNAL(triggered()),&containerImageBrowser,SLOT(show()));
 
     //Now adding few junk code for debugging purposes only. This whole block can be removed later
+    /*
     for(int i = 0; i < 10; i++){
         mainWindow.textBrowserPT->setFontFamily("Lucida Console");
         mainWindow.textBrowserPT->append("                                           \n"
@@ -131,6 +132,7 @@ int main(int argc,char **argv)
                                          "                                                                     \n"
                                          "    Banner Art by ..::==Abhijeet Anand==::..\n");
     }//This removable block ends here
+    */
 
     app.setStyleSheet(globalStyle);
     mainWindow.resize(800, 600);
