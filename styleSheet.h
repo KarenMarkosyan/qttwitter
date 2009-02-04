@@ -95,9 +95,10 @@ QString globalStyle = "\
     /* Style the tab using the tab sub-control. Note that\
         it reads QTabBar _not_ QTabWidget */\
     QTabBar::tab {\
-        background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
-                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\
-                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);\
+        background: qlineargradient(spread:reflect, x1:0.5, y1:0.9, x2:0.5, y2:0,\
+                                          stop:0 rgba(0, 75, 0, 255),\
+                                          stop:0.5 rgba(20, 20, 20, 255));\
+        color: gray;\
         border: 2px solid #C4C4C3;\
         border-bottom-color: #C2C7CB; /* same as the pane color */\
         border-top-left-radius: 4px;\
@@ -106,12 +107,14 @@ QString globalStyle = "\
         padding: 2px;\
     }\
     QTabBar::tab:selected, QTabBar::tab:hover {\
-        background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
-                                 stop: 0 #fafafa, stop: 0.4 #f4f4f4,\
-                                 stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);\
+        color: white;\
+        background: qlineargradient(spread:reflect, x1:0.5, y1:0.7, x2:0.5, y2:0,\
+                                          stop:0 rgba(0, 75, 0, 255),\
+                                          stop:0.3 rgba(21, 170, 28, 255));\
     }\
     QTabBar::tab:selected {\
-        border-color: #9B9B9B;\
+        border: 2px solid;\
+        border-color: rgb(75, 215, 250)/*#9B9B9B*/;\
         border-bottom-color: #C2C7CB; /* same as pane color */\
     }\
     ";
