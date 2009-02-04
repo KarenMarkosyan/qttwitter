@@ -148,6 +148,13 @@ selection-background-color: qlineargradient(spread:pad, x1:0.5, y1:0.7, x2:0.5, 
                                     stop:0 rgba(212, 212, 212, 240),\
                                     stop:0.5 rgba(127, 127, 127, 250),\
                                     stop:1 rgba(212, 212, 212, 240));\
-
+QTabBar::tab {\
+        background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
+                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\
+                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);\
+QTabBar::tab:selected, QTabBar::tab:hover {\
+        background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
+                                 stop: 0 #fafafa, stop: 0.4 #f4f4f4,\
+                                 stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);\
 
 */
