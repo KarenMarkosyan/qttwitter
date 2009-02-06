@@ -104,7 +104,7 @@ QString globalStyle = "\
         border-top-left-radius: 4px;\
         border-top-right-radius: 4px;\
         min-width: 8ex;\
-        padding: 2px;\
+        padding: 2px 16px;\
     }\
     QTabBar::tab:selected, QTabBar::tab:hover {\
         color: white;\
@@ -116,6 +116,24 @@ QString globalStyle = "\
         border: 2px solid;\
         border-color: rgb(75, 215, 250)/*#9B9B9B*/;\
         border-bottom-color: #C2C7CB; /* same as pane color */\
+    }\
+    QTabBar::tab:!selected {\
+        margin-top: 2px;\
+    }\
+    /* make use of negative margins for overlapping tabs */\
+    QTabBar::tab:selected {\
+        /* expand/overlap to the left and right by 4px */\
+        margin-left: -4px;\
+        margin-right: -4px;\
+    }\
+    QTabBar::tab:first:selected {\
+        margin-left: 0; /* the first selected tab has nothing to overlap with on the left */\
+    }\
+    QTabBar::tab:last:selected {\
+        margin-right: 0; /* the last selected tab has nothing to overlap with on the right */\
+    }\
+    QTabBar::tab:only-one {\
+        margin: 0; /* if there is only one tab, we don't want overlapping margins */\
     }\
     ";
 
