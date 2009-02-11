@@ -76,6 +76,7 @@ QString globalStyle = "\
     QTextBrowser{\
         font-size: 10pt;\
         background-image: url(:/globalStyle/BG_LIGHT);\
+        padding: 0.5em 2px 3px 2px;\
     }\
     QLineEdit{\
         border: 1px solid rgba(0, 0, 0, 215);\
@@ -135,6 +136,22 @@ QString globalStyle = "\
     QTabBar::tab:only-one {\
         margin: 0; /* if there is only one tab, we don't want overlapping margins */\
     }\
+    QScrollBar:vertical {\
+        width: 4px;\
+        border: 0px;\
+        border-radius: 2px;\
+        background: none;\
+    }\
+    QScrollBar::handle:vertical {\
+        border: 0px;\
+        border-radius: 2px;\
+        background: grey;\
+        min-height: 20px;\
+    }\
+    QScrollBar::add-line:vertical {\
+        border: 0px;\
+        border-radius: 2px;\
+        background: rgba(255, 255, 255, 0);\
     ";
 
 /*
