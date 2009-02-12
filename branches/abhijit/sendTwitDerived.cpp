@@ -15,6 +15,9 @@ SendTwitDerived::SendTwitDerived()
     //Update the number of characters entered
     QObject::connect(twitLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(updateCharsLeft(const QString &)));
 
+    //Send the tweet to the Twitter server
+    QObject::connect(this, SIGNAL(sendTwit(QString)), myTwitter, SLOT(update(QString)));
+
 }
 
 

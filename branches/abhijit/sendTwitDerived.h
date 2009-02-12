@@ -2,6 +2,10 @@
 #define SENDTWIT_DERIVED
 #include "ui_sendTwit.h"
 #include <QDebug>
+#include "twitterbackendinterface.h"
+
+extern twitterBackendInterface *myTwitter;
+
 class SendTwitDerived : public QDialog , public Ui::sendTwitDialog
 {
   Q_OBJECT
