@@ -16,3 +16,8 @@ http://sf.net/projects/ktiny
 <wiki:video url="http://in.youtube.com/watch?v=S7I24PawwMA"/>
 === ===
 Make any QWidget --> iphone-scrollable!
+=== ===
+=== ===
+Subversion branch handling
+=== ===
+http://google-code-updates.blogspot.com/2009/02/project-hosting-upgraded-to-subversion.html
