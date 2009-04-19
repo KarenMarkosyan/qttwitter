@@ -266,11 +266,11 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
             int k = formattedTweet.indexOf(" ", j+1);
             if (k != -1) {
                 formattedTweet.insert(k, "</A>");
-                formattedTweet.insert(j+1, "<A href='http://www.twitter.com/" + formattedTweet.mid(j+1, k-j-1) + "'>");
+                formattedTweet.insert(j+1, "<A href='http://www.twitter.com/" + formattedTweet.mid(j+1, (k-1)-j) + "'>");
             }
             else {
                 formattedTweet.append("</A>");
-                formattedTweet.insert(j+1, "<A href='http://www.twitter.com/" + formattedTweet.mid(j+1) + "'>");
+                formattedTweet.insert(j+1, "<A href='http://www.twitter.com/" + formattedTweet.mid(j+1, ((formattedTweet.size()-1)-4)-j) + "'>");
             }
             ++j;
         }
