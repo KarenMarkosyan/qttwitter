@@ -259,10 +259,25 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
   while(list.isEmpty() == FALSE )
   {
     statusUser = list.takeFirst();
+    QString formattedTweet = statusUser->status.text;
+    if (!formattedTweet.isEmpty()) {
+        int j = 0;
+        while ((j = formattedTweet.indexOf("@", j)) != -1) {
+            int k = formattedTweet.indexOf(" ", j+1);
+            if (k != -1) {
+                formattedTweet.insert(k, "</A>");
+                formattedTweet.insert(j+1, "<A href='http://www.twitter.com/" + formattedTweet.mid(j+1, k-j-1) + "'>");
+            }
+            else {
+                formattedTweet.append("</A>");
+                formattedTweet.insert(j+1, "<A href='http://www.twitter.com/" + formattedTweet.mid(j+1) + "'>");
+            }
+            ++j;
+        }
+    }
     //value="ID:"+QString::number(statusUser->status.id) ;//if you''l change value= to value+= you will get all the timeline
     value += "<b>" + statusUser->user.screenName + "</b>" + " twittered \" ";
-    value += statusUser->status.text + " \" <br>";
-
+    value += formattedTweet + " \" <br>";
   }
   emit(public_timeline(value));
 }
