@@ -264,6 +264,8 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
         int j = 0;
         int l = 0;
         int h = 0;
+
+        //HTTP Links Creation (partially implemented only currently)
         while ((l = formattedTweet.indexOf("http://", l)) != -1) {
             int n = formattedTweet.indexOf(" ", l+6);
             if (n != -1) {
@@ -277,7 +279,8 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
                 l = -1;
             }
         }
-        qDebug()<<formattedTweet;
+
+        //@replies Links Creation
         while ((j = formattedTweet.indexOf("@", j)) != -1) {
             int k = formattedTweet.indexOf(" ", j+1);
             if (k != -1) {
@@ -291,6 +294,8 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
                 j = -1;
             }
         }
+
+        //Hash Search Links Creation
         while ((h = formattedTweet.indexOf("#", h)) != -1) {
             int d = formattedTweet.indexOf(" ", h+1);
             if (d != -1) {
