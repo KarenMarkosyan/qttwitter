@@ -262,17 +262,34 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
     QString formattedTweet = statusUser->status.text;
     if (!formattedTweet.isEmpty()) {
         int j = 0;
+        int l = 0;
+        while ((l = formattedTweet.indexOf("http://", l)) != -1) {
+            int n = formattedTweet.indexOf(" ", l+6);
+            if (n != -1) {
+                formattedTweet.insert(n, "</A>");
+                formattedTweet.insert(l, "<A href='" + formattedTweet.mid(l, (n-1)-l) + "'>");
+                l = n + 9 + (n-l) + 2 + 4;
+            }
+            else {
+                formattedTweet.append("</A>");
+                formattedTweet.insert(l, "<A href='" + formattedTweet.mid(l, ((formattedTweet.size()-1)-4)-l) + "'>");
+                l = -1;
+            }
+        }
+        qDebug()<<formattedTweet;
         while ((j = formattedTweet.indexOf("@", j)) != -1) {
             int k = formattedTweet.indexOf(" ", j+1);
             if (k != -1) {
                 formattedTweet.insert(k, "</A>");
                 formattedTweet.insert(j+1, "<A href='http://www.twitter.com/" + formattedTweet.mid(j+1, (k-1)-j) + "'>");
+                j = k + 32 + (k-j) + 2 + 4;
             }
             else {
                 formattedTweet.append("</A>");
                 formattedTweet.insert(j+1, "<A href='http://www.twitter.com/" + formattedTweet.mid(j+1, ((formattedTweet.size()-1)-4)-j) + "'>");
+                j = -1;
             }
-            ++j;
+
         }
     }
     //value="ID:"+QString::number(statusUser->status.id) ;//if you''l change value= to value+= you will get all the timeline
