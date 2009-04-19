@@ -11,7 +11,7 @@ twitterBackendInterface::twitterBackendInterface( )
 
     //Creating a timer to fetch the public timeline periodically, this can be later made to fetch at a user specified interval
     timerPublicTweet = new QTimer( this );
-    timerPublicTweet->setInterval( 5000 ); //This shall be the timeout for tweet retrieval in milliseconds
+    timerPublicTweet->setInterval( 60000 ); //This shall be the timeout for tweet retrieval in milliseconds
     connect(timerPublicTweet, SIGNAL( timeout() ), this, SLOT( public_timeline() ) );
 
     //On similar pattern the timer for the other two timelines can be created viz. timerFriendsTweet and timerUserTweet
@@ -263,6 +263,7 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
     if (!formattedTweet.isEmpty()) {
         int j = 0;
         int l = 0;
+        int h = 0;
         while ((l = formattedTweet.indexOf("http://", l)) != -1) {
             int n = formattedTweet.indexOf(" ", l+6);
             if (n != -1) {
@@ -289,7 +290,19 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
                 formattedTweet.insert(j+1, "<A href='http://www.twitter.com/" + formattedTweet.mid(j+1, ((formattedTweet.size()-1)-4)-j) + "'>");
                 j = -1;
             }
-
+        }
+        while ((h = formattedTweet.indexOf("#", h)) != -1) {
+            int d = formattedTweet.indexOf(" ", h+1);
+            if (d != -1) {
+                formattedTweet.insert(d, "</A>");
+                formattedTweet.insert(h+1, "<A href='http://search.twitter.com/search?q=" + formattedTweet.mid(h+1, (d-1)-h) + "'>");
+                h = d + 44 + (d-h) + 2 + 4;
+            }
+            else {
+                formattedTweet.append("</A>");
+                formattedTweet.insert(h+1, "<A href='http://search.twitter.com/search?q=" + formattedTweet.mid(h+1, ((formattedTweet.size()-1)-4)-h) + "'>");
+                h = -1;
+            }
         }
     }
     //value="ID:"+QString::number(statusUser->status.id) ;//if you''l change value= to value+= you will get all the timeline
