@@ -20,11 +20,13 @@ LoginDialogDerived::LoginDialogDerived()
     QObject::connect(passwordLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(enableLoginButton(const QString &)));
 
     qDebug()<<"reached here in LoginDialogDerived, all connections established";
+    readLoginCredentials();
 
 }
 
 void LoginDialogDerived::emitUserPassword()
 {
+    storeLoginCredentials();
     emit setUserPassword(loginLineEdit->text(),passwordLineEdit->text());
     loginLineEdit->setText("");
     passwordLineEdit->setText("");
@@ -57,3 +59,22 @@ void LoginDialogDerived::showDialog()
     LoginDialogDerived *loginDialog = new LoginDialogDerived();
     loginDialog->show();
 }
+
+void LoginDialogDerived::storeLoginCredentials()
+{
+    //using QSettings
+    QSettings loginSettings("Techfreaks4u Inc.", "Qwitter Book");
+
+    loginSettings.setValue("uname", loginLineEdit->text());
+    loginSettings.setValue("password", passwordLineEdit->text());
+}
+
+void LoginDialogDerived::readLoginCredentials()
+{
+    //using QSettings
+    QSettings loginSettings("Techfreaks4u Inc.", "Qwitter Book");
+
+    loginLineEdit->setText(loginSettings.value("uname").toString());
+    passwordLineEdit->setText(loginSettings.value("password").toString());
+}
+
