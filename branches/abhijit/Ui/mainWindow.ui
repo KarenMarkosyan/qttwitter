@@ -251,6 +251,9 @@
           <property name="statusTip">
            <string>So many people. so much traffic... But let's see what everyone else is doing :-)</string>
           </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
        </layout>
