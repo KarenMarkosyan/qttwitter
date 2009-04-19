@@ -181,6 +181,9 @@
       <property name="currentIndex">
        <number>0</number>
       </property>
+      <property name="elideMode">
+       <enum>Qt::ElideMiddle</enum>
+      </property>
       <widget class="QWidget" name="tabPublicTimeline">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -404,7 +407,7 @@
      <x>0</x>
      <y>0</y>
      <width>585</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="sizePolicy">

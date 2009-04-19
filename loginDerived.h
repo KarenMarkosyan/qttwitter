@@ -2,6 +2,7 @@
 #define LOGINDERIVED_H
 #include "ui_login.h"
 #include "twitterbackendinterface.h"
+#include <QSettings>
 
 extern twitterBackendInterface *myTwitter;
 
@@ -13,6 +14,10 @@ public:
     LoginDialogDerived();
 
     static void showDialog();
+
+private:
+    void storeLoginCredentials();
+    void readLoginCredentials();
 
 public slots:
     void emitUserPassword();
