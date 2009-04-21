@@ -265,21 +265,21 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
         int l = 0;
         int h = 0;
 
-        //HTTP Links Creation (partially implemented only currently)
+        //HTTP Links Creation (currently only partially implemented)
         while ((l = formattedTweet.indexOf("http://", l)) != -1) {
-            int n = formattedTweet.indexOf(" ", l+6);
+            int n = formattedTweet.indexOf(" ", l+7);
             if (n != -1) {
                 formattedTweet.insert(n, "</A>");
-                formattedTweet.insert(l, "<A href='" + formattedTweet.mid(l, (n-1)-l) + "'>");
+                formattedTweet.insert(l, "<A href='" + formattedTweet.mid(l, n-l) + "'>");
                 l = n + 9 + (n-l) + 2 + 4;
             }
             else {
                 formattedTweet.append("</A>");
-                formattedTweet.insert(l, "<A href='" + formattedTweet.mid(l, ((formattedTweet.size()-1)-4)-l) + "'>");
+                formattedTweet.insert(l, "<A href='" + formattedTweet.mid(l, (formattedTweet.size()-4)-l) + "'>");
                 l = -1;
             }
         }
-
+        qDebug()<<formattedTweet;
         //@replies Links Creation
         while ((j = formattedTweet.indexOf("@", j)) != -1) {
             int k = formattedTweet.indexOf(" ", j+1);
@@ -294,7 +294,7 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
                 j = -1;
             }
         }
-
+        qDebug()<<formattedTweet;
         //Hash Search Links Creation
         while ((h = formattedTweet.indexOf("#", h)) != -1) {
             int d = formattedTweet.indexOf(" ", h+1);
@@ -310,6 +310,7 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
             }
         }
     }
+    qDebug()<<formattedTweet;
     //value="ID:"+QString::number(statusUser->status.id) ;//if you''l change value= to value+= you will get all the timeline
     value += "<b>" + statusUser->user.screenName + "</b>" + " twittered \" ";
     value += formattedTweet + " \" <br>";
