@@ -27,8 +27,8 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
     userImageButton->setStyleSheet("border-top-right-radius: 0px;");
     userImageButton->setStyleSheet("border-bottom-right-radius: 0px;");
     userImageButton->setStyleSheet("border: 2px;");
-    userImageButton->setStyleSheet("border-image: url(:/globalStyle/BG_LIGHT)");
-    userImageButton->setStyleSheet("background: qlineargradient(spread:pad, x1:0.5, y1:0.96, x2:0.5, y2:0, stop:0 rgba(209, 209, 209, 252), stop:0.065 rgba(157, 157, 157, 255), stop:0.130 rgba(89, 89, 89, 255), stop:0.92 rgba(250, 250, 250, 255), stop:1 rgba(210, 210, 210, 255));");
+    userImageButton->setStyleSheet("border-image: url(:/globalStyle/BG_DARK)");
+    //userImageButton->setStyleSheet("background: qlineargradient(spread:pad, x1:0.5, y1:0.96, x2:0.5, y2:0, stop:0 rgba(209, 209, 209, 252), stop:0.065 rgba(157, 157, 157, 255), stop:0.130 rgba(89, 89, 89, 255), stop:0.92 rgba(250, 250, 250, 255), stop:1 rgba(210, 210, 210, 255));");
     userImageButton->setCursor(QCursor(Qt::PointingHandCursor));
     userImageButton->setMouseTracking(true);
     userImageButton->setFocusPolicy(Qt::NoFocus);
@@ -48,8 +48,8 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
     tweetTextBrowser->setStyleSheet("border-bottom-right-radius: 6px;");
     tweetTextBrowser->setStyleSheet("border-top-left-radius: 0px;");
     tweetTextBrowser->setStyleSheet("border-bottom-left-radius: 0px;");
-    //tweetTextBrowser->setStyleSheet("background: url(:/globalStyle/BG_DARK) top left;");
-    tweetTextBrowser->setStyleSheet("background: qlineargradient(spread:pad, x1:0.5, y1:0.96, x2:0.5, y2:0, stop:0 rgba(209, 209, 209, 252), stop:0.065 rgba(157, 157, 157, 255), stop:0.130 rgba(89, 89, 89, 255), stop:0.92 rgba(250, 250, 250, 255), stop:1 rgba(210, 210, 210, 255));");
+    tweetTextBrowser->setStyleSheet("background: url(:/globalStyle/BG_DARK) top left;");
+    //tweetTextBrowser->setStyleSheet("background: qlineargradient(spread:pad, x1:0.5, y1:0.96, x2:0.5, y2:0, stop:0 rgba(209, 209, 209, 252), stop:0.065 rgba(157, 157, 157, 255), stop:0.130 rgba(89, 89, 89, 255), stop:0.92 rgba(250, 250, 250, 255), stop:1 rgba(210, 210, 210, 255));");
     tweetTextBrowser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     tweetTextBrowser->setOpenExternalLinks(true);
 

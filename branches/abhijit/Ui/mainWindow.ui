@@ -409,7 +409,7 @@
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string>background-image: url(:/globalStyle/BG_DARK);</string>
+        <string>background-image: url(:/globalStyle/BG_LIGHT);</string>
        </property>
        <attribute name="title">
         <string>Temporary View of New GUI</string>
