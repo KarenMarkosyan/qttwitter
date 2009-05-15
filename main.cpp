@@ -67,6 +67,9 @@ int main(int argc,char **argv)
     QObject::connect(myTwitter, SIGNAL(friends_timeline(QString)), mainWindow.textBrowserFT, SLOT(append(QString)));
     QObject::connect(myTwitter, SIGNAL(user_timeline(QString)), mainWindow.textBrowserMTT, SLOT(append(QString)));
 
+    //creating connections for the new GUI
+    QObject::connect(myTwitter, SIGNAL(newGuiCreated(QWidget *)), &mainWindow, SLOT(addTweetBubble(QWidget *)));
+
     //Image Display Widget connections
     QObject::connect(mainWindow.actionView_Images_From_Area,SIGNAL(triggered()),&containerImageBrowser,SLOT(show()));
 

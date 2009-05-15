@@ -253,10 +253,16 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
 //====================== Working Code Follows - Courtesy Shanky ====================
 
   Returnables::StatusUser *statusUser = NULL;
+  TweetBubbleWidget *tweetBubble = NULL;
   QString value="";
 
   while (!(list.isEmpty())) {
     statusUser = list.takeFirst();
+    tweetBubble = new TweetBubbleWidget();
+    tweetBubble->copyData(statusUser);
+    emit (newGuiCreated(tweetBubble));
+
+    /* Commented out to test the new GUI
     QString formattedTweet = statusUser->status.text;
     if (!formattedTweet.isEmpty()) {
         int j = 0;
@@ -310,7 +316,7 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
     }
 
     value += "<b>" + statusUser->user.screenName + "</b>" + " twittered \" ";
-    value += formattedTweet + " \" <br>";
+    value += formattedTweet + " \" <br>";*/
   }
 
   switch (reqId) {
