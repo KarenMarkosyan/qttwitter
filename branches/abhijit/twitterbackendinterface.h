@@ -6,6 +6,7 @@
 #include <twitlib/QTwitLib.h>
 #include <QTimer>
 #include <QString>
+#include "tweetbubblewidget.h"
 
 class twitterBackendInterface :public QObject
 {
@@ -66,6 +67,7 @@ signals:
     void public_timeline(QString);
     void friends_timeline(QString);
     void user_timeline(QString);
+    void newGuiCreated(QWidget *);
     void statusMessage(QString id);//
 
 private:

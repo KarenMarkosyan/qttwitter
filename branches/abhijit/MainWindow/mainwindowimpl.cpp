@@ -7,7 +7,7 @@
 MainWindowImpl::MainWindowImpl(QWidget *parent, Qt::WindowFlags flags): mainWindowDerived(parent, flags)
 {
     setupUi(this);
-    flickScroll.activateOn(textBrowserPT);
+    flickScroll.activateOn(scrollArea);
 
     //defining the menu actions of main windwos here.
     //Here Comes File Menu
@@ -60,4 +60,11 @@ void MainWindowImpl::showLoginDialog()
 void MainWindowImpl::showConfigDialog()
 {
     ConfigDialogDerived::showDialog();
+}
+
+void MainWindowImpl::addTweetBubble(QWidget *tweetBubble)
+{
+    //over here I add the bubble somehow, details later
+    tweetBubble->setParent(scrollAreaWidgetContents);
+    newGuiVLayout->addWidget(tweetBubble);
 }

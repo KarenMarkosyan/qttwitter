@@ -21,6 +21,7 @@ public slots:
         void showSendDialog();
         void showLoginDialog();
         void showConfigDialog();
+        void addTweetBubble(QWidget *);
 signals:
 	void showLoginScreen();//signal specifies the window to show login screen and do login work
 	void doLogout();//signal is there to make logout work

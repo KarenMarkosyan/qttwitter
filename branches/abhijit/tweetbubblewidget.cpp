@@ -7,11 +7,13 @@
 TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
         : QWidget(parent)
 {
-    this->setMinimumSize(579, 276);
+    this->setMinimumSize(375, 76);
+    this->setMaximumSize(1400, 76);
     this->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    this->setStyleSheet("border-radius: 6px;");
 
     thisWidgetLayout = new QHBoxLayout(this);
-    thisWidgetLayout->setSpacing(4);
+    thisWidgetLayout->setSpacing(2);
     thisWidgetLayout->setMargin(2);
     thisWidgetLayout->setSizeConstraint(QLayout::SetMinimumSize);
 
@@ -20,8 +22,12 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
     userImageButton->setMinimumSize(72, 72);
     userImageButton->setMaximumSize(72, 72);
     userImageButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    userImageButton->setStyleSheet("border-radius: 6px;");
+    userImageButton->setStyleSheet("border-top-left-radius: 6px;");
+    userImageButton->setStyleSheet("border-bottom-left-radius: 6px;");
+    userImageButton->setStyleSheet("border-top-right-radius: 0px;");
+    userImageButton->setStyleSheet("border-bottom-right-radius: 0px;");
     userImageButton->setStyleSheet("border: 2px;");
+    userImageButton->setStyleSheet("border-image: url(:/globalStyle/BG_DARK)");
     userImageButton->setCursor(QCursor(Qt::PointingHandCursor));
     userImageButton->setMouseTracking(true);
     userImageButton->setFocusPolicy(Qt::NoFocus);
@@ -37,7 +43,12 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
     tweetTextBrowser->setFrameShape(QFrame::NoFrame);
     tweetTextBrowser->setLineWidth(0);
     tweetTextBrowser->setStyleSheet("font: 10pt 'Lucida Grande';");
-    tweetTextBrowser->setStyleSheet("background: url(:/globalStyle/work_area.png) no-repeat top left;");
+    tweetTextBrowser->setStyleSheet("border-top-right-radius: 6px;");
+    tweetTextBrowser->setStyleSheet("border-bottom-right-radius: 6px;");
+    tweetTextBrowser->setStyleSheet("border-top-left-radius: 0px;");
+    tweetTextBrowser->setStyleSheet("border-bottom-left-radius: 0px;");
+    tweetTextBrowser->setStyleSheet("background: url(:/globalStyle/BG_DARK) top left;");
+    tweetTextBrowser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     thisWidgetLayout->addWidget(tweetTextBrowser);
 
@@ -66,7 +77,7 @@ void TweetBubbleWidget::copyData(Returnables::StatusUser *statusUser)
     createLinks(&tweetText);
 
     tweetTextBrowser->setFontFamily("Lucida Grande");
-    tweetTextBrowser->append("<b>" + userScreenName + "</b> from " + userLocation + " <i>says</i> <br>");
+    tweetTextBrowser->append("<b>" + userScreenName + "</b> from " + userLocation + " <i>says</i> \n");
     tweetTextBrowser->append(tweetText);
 }
 
