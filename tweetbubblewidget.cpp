@@ -49,6 +49,7 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
     tweetTextBrowser->setStyleSheet("border-bottom-left-radius: 0px;");
     tweetTextBrowser->setStyleSheet("background: url(:/globalStyle/BG_DARK) top left;");
     tweetTextBrowser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    tweetTextBrowser->setOpenExternalLinks(true);
 
     thisWidgetLayout->addWidget(tweetTextBrowser);
 
