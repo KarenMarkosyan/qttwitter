@@ -256,8 +256,7 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
   Returnables::StatusUser *statusUser = NULL;
   QString value="";
 
-  while(list.isEmpty() == FALSE )
-  {
+  while (!(list.isEmpty())) {
     statusUser = list.takeFirst();
     QString formattedTweet = statusUser->status.text;
     if (!formattedTweet.isEmpty()) {
