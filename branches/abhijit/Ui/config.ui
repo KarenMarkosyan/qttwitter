@@ -358,7 +358,7 @@ font: 10pt &quot;Lucida Grande&quot;;</string>
                    <number>2</number>
                   </property>
                   <item>
-                   <widget class="QPushButton" name="pushButton">
+                   <widget class="QToolButton" name="toolButton">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                       <horstretch>0</horstretch>
@@ -380,11 +380,14 @@ font: 10pt &quot;Lucida Grande&quot;;</string>
                     <property name="cursor">
                      <cursorShape>PointingHandCursor</cursorShape>
                     </property>
+                    <property name="mouseTracking">
+                     <bool>true</bool>
+                    </property>
+                    <property name="focusPolicy">
+                     <enum>Qt::NoFocus</enum>
+                    </property>
                     <property name="autoFillBackground">
                      <bool>false</bool>
-                    </property>
-                    <property name="styleSheet">
-                     <string>background-image: url(:/globalStyle/BG_LIGHT);</string>
                     </property>
                     <property name="text">
                      <string/>
@@ -393,8 +396,14 @@ font: 10pt &quot;Lucida Grande&quot;;</string>
                      <iconset resource="../images/images.qrc">
                       <normaloff>:/globalStyle/work_area.png</normaloff>:/globalStyle/work_area.png</iconset>
                     </property>
-                    <property name="autoDefault">
-                     <bool>false</bool>
+                    <property name="iconSize">
+                     <size>
+                      <width>66</width>
+                      <height>68</height>
+                     </size>
+                    </property>
+                    <property name="autoRaise">
+                     <bool>true</bool>
                     </property>
                    </widget>
                   </item>

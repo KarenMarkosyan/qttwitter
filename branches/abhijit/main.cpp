@@ -41,13 +41,9 @@ int main(int argc,char **argv)
     QObject::connect(mainWindow.actionQuit, SIGNAL(triggered()), &app, SLOT(quit()));
 
     //For displaying the Login Dialog Box.
-    //QObject::connect(mainWindow.actionLogin,SIGNAL(triggered()),&myLoginDialog,SLOT(show()));
     QObject::connect(mainWindow.actionLogin, SIGNAL(triggered()), &mainWindow, SLOT(showLoginDialog()));
-    //login connection, transferring temporarily to the loginDerived.cpp and checking if login can be localised like sendTweet
-    //QObject::connect(&myLoginDialog, SIGNAL(setUserPassword(QString,QString)), myTwitter, SLOT(setUserNamePassword(QString,QString)));
 
     //For displaying the Send Tweet Dialog Box
-    //QObject::connect(mainWindow.actionSet_New_Status,SIGNAL(triggered()),&mySendTwitDialog,SLOT(show()));
     QObject::connect(mainWindow.actionSet_New_Status, SIGNAL(triggered()), &mainWindow, SLOT(showSendDialog()));
 
     //For displaying the configuration box
@@ -63,7 +59,7 @@ int main(int argc,char **argv)
     QObject::connect(mainWindow.actionPublic, SIGNAL(triggered()), myTwitter->timerPublicTweet, SLOT(start()));
     //the slot to be later replaced by myTwitter->timerFriendsTweet->start();
     //QObject::connect(mainWindow.actionFriends, SIGNAL(triggered()), myTwitter, SLOT(friends_timeline()));
-    // the slot to be later replaced by myTwitter->timerUserTweet->start();
+    //the slot to be later replaced by myTwitter->timerUserTweet->start();
     //QObject::connect(mainWindow.actionOwn, SIGNAL(triggered()), myTwitter, SLOT(user_timeline()));
 
     //Displaying the Public Timeline messages to the respective tab
@@ -72,67 +68,6 @@ int main(int argc,char **argv)
 
     //Image Display Widget connections
     QObject::connect(mainWindow.actionView_Images_From_Area,SIGNAL(triggered()),&containerImageBrowser,SLOT(show()));
-
-    //Now adding few junk code for debugging purposes only. This whole block can be removed later
-    /*
-    for(int i = 0; i < 10; i++){
-        mainWindow.textBrowserPT->setFontFamily("Lucida Console");
-        mainWindow.textBrowserPT->append("                                           \n"
-                                         "     QQQQQQQQQ               tttt          \n"
-                                         "   QQ:::::::::QQ          ttt:::t          \n"
-                                         " QQ:::::::::::::QQ        t:::::t          \n"
-                                         "Q:::::::QQQ:::::::Q       t:::::t          \n"
-                                         "Q::::::O   Q::::::Q ttttttt:::::ttttttt    \n"
-                                         "Q:::::O     Q:::::Q t:::::::::::::::::t    \n"
-                                         "Q:::::O     Q:::::Q t:::::::::::::::::t    \n"
-                                         "Q:::::O     Q:::::Q tttttt:::::::tttttt    \n"
-                                         "Q:::::O     Q:::::Q       t:::::t          \n"
-                                         "Q:::::O     Q:::::Q       t:::::t          \n"
-                                         "Q:::::O  QQQQ:::::Q       t:::::t          \n"
-                                         "Q::::::O Q::::::::Q       t:::::t    tttttt\n"
-                                         "Q:::::::QQ::::::::Q       t::::::tttt:::::t\n"
-                                         " QQ::::::::::::::Q        tt::::::::::::::t\n"
-                                         "   QQ:::::::::::Q           tt:::::::::::tt\n"
-                                         "     QQQQQQQQ::::QQ           ttttttttttt  \n"
-                                         "             Q:::::Q                       \n"
-                                         "              QQQQQQ                       \n"
-                                         "                                           \n");
-        mainWindow.textBrowserPT->append("\n"
-                                         "     #####                                           #         ###   \n"
-                                         "    #     # #    # # ##### ##### ###### #####       ##        #   #  \n"
-                                         "    #     # #    # #   #     #   #      #    #     # #       #     # \n"
-                                         "    #     # #    # #   #     #   #####  #    #       #       #     # \n"
-                                         "    #   # # # ## # #   #     #   #      #####        #   ### #     # \n"
-                                         "    #    #  ##  ## #   #     #   #      #   #        #   ###  #   #  \n"
-                                         "     #### # #    # #   #     #   ###### #    #     ##### ###   ###   \n"
-                                         "                                                                     \n"
-                                         "\n\n\n    Banner Art by ..::==Abhijeet Anand==::..\n");
-
-        mainWindow.textBrowserFT->setFontFamily("Lucida Console");
-        mainWindow.textBrowserPT->append("\n\n\n\n\n\n"
-                                         "     #####                                           #         ###   \n"
-                                         "    #     # #    # # ##### ##### ###### #####       ##        #   #  \n"
-                                         "    #     # #    # #   #     #   #      #    #     # #       #     # \n"
-                                         "    #     # #    # #   #     #   #####  #    #       #       #     # \n"
-                                         "    #   # # # ## # #   #     #   #      #####        #   ### #     # \n"
-                                         "    #    #  ##  ## #   #     #   #      #   #        #   ###  #   #  \n"
-                                         "     #### # #    # #   #     #   ###### #    #     ##### ###   ###   \n"
-                                         "                                                                     \n"
-                                         "    Banner Art by ..::==Abhijeet Anand==::..\n");
-
-        mainWindow.textBrowserMTT->setFontFamily("Terminal");
-        mainWindow.textBrowserPT->append("\n\n\n\n\n\n"
-                                         "     #####                                           #         ###   \n"
-                                         "    #     # #    # # ##### ##### ###### #####       ##        #   #  \n"
-                                         "    #     # #    # #   #     #   #      #    #     # #       #     # \n"
-                                         "    #     # #    # #   #     #   #####  #    #       #       #     # \n"
-                                         "    #   # # # ## # #   #     #   #      #####        #   ### #     # \n"
-                                         "    #    #  ##  ## #   #     #   #      #   #        #   ###  #   #  \n"
-                                         "     #### # #    # #   #     #   ###### #    #     ##### ###   ###   \n"
-                                         "                                                                     \n"
-                                         "    Banner Art by ..::==Abhijeet Anand==::..\n");
-    }//This removable block ends here
-    */
 
     app.setStyleSheet(globalStyle);
     mainWindow.resize(800, 600);
