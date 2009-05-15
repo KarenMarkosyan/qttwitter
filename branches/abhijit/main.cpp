@@ -62,9 +62,10 @@ int main(int argc,char **argv)
     //the slot to be later replaced by myTwitter->timerUserTweet->start();
     //QObject::connect(mainWindow.actionOwn, SIGNAL(triggered()), myTwitter, SLOT(user_timeline()));
 
-    //Displaying the Public Timeline messages to the respective tab
-    QObject::connect(myTwitter, SIGNAL(public_timeline(QString)), mainWindow.textBrowserPT, SLOT(append(QString)) );
-    //QObject::connect(&mySendTwitDialog, SIGNAL(sendTwit(QString)), myTwitter, SLOT(update(QString))); //From Shanky's Branch.. Yet to see its function.
+    //Displaying the Timeline messages to the respective tab
+    QObject::connect(myTwitter, SIGNAL(public_timeline(QString)), mainWindow.textBrowserPT, SLOT(append(QString)));
+    QObject::connect(myTwitter, SIGNAL(friends_timeline(QString)), mainWindow.textBrowserFT, SLOT(append(QString)));
+    QObject::connect(myTwitter, SIGNAL(user_timeline(QString)), mainWindow.textBrowserMTT, SLOT(append(QString)));
 
     //Image Display Widget connections
     QObject::connect(mainWindow.actionView_Images_From_Area,SIGNAL(triggered()),&containerImageBrowser,SLOT(show()));

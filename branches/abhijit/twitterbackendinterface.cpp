@@ -166,8 +166,7 @@ void twitterBackendInterface::OnStatusReceived(SERVER::RESP response)
 //This is the response handler from the QTwitLib handling all the enums from Returnables::
 void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 {
-    //qDebug()<<"status recived"<<resp->reqID;
-    qDebug()<<"i am here in OnResponseRecived()";
+    qDebug()<<"i am here in OnResponseRecieved()";
 
     if(resp)
     {
@@ -176,7 +175,7 @@ void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
             case Returnables::PUBLIC_TIMELINE:
             {
                 Returnables::PublicTimeline *pTimeline = static_cast<Returnables::PublicTimeline *>(resp);
-                DisplayList(pTimeline->list, "Public Timeline");
+                DisplayList(pTimeline->list, Returnables::PUBLIC_TIMELINE);
                 delete pTimeline;
                 break;
             }
@@ -193,14 +192,14 @@ void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
             case Returnables::FRIENDS_TIMELINE:
             {
                 Returnables::FriendsTimeline *fTimeline = static_cast<Returnables::FriendsTimeline *>(resp);
-                DisplayList(fTimeline->list, "Friends Timeline");
+                DisplayList(fTimeline->list, Returnables::FRIENDS_TIMELINE);
                 delete fTimeline;
                 break;
             }
             case Returnables::USER_TIMELINE:
             {
                 Returnables::UserTimeline *userTimeline = static_cast<Returnables::UserTimeline *>(resp);
-                DisplayList(userTimeline->list, "Users Timeline");
+                DisplayList(userTimeline->list, Returnables::USER_TIMELINE);
                 delete userTimeline;
                 break;
             }
@@ -210,7 +209,7 @@ void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 }
 
 
-void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *> list, QString header)
+void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *> list, Returnables::RequestId reqId)
 {
  /* Returnables::StatusUser *statusUser = NULL;
   QString value = "";
@@ -251,7 +250,7 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
     //The program used to crash until now. Pluasible reason being an empty 'value' getting passed
 */
 
-/** my handy wrok starts here where my=shanky*/
+//====================== Working Code Follows - Courtesy Shanky ====================
 
   Returnables::StatusUser *statusUser = NULL;
   QString value="";
@@ -310,11 +309,33 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
         }
     }
 
-    //value="ID:"+QString::number(statusUser->status.id) ;//if you''l change value= to value+= you will get all the timeline
     value += "<b>" + statusUser->user.screenName + "</b>" + " twittered \" ";
     value += formattedTweet + " \" <br>";
   }
-  emit(public_timeline(value));
+
+  switch (reqId) {
+  case Returnables::PUBLIC_TIMELINE:
+      {
+          emit (public_timeline(value));
+          break;
+      }
+  case Returnables::FRIENDS_TIMELINE:
+      {
+          emit (friends_timeline(value));
+          break;
+      }
+  case Returnables::USER_TIMELINE:
+      {
+          emit (user_timeline(value));
+          break;
+      }
+
+  default:
+      {
+          emit (public_timeline(value));
+          break;
+      }
+  }
 }
 
 void twitterBackendInterface::setUserNamePassword(QString user , QString password)
