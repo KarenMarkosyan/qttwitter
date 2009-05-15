@@ -179,7 +179,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideMiddle</enum>
@@ -325,6 +325,9 @@
           <property name="statusTip">
            <string>Enjoy the trip to the ecstacy-land within this Friends Tweet Shuttle</string>
           </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
        </layout>
@@ -385,16 +388,14 @@
             </disabled>
            </palette>
           </property>
-          <property name="font">
-           <font>
-            <family>Incantation</family>
-           </font>
-          </property>
           <property name="cursor" stdset="0">
            <cursorShape>IBeamCursor</cursorShape>
           </property>
           <property name="statusTip">
            <string>You are currently xooming accross your Tweetverse</string>
+          </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
