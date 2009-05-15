@@ -415,6 +415,9 @@ font: 10pt &quot;Lucida Grande&quot;;</string>
                     <property name="lineWidth">
                      <number>0</number>
                     </property>
+                    <property name="openExternalLinks">
+                     <bool>true</bool>
+                    </property>
                    </widget>
                   </item>
                  </layout>
