@@ -32,7 +32,8 @@ HEADERS += blog.h \
     styleSheet.h \
     lineedit.h \
     configDerived.h \
-    flickcharm.h
+    flickcharm.h \
+    tweetbubblewidget.h
 FORMS += Ui/imageBrowser.ui \
     Ui/login.ui \
     Ui/mainWindow.ui \
@@ -49,6 +50,7 @@ SOURCES += main.cpp \
     sendTwitDerived.cpp \
     lineedit.cpp \
     configDerived.cpp \
-    flickcharm.cpp
+    flickcharm.cpp \
+    tweetbubblewidget.cpp
 RESOURCES += images/images.qrc
 RC_FILE = images/App-Icon.rc
