@@ -1,10 +1,7 @@
 #include "mainwindowimpl.h"
-#include <QPrinter>
-#include <QPrintDialog>
-#include <QDebug>
-#include <QMessageBox>
 
-MainWindowImpl::MainWindowImpl(QWidget *parent, Qt::WindowFlags flags): mainWindowDerived(parent, flags)
+MainWindowImpl::MainWindowImpl(QWidget *parent, Qt::WindowFlags flags)
+        : SystemTray(parent, flags)
 {
     setupUi(this);
     flickScroll.activateOn(scrollArea);
@@ -20,19 +17,22 @@ MainWindowImpl::MainWindowImpl(QWidget *parent, Qt::WindowFlags flags): mainWind
     //Here Comes Timeline Menu
 
 }
+
 void MainWindowImpl::doPrint()
 {
     QPrinter myPrinter;
-    QPrintDialog *dialog = new QPrintDialog(&myPrinter, this);
-    dialog->setWindowTitle(tr("Print Document"));
-    // dialog-->show();
+    QPrintDialog *myPrintDialog = new QPrintDialog(&myPrinter, this);
+    myPrintDialog->setWindowTitle(tr("Print Document"));
+    myPrintDialog->show();
 
 }
+
 void MainWindowImpl::showAboutQt()
 {
     QMessageBox temp;
     temp.aboutQt(this,"About Qt Framework/Toolkit");
 }
+
 void MainWindowImpl::showAboutQtTwitter()
 {
     QMessageBox::about(this,"About Qwitter Book Program",
@@ -64,7 +64,6 @@ void MainWindowImpl::showConfigDialog()
 
 void MainWindowImpl::addTweetBubble(QWidget *tweetBubble)
 {
-    //over here I add the bubble somehow, details later
     tweetBubble->setParent(scrollAreaWidgetContents);
     newGuiVLayout->addWidget(tweetBubble);
 }

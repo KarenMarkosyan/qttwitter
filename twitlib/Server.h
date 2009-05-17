@@ -16,7 +16,7 @@ namespace SERVER
 			INTERNAL_SERVER_ERROR = 500,
 			BAD_GATEWAY = 502,
 			SERVICE_UNAVAILABLE = 503,
-            UNKNOWN = 2723
+                        UNKNOWN = 2723
 		};
         
         struct Option1
