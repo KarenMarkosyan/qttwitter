@@ -3,6 +3,9 @@
 #include <QTextBrowser>
 #include <QPixmap>
 #include <QHBoxLayout>
+#include <QHttp>
+#include <QBuffer>
+#include <QDebug>
 
 TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
         : QWidget(parent)
@@ -16,6 +19,8 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
     thisWidgetLayout->setSpacing(2);
     thisWidgetLayout->setMargin(2);
     thisWidgetLayout->setSizeConstraint(QLayout::SetMinimumSize);
+
+    imageDataFromServer = new QBuffer(this);
 
     userImageButton = new QToolButton(this);
     userImageButton->setAutoRaise(true);
@@ -78,6 +83,7 @@ void TweetBubbleWidget::copyData(Returnables::StatusUser *statusUser)
     tweetFavourited = statusUser->status.favorited;
 
     createLinks(&tweetText);
+    setUserIcon();
 
     tweetTextBrowser->setFontFamily("Lucida Grande");
     tweetTextBrowser->append("<b>" + userScreenName + "</b> from " + userLocation + " <i>says</i> \n");
@@ -138,7 +144,17 @@ void TweetBubbleWidget::createLinks(QString *tweetText)
     }
 }
 
-void TweetBubbleWidget::setUserIcon(QPixmap *userIcon)
+void TweetBubbleWidget::setUserIcon()
 {
     //The code to add the pixmap to the icon is to be done here somehow
+    imageDataFromServer->open(QIODevice::ReadWrite);
+    QHttp *http = new QHttp(this);
+    http->get(userProfileImageUrl, imageDataFromServer);
+    qDebug() << imageDataFromServer->buffer();
+    QPixmap userPixmap;
+    userPixmap.loadFromData(imageDataFromServer->buffer());
+    QIcon userIcon;
+    userIcon.addPixmap(userPixmap);
+    userImageButton->setIcon(userIcon);
+    qDebug() << "ping to buffer again " << imageDataFromServer->buffer();
 }

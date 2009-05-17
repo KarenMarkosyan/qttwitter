@@ -29,5 +29,7 @@
         <file>Fileclose.png</file>
         <file alias="BG_DARK" >Brushed_Background_Dark.png</file>
         <file alias="BG_LIGHT" >Brushed_Background_Light.png</file>
+        <file>arrow_left.png</file>
+        <file>arrow_right.png</file>
     </qresource>
 </RCC>

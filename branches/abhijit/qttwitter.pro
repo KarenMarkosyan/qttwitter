@@ -19,7 +19,6 @@ QT += gui \
 
 # Input
 HEADERS += blog.h \
-    mainWindowDerived.h \
     twitterbackendinterface.h \
     MainWindow/mainwindowimpl.h \
     twitlib/Core.h \
@@ -33,14 +32,14 @@ HEADERS += blog.h \
     lineedit.h \
     configDerived.h \
     flickcharm.h \
-    tweetbubblewidget.h
+    tweetbubblewidget.h \
+    MainWindow/systemtray.h
 FORMS += Ui/imageBrowser.ui \
     Ui/login.ui \
     Ui/mainWindow.ui \
     Ui/sendTwit.ui \
     Ui/config.ui
 SOURCES += main.cpp \
-    mainWindowDerived.cpp \
     twitterbackendinterface.cpp \
     MainWindow/mainwindowimpl.cpp \
     twitlib/Core.cpp \
@@ -51,6 +50,7 @@ SOURCES += main.cpp \
     lineedit.cpp \
     configDerived.cpp \
     flickcharm.cpp \
-    tweetbubblewidget.cpp
+    tweetbubblewidget.cpp \
+    MainWindow/systemtray.cpp
 RESOURCES += images/images.qrc
 RC_FILE = images/App-Icon.rc

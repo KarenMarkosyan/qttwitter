@@ -7,6 +7,7 @@
 class QToolButton;
 class QTextBrowser;
 class QHBoxLayout;
+class QBuffer;
 
 class TweetBubbleWidget : public QWidget
 {
@@ -19,6 +20,7 @@ private:
     QToolButton *userImageButton;
     QTextBrowser *tweetTextBrowser;
     QHBoxLayout *thisWidgetLayout;
+    QBuffer *imageDataFromServer;
     //========= User Info Variables ======================
     unsigned int userId;
     QString userName;
@@ -40,7 +42,7 @@ private:
     bool tweetFavourited;
     //========= Utility Methods ==========================
     void createLinks(QString *tweet);
-    void setUserIcon(QPixmap *userIcon);
+    void setUserIcon();
 
 public:
     void copyData(Returnables::StatusUser *statusUser);

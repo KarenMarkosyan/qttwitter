@@ -7,8 +7,6 @@ on open suse 11.1 and Windows XP Professional SP2
 #include <QApplication>
 #include <QDialog>
 #include "MainWindow/mainwindowimpl.h"
-//#include "loginDerived.h"
-//#include "sendTwitDerived.h"
 //#include "imagebrowserimpl.h"
 #include "twitterbackendinterface.h"
 #include "styleSheet.h"
@@ -26,10 +24,6 @@ int main(int argc,char **argv)
     // These containers are not required and are ambiguous
     QDialog containerImageBrowser;
     //Ui::imageBrowserimpl myImageBroswer; //not needed right now
-
-    //Creating Login and Send Tweet dialogs
-    //Ui::loginDialogDerived myLoginDialog;
-    //Ui::sendTwitDerived mySendTwitDialog;
 
     //==================================================================
     //connection slots
