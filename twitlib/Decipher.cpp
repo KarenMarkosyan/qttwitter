@@ -272,7 +272,7 @@ Returnables::Login* Decipher::Login(const QString &xml)
 	QDomElement elem;
 
 	doc.setContent(xml);
-	elem = doc.namedItem(nAuthorized).toElement();
+        elem = doc.namedItem(nScreenName).toElement();
 
 	if(!elem.isNull())
 	{

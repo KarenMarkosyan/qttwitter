@@ -36,10 +36,8 @@ int main(int argc,char **argv)
 
     //For displaying the Login Dialog Box.
     QObject::connect(mainWindow.actionLogin, SIGNAL(triggered()), &mainWindow, SLOT(showLoginDialog()));
-
     //For displaying the Send Tweet Dialog Box
     QObject::connect(mainWindow.actionSet_New_Status, SIGNAL(triggered()), &mainWindow, SLOT(showSendDialog()));
-
     //For displaying the configuration box
     QObject::connect(mainWindow.actionConfigure, SIGNAL(triggered()), &mainWindow, SLOT(showConfigDialog()));
 
@@ -60,12 +58,13 @@ int main(int argc,char **argv)
     QObject::connect(myTwitter, SIGNAL(public_timeline(QString)), mainWindow.textBrowserPT, SLOT(append(QString)));
     QObject::connect(myTwitter, SIGNAL(friends_timeline(QString)), mainWindow.textBrowserFT, SLOT(append(QString)));
     QObject::connect(myTwitter, SIGNAL(user_timeline(QString)), mainWindow.textBrowserMTT, SLOT(append(QString)));
-
     //creating connections for the new GUI
     QObject::connect(myTwitter, SIGNAL(newGuiCreated(QWidget *)), &mainWindow, SLOT(addTweetBubble(QWidget *)));
 
     //Image Display Widget connections
     QObject::connect(mainWindow.actionView_Images_From_Area,SIGNAL(triggered()),&containerImageBrowser,SLOT(show()));
+
+    //QObject::connect(&mainWindow, SIGNAL(windowResized()), mainWindow.scrollAreaWidgetContents->findChildren;
 
     app.setStyleSheet(globalStyle);
     mainWindow.resize(800, 600);

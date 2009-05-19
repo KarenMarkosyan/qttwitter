@@ -25,6 +25,11 @@ void twitterBackendInterface::public_timeline ( /*int since_id*/ )
     qDebug() << "public_timeline";
 }
 
+void twitterBackendInterface::setUserNamePassword(QString user , QString password)
+{
+    m_twitLib->Login(user, password);
+}
+
 void  twitterBackendInterface::friends_timeline()
 {
     m_twitLib->GetFriendsTimeline();
@@ -166,7 +171,7 @@ void twitterBackendInterface::OnStatusReceived(SERVER::RESP response)
 //This is the response handler from the QTwitLib handling all the enums from Returnables::
 void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 {
-    qDebug()<<"i am here in OnResponseRecieved()";
+    qDebug()<<"i am here in OnResponseRecieved() with request ID"/*<<resp->reqID*/;
 
     if(resp)
     {
@@ -254,10 +259,10 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
 
   Returnables::StatusUser *statusUser = NULL;
   TweetBubbleWidget *tweetBubble = NULL;
-  QString value="";
+  QString value="See new gui";
 
   while (!(list.isEmpty())) {
-    statusUser = list.takeFirst();
+    statusUser = list.takeLast();
     tweetBubble = new TweetBubbleWidget();
     tweetBubble->copyData(statusUser);
     emit (newGuiCreated(tweetBubble));
@@ -342,11 +347,6 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
           break;
       }
   }
-}
-
-void twitterBackendInterface::setUserNamePassword(QString user , QString password)
-{
-    m_twitLib->Login(user, password);
 }
 
 /*

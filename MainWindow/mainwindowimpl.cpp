@@ -4,9 +4,9 @@ MainWindowImpl::MainWindowImpl(QWidget *parent, Qt::WindowFlags flags)
         : SystemTray(parent, flags)
 {
     setupUi(this);
-    flickScroll.activateOn(scrollArea);
+    flickScroll.activateOn(this);
 
-    //defining the menu actions of main windwos here.
+    //defining the menu actions of main windows here.
     //Here Comes File Menu
     //connect(actionLogout, SIGNAL(triggered()), this, SIGNAL(doLogout()));
     connect(actionPrint, SIGNAL(triggered()), this, SLOT(doPrint()));
@@ -66,4 +66,10 @@ void MainWindowImpl::addTweetBubble(QWidget *tweetBubble)
 {
     tweetBubble->setParent(scrollAreaWidgetContents);
     newGuiVLayout->addWidget(tweetBubble);
+    scrollArea->scroll(0, scrollArea->size().height());
+}
+
+void MainWindowImpl::resizeEvent(QResizeEvent *event)
+{
+    emit windowResized();
 }

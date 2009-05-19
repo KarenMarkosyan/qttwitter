@@ -2,16 +2,16 @@
 #include <QToolButton>
 #include <QTextBrowser>
 #include <QPixmap>
+#include <QIcon>
 #include <QHBoxLayout>
-#include <QHttp>
-#include <QBuffer>
 #include <QDebug>
+#include "imagehandler.h"
 
 TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
         : QWidget(parent)
 {
     this->setMinimumSize(375, 76);
-    this->setMaximumSize(1400, 76);
+    this->setMaximumSize(1400, 200);
     this->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     this->setStyleSheet("border-radius: 6px;");
 
@@ -20,7 +20,8 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
     thisWidgetLayout->setMargin(2);
     thisWidgetLayout->setSizeConstraint(QLayout::SetMinimumSize);
 
-    imageDataFromServer = new QBuffer(this);
+    requestImage = new ImageHandler();
+    connect(requestImage, SIGNAL(PixmapReceived(QPixmap)), this, SLOT(setUserIcon(QPixmap)));
 
     userImageButton = new QToolButton(this);
     userImageButton->setAutoRaise(true);
@@ -33,14 +34,13 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
     userImageButton->setStyleSheet("border-bottom-right-radius: 0px;");
     userImageButton->setStyleSheet("border: 2px;");
     userImageButton->setStyleSheet("border-image: url(:/globalStyle/BG_DARK)");
-    //userImageButton->setStyleSheet("background: qlineargradient(spread:pad, x1:0.5, y1:0.96, x2:0.5, y2:0, stop:0 rgba(209, 209, 209, 252), stop:0.065 rgba(157, 157, 157, 255), stop:0.130 rgba(89, 89, 89, 255), stop:0.92 rgba(250, 250, 250, 255), stop:1 rgba(210, 210, 210, 255));");
     userImageButton->setCursor(QCursor(Qt::PointingHandCursor));
     userImageButton->setMouseTracking(true);
     userImageButton->setFocusPolicy(Qt::NoFocus);
     userImageButton->setAutoFillBackground(false);
-    QIcon userIcon;
+    /*QIcon userIcon;
     userIcon.addPixmap(QPixmap(":/twitter/personal.svg"), QIcon::Normal, QIcon::Off);
-    userImageButton->setIcon(userIcon);
+    userImageButton->setIcon(userIcon);*/
     userImageButton->setIconSize(QSize(68, 68));
 
     thisWidgetLayout->addWidget(userImageButton, 0, Qt::AlignLeft | Qt::AlignTop);
@@ -54,11 +54,13 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
     tweetTextBrowser->setStyleSheet("border-top-left-radius: 0px;");
     tweetTextBrowser->setStyleSheet("border-bottom-left-radius: 0px;");
     tweetTextBrowser->setStyleSheet("background: url(:/globalStyle/BG_DARK) top left;");
-    //tweetTextBrowser->setStyleSheet("background: qlineargradient(spread:pad, x1:0.5, y1:0.96, x2:0.5, y2:0, stop:0 rgba(209, 209, 209, 252), stop:0.065 rgba(157, 157, 157, 255), stop:0.130 rgba(89, 89, 89, 255), stop:0.92 rgba(250, 250, 250, 255), stop:1 rgba(210, 210, 210, 255));");
     tweetTextBrowser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     tweetTextBrowser->setOpenExternalLinks(true);
+    tweetTextBrowser->adjustSize();
 
     thisWidgetLayout->addWidget(tweetTextBrowser);
+
+    this->adjustSize();
 
 }
 
@@ -83,11 +85,15 @@ void TweetBubbleWidget::copyData(Returnables::StatusUser *statusUser)
     tweetFavourited = statusUser->status.favorited;
 
     createLinks(&tweetText);
-    setUserIcon();
+
+    requestImage->getImage(userProfileImageUrl);
 
     tweetTextBrowser->setFontFamily("Lucida Grande");
-    tweetTextBrowser->append("<b>" + userScreenName + "</b> from " + userLocation + " <i>says</i> \n");
+    tweetTextBrowser->append("<b>" + userScreenName + "</b> from " + userLocation + \
+                             " <i>said at </i>" + tweetCreatedAt + " \n");
     tweetTextBrowser->append(tweetText);
+    tweetTextBrowser->adjustSize();
+    this->adjustSize();
 }
 
 void TweetBubbleWidget::createLinks(QString *tweetText)
@@ -100,7 +106,9 @@ void TweetBubbleWidget::createLinks(QString *tweetText)
         //HTTP Links Creation (currently only partially implemented)
         while ((l = tweetText->indexOf("http://", l)) != -1) {
             int n;
-            if ( ((n = tweetText->indexOf("; ", l+7)) != -1) || ((n = tweetText->indexOf(", ", l+7)) != -1) || ((n = tweetText->indexOf(" ", l+7)) != -1) ) {
+            if ( ((n = tweetText->indexOf("; ", l+7)) != -1) || \
+                 ((n = tweetText->indexOf(", ", l+7)) != -1) || \
+                 ((n = tweetText->indexOf(" ", l+7)) != -1) ) {
                 tweetText->insert(n, "</A>");
                 tweetText->insert(l, "<A href='" + tweetText->mid(l, n-l) + "'>");
                 l = n + 9 + (n-l) + 2 + 4;
@@ -115,14 +123,19 @@ void TweetBubbleWidget::createLinks(QString *tweetText)
         //@replies Links Creation
         while ((j = tweetText->indexOf("@", j)) != -1) {
             int k;
-            if ( ((k = tweetText->indexOf(", ", j+1)) != -1) || ((k = tweetText->indexOf("; ", j+1)) != -1) || ((k = tweetText->indexOf(": ", j+1)) != -1) || ((k = tweetText->indexOf(" ", j+1)) != -1) ) {
+            if ( ((k = tweetText->indexOf(", ", j+1)) != -1) || \
+                 ((k = tweetText->indexOf("; ", j+1)) != -1) || \
+                 ((k = tweetText->indexOf(": ", j+1)) != -1) || \
+                 ((k = tweetText->indexOf(" ", j+1)) != -1) ) {
                 tweetText->insert(k, "</A>");
-                tweetText->insert(j+1, "<A href='http://www.twitter.com/" + tweetText->mid(j+1, (k-1)-j) + "'>");
+                tweetText->insert(j+1, "<A href='http://www.twitter.com/" + \
+                                  tweetText->mid(j+1, (k-1)-j) + "'>");
                 j = k + 32 + (k-j) + 2 + 4;
             }
             else {
                 tweetText->append("</A>");
-                tweetText->insert(j+1, "<A href='http://www.twitter.com/" + tweetText->mid(j+1, ((tweetText->size()-1)-4)-j) + "'>");
+                tweetText->insert(j+1, "<A href='http://www.twitter.com/" + \
+                                  tweetText->mid(j+1, ((tweetText->size()-1)-4)-j) + "'>");
                 j = -1;
             }
         }
@@ -132,29 +145,29 @@ void TweetBubbleWidget::createLinks(QString *tweetText)
             int d = tweetText->indexOf(" ", h+1);
             if (d != -1) {
                 tweetText->insert(d, "</A>");
-                tweetText->insert(h+1, "<A href='http://search.twitter.com/search?q=" + tweetText->mid(h+1, (d-1)-h) + "'>");
+                tweetText->insert(h+1, "<A href='http://search.twitter.com/search?q=" + \
+                                  tweetText->mid(h+1, (d-1)-h) + "'>");
                 h = d + 44 + (d-h) + 2 + 4;
             }
             else {
                 tweetText->append("</A>");
-                tweetText->insert(h+1, "<A href='http://search.twitter.com/search?q=" + tweetText->mid(h+1, ((tweetText->size()-1)-4)-h) + "'>");
+                tweetText->insert(h+1, "<A href='http://search.twitter.com/search?q=" + \
+                                  tweetText->mid(h+1, ((tweetText->size()-1)-4)-h) + "'>");
                 h = -1;
             }
         }
     }
 }
 
-void TweetBubbleWidget::setUserIcon()
+void TweetBubbleWidget::setUserIcon(QPixmap userPixmap)
 {
-    //The code to add the pixmap to the icon is to be done here somehow
-    imageDataFromServer->open(QIODevice::ReadWrite);
-    QHttp *http = new QHttp(this);
-    http->get(userProfileImageUrl, imageDataFromServer);
-    qDebug() << imageDataFromServer->buffer();
-    QPixmap userPixmap;
-    userPixmap.loadFromData(imageDataFromServer->buffer());
     QIcon userIcon;
-    userIcon.addPixmap(userPixmap);
+    userIcon.addPixmap(userPixmap, QIcon::Normal, QIcon::Off);
     userImageButton->setIcon(userIcon);
-    qDebug() << "ping to buffer again " << imageDataFromServer->buffer();
+    qDebug() << "Image has been set";
+}
+
+void TweetBubbleWidget::resizeWidgets()
+{
+    //resize them
 }
