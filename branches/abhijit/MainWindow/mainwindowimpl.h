@@ -34,10 +34,14 @@ signals:
     void showOwnTimeline();
     void showFollowerTimeline();
     void showFriendsline();
+    void windowResized();
     //void showImageBrowser();//just show the image browser mode
 
 private:
     FlickCharm flickScroll;
+
+protected:
+    void resizeEvent(QResizeEvent *event);
 };
 
 #endif

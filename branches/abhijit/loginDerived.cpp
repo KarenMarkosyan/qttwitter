@@ -33,20 +33,17 @@ void LoginDialogDerived::emitUserPassword()
     loginLineEdit->setFocus();
 }
 
-//Implementing the slot enablePasswordField(const QString &)
 void LoginDialogDerived::enablePasswordField(const QString &text)
 {
     passwordLineEdit->setEnabled(!text.isEmpty());
     passwordLineEdit->setText("");
 }
 
-//Implementing the slot enableLoginButton(const QString &)
 void LoginDialogDerived::enableLoginButton(const QString &text)
 {
     loginButton->setEnabled(!text.isEmpty() && passwordLineEdit->isEnabled());
 }
 
-//Implementing the slot clearOnCancel() to remove all the texts from the fields on close
 void LoginDialogDerived::clearOnCancel()
 {
     loginLineEdit->setText("");
@@ -62,7 +59,6 @@ void LoginDialogDerived::showDialog()
 
 void LoginDialogDerived::storeLoginCredentials()
 {
-    //using QSettings
     QSettings loginSettings("Techfreaks4u Inc.", "Qwitter Book");
 
     loginSettings.setValue("uname", loginLineEdit->text());
@@ -77,4 +73,3 @@ void LoginDialogDerived::readLoginCredentials()
     loginLineEdit->setText(loginSettings.value("uname").toString());
     passwordLineEdit->setText(loginSettings.value("password").toString());
 }
-

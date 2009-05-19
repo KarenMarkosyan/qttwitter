@@ -33,7 +33,8 @@ HEADERS += blog.h \
     configDerived.h \
     flickcharm.h \
     tweetbubblewidget.h \
-    MainWindow/systemtray.h
+    MainWindow/systemtray.h \
+    imagehandler.h
 FORMS += Ui/imageBrowser.ui \
     Ui/login.ui \
     Ui/mainWindow.ui \
@@ -51,6 +52,7 @@ SOURCES += main.cpp \
     configDerived.cpp \
     flickcharm.cpp \
     tweetbubblewidget.cpp \
-    MainWindow/systemtray.cpp
+    MainWindow/systemtray.cpp \
+    imagehandler.cpp
 RESOURCES += images/images.qrc
 RC_FILE = images/App-Icon.rc

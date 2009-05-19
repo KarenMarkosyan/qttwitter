@@ -38,7 +38,7 @@ void SystemTray::closeEvent(QCloseEvent *event)
         This stub will make sure that the message box onCloseEvent only appears once
         QSettings globalSettings
         */
-        QMessageBox::warning(this, tr("Systray"),
+        QMessageBox::warning(this, tr("Going in stealth mode..."),
                                  tr("The program will keep running in the "
                                     "system tray. To terminate the program, "
                                     "choose <b>Quit</b> in the context menu "
