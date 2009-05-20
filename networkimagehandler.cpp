@@ -1,6 +1,6 @@
-#include "imagehandler.h"
+#include "networkimagehandler.h"
 
-ImageHandler::ImageHandler()
+NetworkImageHandler::NetworkImageHandler()
 {
     m_eventLoop = new QEventLoop(this);
     m_http = new QHttp();
@@ -8,7 +8,7 @@ ImageHandler::ImageHandler()
     MakeConnections();
 }
 
-ImageHandler::~ImageHandler()
+NetworkImageHandler::~NetworkImageHandler()
 {
     if (m_eventLoop) {
         delete m_eventLoop;
@@ -18,7 +18,7 @@ ImageHandler::~ImageHandler()
     }
 }
 
-void ImageHandler::MakeConnections()
+void NetworkImageHandler::MakeConnections()
 {
     connect(m_http, SIGNAL(dataReadProgress(int,int)), this, SLOT(DataReadProgress(int,int)));
     connect(m_http, SIGNAL(requestStarted(int)), this, SLOT(RequestStarted(int)));
@@ -27,39 +27,44 @@ void ImageHandler::MakeConnections()
     connect(this, SIGNAL(QueryDone()), m_eventLoop, SLOT(quit()));
 }
 
-void ImageHandler::Done ( bool /*error*/ )
+void NetworkImageHandler::Done ( bool /*error*/ )
 {
     emit QueryDone();
 }
 
-void ImageHandler::DataReadProgress ( int /*done*/, int /*total*/ )
+void NetworkImageHandler::DataReadProgress ( int /*done*/, int /*total*/ )
 {
     //emit OnMessageReceived(QString::number(done).toStdString()+" / "+QString::number(total).toStdString());
     //Here I can display a progress bar or emit signal for a progress bar somewhere
 }
 
-int ImageHandler::MakeGetRequest(QString req)
+int NetworkImageHandler::MakeGetRequest(QString req)
 {
     int id;
     QBuffer *imageDataFromServer = new QBuffer;
     imageDataFromServer->open(QIODevice::ReadWrite);
+    QUrl encodedUrl(req);
+    qDebug() << "Encoded URL:" << encodedUrl;
+    m_http->setHost(encodedUrl.encodedHost());
     id = m_http->get(req, imageDataFromServer);
     m_buffer.insert(id, imageDataFromServer);
+    qDebug() << "Reached in NetworkImageHandler::MakeGetRequest";
 
     return id;
 }
 
-void ImageHandler::RequestStarted(int /*id*/)
+void NetworkImageHandler::RequestStarted(int /*id*/)
 {
     //something can be done here depending upon implementation
 }
 
-void ImageHandler::RequestFinished(int id, bool error)
+void NetworkImageHandler::RequestFinished(int id, bool error)
 {
     QPixmap requestedPixmap;
     QHttpResponseHeader head;
 
     if (error) {
+        qDebug() << "Error in NetworkImageHandler::RequestFinished " << m_http->errorString();
         emit OnError(m_http->errorString());
     }
 
@@ -75,6 +80,7 @@ void ImageHandler::RequestFinished(int id, bool error)
     }
 
     if (!requestedPixmap.isNull()) {
+        qDebug() << "Pixmap sent";
         emit PixmapReceived(requestedPixmap);
     }
 
@@ -85,7 +91,7 @@ void ImageHandler::RequestFinished(int id, bool error)
     }
 }
 
-void ImageHandler::responseHeaderReceived(const QHttpResponseHeader &resp)
+void NetworkImageHandler::responseHeaderReceived(const QHttpResponseHeader &resp)
 {
         switch(resp.statusCode())
         {
@@ -122,8 +128,9 @@ void ImageHandler::responseHeaderReceived(const QHttpResponseHeader &resp)
         }
 }
 
-void ImageHandler::getImage(QString url)
+void NetworkImageHandler::getImage(QString url)
 {
+    qDebug() << "Image Requested with url " + url;
     MakeGetRequest(url);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
