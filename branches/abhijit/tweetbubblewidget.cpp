@@ -41,7 +41,7 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
     QIcon userIcon;
     userIcon.addPixmap(QPixmap(":/twitter/personal.svg"), QIcon::Normal, QIcon::Off);
     userImageButton->setIcon(userIcon);
-    userImageButton->setIconSize(QSize(68, 68));
+    userImageButton->setIconSize(QSize(64, 64));
 
     thisWidgetLayout->addWidget(userImageButton, 0, Qt::AlignLeft | Qt::AlignTop);
 
