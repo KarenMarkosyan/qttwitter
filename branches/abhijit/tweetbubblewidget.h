@@ -8,7 +8,7 @@ class QToolButton;
 class QTextBrowser;
 class QHBoxLayout;
 class QPixmap;
-class ImageHandler;
+class NetworkImageHandler;
 
 class TweetBubbleWidget : public QWidget
 {
@@ -21,7 +21,7 @@ private:
     QToolButton *userImageButton;
     QTextBrowser *tweetTextBrowser;
     QHBoxLayout *thisWidgetLayout;
-    ImageHandler *requestImage;
+    NetworkImageHandler *requestImage;
     //========= User Info Variables ======================
     unsigned int userId;
     QString userName;

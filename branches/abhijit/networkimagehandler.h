@@ -1,5 +1,5 @@
-#ifndef IMAGEHANDLER_H
-#define IMAGEHANDLER_H
+#ifndef NETWORKIMAGEHANDLER_H
+#define NETWORKIMAGEHANDLER_H
 
 #include <QObject>
 #include <QDebug>
@@ -8,15 +8,16 @@
 #include <QMap>
 #include <QHttp>
 #include <QPixmap>
+#include <QUrl>
 #include "Server.h"
 
-class ImageHandler : public QObject
+class NetworkImageHandler : public QObject
 {
     Q_OBJECT
 
 public:
-    ImageHandler();
-    virtual ~ImageHandler();
+    NetworkImageHandler();
+    virtual ~NetworkImageHandler();
 
 public:
     void getImage(QString url);
@@ -45,4 +46,4 @@ signals:
     void PixmapReceived(QPixmap pixmap);
 };
 
-#endif // IMAGEHANDLER_H
+#endif // NETWORKIMAGEHANDLER_H

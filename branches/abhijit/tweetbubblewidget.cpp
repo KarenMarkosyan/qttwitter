@@ -5,7 +5,7 @@
 #include <QIcon>
 #include <QHBoxLayout>
 #include <QDebug>
-#include "imagehandler.h"
+#include "networkimagehandler.h"
 
 TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
         : QWidget(parent)
@@ -20,7 +20,7 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
     thisWidgetLayout->setMargin(2);
     thisWidgetLayout->setSizeConstraint(QLayout::SetMinimumSize);
 
-    requestImage = new ImageHandler();
+    requestImage = new NetworkImageHandler();
     connect(requestImage, SIGNAL(PixmapReceived(QPixmap)), this, SLOT(setUserIcon(QPixmap)));
 
     userImageButton = new QToolButton(this);
@@ -38,9 +38,9 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
     userImageButton->setMouseTracking(true);
     userImageButton->setFocusPolicy(Qt::NoFocus);
     userImageButton->setAutoFillBackground(false);
-    /*QIcon userIcon;
+    QIcon userIcon;
     userIcon.addPixmap(QPixmap(":/twitter/personal.svg"), QIcon::Normal, QIcon::Off);
-    userImageButton->setIcon(userIcon);*/
+    userImageButton->setIcon(userIcon);
     userImageButton->setIconSize(QSize(68, 68));
 
     thisWidgetLayout->addWidget(userImageButton, 0, Qt::AlignLeft | Qt::AlignTop);
