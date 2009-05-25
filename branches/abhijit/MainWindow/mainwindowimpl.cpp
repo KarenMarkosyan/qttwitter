@@ -65,7 +65,7 @@ void MainWindowImpl::showConfigDialog()
 void MainWindowImpl::addTweetBubble(QWidget *tweetBubble)
 {
     tweetBubble->setParent(scrollAreaWidgetContents);
-    newGuiVLayout->addWidget(tweetBubble);
+    newGuiVLayout->insertWidget(0, tweetBubble);
     scrollArea->scroll(0, scrollArea->size().height());
 }
 
