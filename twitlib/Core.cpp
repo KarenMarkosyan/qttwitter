@@ -413,11 +413,16 @@ void Core::GetFriendsTimeline(SERVER::Option1 *opt  /*=NULL*/)
 //=====================================================================
 void Core::PostNewStatus(QString status)
 {
-    QByteArray encodedUrl, req;
+    QByteArray encodedUrl, req, encodedSourceDevice;
     encodedUrl = QUrl::toPercentEncoding(status);
+
+    QString sourceDevice = "<a href='http://code.google.com/p/qttwitter/'>Qwitter Book</a>";
+    encodedSourceDevice = QUrl::toPercentEncoding(sourceDevice);
     
     req = "status=";
     req += encodedUrl;
+    req += "&source=Qwitter%20Book";
+    //req += encodedSourceDevice;
     
     MakePostRequest(POST_NEW_STATUS_URL,req,Returnables::NEW_STATUS);
     m_eventLoop->exec(QEventLoop::AllEvents);

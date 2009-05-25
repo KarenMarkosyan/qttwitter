@@ -133,4 +133,5 @@ void NetworkImageHandler::getImage(QString url)
     qDebug() << "Image Requested with url " + url;
     MakeGetRequest(url);
     m_eventLoop->exec(QEventLoop::AllEvents);
+    return;
 }
