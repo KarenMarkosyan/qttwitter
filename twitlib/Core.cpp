@@ -4,6 +4,7 @@
 #include <QtGui/QMessageBox>
 #include <QtCore/QUrl>
 #include <QtCore/QFile>
+#include <QtNetwork/QNetworkProxy>
 
 //=====================================================================
 QString Core::TWITTER_HOST = "twitter.com";
@@ -17,11 +18,11 @@ QString Core::USERS_TIMELINE_URL = "/statuses/user_timeline[/opt-user].xml";
 QString Core::GET_FAVORITES_URL = "/favorites[/opt-user].xml";
 QString Core::FRIENDS_TIMELINE_URL = "/statuses/friends_timeline.xml";
 QString Core::POST_NEW_STATUS_URL = "/statuses/update.xml";
-QString Core::GET_REPLIES_URL = "/statuses/replies.xml";
+QString Core::GET_MENTIONS_URL = "/statuses/mentions.xml";
 QString Core::REMOVE_STATUS_URL = "/statuses/destroy/[req-id].xml";
 QString Core::GET_FRIENDS_URL = "/statuses/friends[/opt-user].xml";
 QString Core::GET_FOLLOWERS_URL = "/statuses/followers[/opt-user].xml";
-QString Core::GET_USER_DETAILS_URL = "/users/show/[req-user].xml";
+QString Core::GET_USER_DETAILS_URL = "/users/show[/req-user].xml";
 QString Core::GET_SENT_DIRECT_MESSAGES_URL = "/direct_messages/sent.xml";
 QString Core::GET_RECEIVED_DIRECT_MESSAGES_URL = "/direct_messages.xml";
 QString Core::SEND_NEW_DIRECT_MESSAGE_URL = "/direct_messages/new.xml";
@@ -29,11 +30,20 @@ QString Core::REMOVE_DIRECT_MESSAGE_URL = "/direct_messages/destroy/[req-id].xml
 QString Core::CREATE_FRIENDSHIP_URL = "/friendships/create/[req-user].xml";
 QString Core::REMOVE_FRIENDSHIP_URL = "/friendships/destroy/[req-user].xml";
 QString Core::FRIENDSHIP_EXIST_URL = "http://twitter.com/friendships/exists.xml";
-QString Core::UPDATE_LOCATION_URL = "/account/update_location.xml";
 QString Core::UPDATE_DELIVERY_DEVICE_URL = "/account/update_delivery_device.xml";
 QString Core::REMAINING_API_REQUESTS_URL = "/account/rate_limit_status.xml";
 QString Core::ADD_FAVORITE_URL = "/favorites/create/[req-id].xml";
 QString Core::REMOVE_FAVORITE_URL = "/favorites/destroy/[req-id].xml";
+QString Core::PROFILE_COLORS_URL = "/account/update_profile_colors.xml";
+QString Core::PROFILE_IMAGE_URL = "/account/update_profile_image.xml";
+QString Core::PROFILE_BACKGROUND_IMAGE_URL = "/account/update_profile_background_image.xml";
+QString Core::PROFILE_URL = "/account/update_profile.xml";
+QString Core::ENABLE_NOTIFICATIONS_URL = "/notifications/follow/[req-id].xml";
+QString Core::DISABLE_NOTIFICATIONS_URL = "/notifications/leave/[req-id].xml";
+QString Core::BLOCK_USER_URL = "/blocks/create/[req-id].xml";
+QString Core::UNBLOCK_USER_URL = "/blocks/destroy/[req-id].xml";
+QString Core::FRIENDS_IDS_URL = "/friends/ids[/req-id].xml";
+QString Core::FOLLOWERS_IDS_URL = "/followers/ids[/req-id].xml";
 //=====================================================================
 Core::Core()
 {
@@ -49,6 +59,32 @@ Core::~Core()
         delete m_eventLoop;
     if(m_http)
         delete m_http;
+}
+//=====================================================================
+void Core::SetProxy(SERVER::PROXY_TYPE type, const QString hostName, \
+                    quint16 port, const QString user, const QString password)
+{
+    QNetworkProxy::ProxyType proxy_type = QNetworkProxy::NoProxy;
+    switch(type)
+    {
+        case SERVER::NO_PROXY:
+            proxy_type = QNetworkProxy::NoProxy;
+        break;
+        case SERVER::SOCKS5_PROXY:
+            proxy_type = QNetworkProxy::Socks5Proxy;
+        break;
+        case SERVER::HTTP_PROXY:
+            proxy_type = QNetworkProxy::HttpProxy;
+        break;
+    }
+
+    QNetworkProxy m_proxy = QNetworkProxy(proxy_type, hostName, port, user, password);
+    m_http->setProxy(m_proxy);
+}
+//=====================================================================
+void Core::Abort()
+{
+    m_http->abort();
 }
 //=====================================================================
 void Core::MakeConnections()   
@@ -81,14 +117,20 @@ int Core::MakeGetRequest(QString req,Returnables::RequestId reqId)
 	return id;
 }
 //=====================================================================
-int Core::MakePostRequest(QString path,QByteArray req,Returnables::RequestId reqId)
+int Core::MakePostRequest(QString path,QByteArray req,Returnables::RequestId reqId, bool isMultipart)
 {
     int id;
     QBuffer *tempBuffer = new QBuffer;
     tempBuffer->open(QIODevice::ReadWrite);
-    id = m_http->post(path,req,tempBuffer);
-	m_buffer[id].buffer = tempBuffer;
-	m_buffer[id].requestid = reqId;
+
+    if(isMultipart)
+    {
+        id = m_http->request(header, req, tempBuffer);
+    } else {
+        id = m_http->post(path,req,tempBuffer);
+    }
+        m_buffer[id].buffer = tempBuffer;
+        m_buffer[id].requestid = reqId;
 	return id;
 }
 //=====================================================================
@@ -100,15 +142,12 @@ void Core::ReqFinished(int id, bool error)
     QString response;
     QHttpResponseHeader head;
 
-	if(error)
-	{
-		emit OnError(m_http->errorString());
-	}
-    
-	head = m_http->lastResponse(); 
-    if(head.isValid())
-        responseHeaderReceived(head);
-     
+        if(error)
+        {
+                emit OnErrorString(m_http->errorString());
+                emit OnError(m_http->error());
+        }
+
 	if(m_buffer[id].buffer)
 		response = QString(m_buffer[id].buffer->data());
 	else
@@ -116,6 +155,10 @@ void Core::ReqFinished(int id, bool error)
      
 	if(!response.isNull())
         {
+                head = m_http->lastResponse();
+                if(head.isValid())
+                    responseHeaderReceived(head);
+
 		switch(m_buffer[id].requestid)
 		{
 		case Returnables::PUBLIC_TIMELINE:
@@ -139,9 +182,9 @@ void Core::ReqFinished(int id, bool error)
 			emit OnResponseReceived(featuredUsers);
 			break;
 		case Returnables::VERIFY_CREDENTIALS:
-			Returnables::Login *login;
-			login = Decipher::Instance()->Login(response);
-			emit OnResponseReceived(login);
+                        Returnables::VerifyCredentials *verifyCredentials;
+                        verifyCredentials = Decipher::Instance()->VerifyCredentials(response);
+                        emit OnResponseReceived(verifyCredentials);
 			break;
 		case Returnables::TWITTER_UP:
 			Returnables::TwitterUp *twitterUp;
@@ -163,10 +206,10 @@ void Core::ReqFinished(int id, bool error)
 			newStatus = Decipher::Instance()->NewStatus(response);
 			emit OnResponseReceived(newStatus);
 			break;
-		case Returnables::RECENT_REPLIES:
-			Returnables::RecentReplies *replies;
-			replies = Decipher::Instance()->RecentReplies(response);
-			emit OnResponseReceived(replies);
+                case Returnables::RECENT_MENTIONS:
+                        Returnables::RecentMentions *mentions;
+                        mentions = Decipher::Instance()->RecentMentions(response);
+                        emit OnResponseReceived(mentions);
 			break;
 		case Returnables::REMOVE_STATUS:
 			Returnables::RemoveStatus *removedStatus;
@@ -223,11 +266,6 @@ void Core::ReqFinished(int id, bool error)
 			friendshipExists = Decipher::Instance()->FriendshipExist(response);
 			emit OnResponseReceived(friendshipExists);
 			break;
-		case Returnables::UPDATE_LOCATION:
-			Returnables::UpdateLocation *updateLocation;
-			updateLocation = Decipher::Instance()->UpdateLocation(response);
-			emit OnResponseReceived(updateLocation);
-			break;
 		case Returnables::DELIVERY_DEVICE:
 			Returnables::DeliveryDevice *deliveryDevice;
 			deliveryDevice = Decipher::Instance()->DeliveryDevice(response);
@@ -248,6 +286,56 @@ void Core::ReqFinished(int id, bool error)
 			removeFavorite = Decipher::Instance()->RemoveFavorite(response);
 			emit OnResponseReceived(removeFavorite);
 			break;
+                case Returnables::PROFILE_COLORS:
+                        Returnables::ProfileColors *profileColors;
+                        profileColors = Decipher::Instance()->ProfileColors(response);
+                        emit OnResponseReceived(profileColors);
+                        break;
+                case Returnables::PROFILE_IMAGE:
+                        Returnables::ProfileImage *profileImage;
+                        profileImage = Decipher::Instance()->ProfileImage(response);
+                        emit OnResponseReceived(profileImage);
+                        break;
+                case Returnables::PROFILE_BACKGROUND_IMAGE:
+                        Returnables::ProfileBackgroundImage *profileBackgroundImage;
+                        profileBackgroundImage = Decipher::Instance()->ProfileBackgroundImage(response);
+                        emit OnResponseReceived(profileBackgroundImage);
+                        break;
+                case Returnables::PROFILE:
+                        Returnables::Profile *profile;
+                        profile = Decipher::Instance()->Profile(response);
+                        emit OnResponseReceived(profile);
+                        break;
+                case Returnables::ENABLE_NOTIFICATIONS:
+                        Returnables::EnableNotifications *enableNotifications;
+                        enableNotifications = Decipher::Instance()->EnableNotifications(response);
+                        emit OnResponseReceived(enableNotifications);
+                        break;
+                case Returnables::DISABLE_NOTIFICATIONS:
+                        Returnables::DisableNotifications *disableNotifications;
+                        disableNotifications = Decipher::Instance()->DisableNotifications(response);
+                        emit OnResponseReceived(disableNotifications);
+                        break;
+                case Returnables::BLOCK_USER:
+                        Returnables::BlockUser *blockUser;
+                        blockUser = Decipher::Instance()->BlockUser(response);
+                        emit OnResponseReceived(blockUser);
+                        break;
+                case Returnables::UNBLOCK_USER:
+                        Returnables::UnBlockUser *unBlockUser;
+                        unBlockUser = Decipher::Instance()->UnBlockUser(response);
+                        emit OnResponseReceived(unBlockUser);
+                        break;
+                case Returnables::FRIENDS_IDS:
+                        Returnables::FriendsIDs *friendsIDs;
+                        friendsIDs = Decipher::Instance()->FriendsIDs(response);
+                        emit OnResponseReceived(friendsIDs);
+                        break;
+                case Returnables::FOLLOWERS_IDS:
+                        Returnables::FollowersIDs *followersIDs;
+                        followersIDs = Decipher::Instance()->FollowersIDs(response);
+                        emit OnResponseReceived(followersIDs);
+                        break;
 		default:
 			emit OnMessageReceived(response);
 		}
@@ -319,23 +407,22 @@ void Core::GetFeaturedUsers()
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
+void Core::Login(QString user, QString passw)
+{
+    m_http->setUser(user, passw);
+    VerifyCredentials();
+}
+//=====================================================================
 void Core::Logout()
 {
     m_http->setUser("","");
-	MakePostRequest(LOGOUT_URL,"",Returnables::LOGOUT);
+    MakePostRequest(LOGOUT_URL,"",Returnables::LOGOUT);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
-void Core::Login(QString user, QString passw)
+void Core::SetLoginInfo(QString user, QString passw)
 {
-    int id; //Added by Abhijeet Anand temporarily for debuggin purposes
-    QBuffer *tmpBuffer = new QBuffer;   //Added by Abhijeet Anand temporarily for debuggin purposes
-    tmpBuffer->open(QBuffer::ReadWrite);    //Added by Abhijeet Anand temporarily for debuggin purposes
-    tmpBuffer->write("login");  //Added by Abhijeet Anand temporarily for debuggin purposes
-    id = m_http->setUser(user, passw);  //Added by Abhijeet Anand temporarily for debuggin purposes. Originally no lvalue present
-    m_buffer[id].requestid = Returnables::VERIFY_CREDENTIALS;   //Added by Abhijeet Anand temporarily for debuggin purposes
-    m_buffer[id].buffer = tmpBuffer;    //Added by Abhijeet Anand temporarily for debuggin purposes
-	VerifyCredentials();
+    m_http->setUser(user, passw);
 }
 //=====================================================================
 void Core::IsTwitterUp()
@@ -350,20 +437,22 @@ void Core::GetUsersTimeline(SERVER::Option2 *opt  /*=NULL*/)
     
     if(opt)
     {
-        QString user        = opt->user;
-        QString count      = QString::number(opt->count);
-        QString since       = opt->since;
-        QString sinceId    = QString::number(opt->sinceId);
+        QString id        = opt->id;
+        QString user_id = QString::number(opt->user_id);
+        QString screen_name = opt->screen_name;
+        QString since_id    = QString::number(opt->since_id);
+        QString max_id = QString::number(opt->max_id);
         QString page       = QString::number(opt->page);
         
-        if(!user.isEmpty())
-            buildUrl.replace("[/opt-user]","/"+user);
+        if(!id.isEmpty())
+            buildUrl.replace("[/opt-user]","/"+id);
         else
             buildUrl.replace("[/opt-user]","");
         
-        buildUrl += "?count="+count;
-        buildUrl += "&since="+since;
-        buildUrl += "&since_id="+sinceId;
+        buildUrl += "?user_id="+user_id;
+        buildUrl += "&screen_name="+screen_name;
+        buildUrl += "&since_id="+since_id;
+        buildUrl += "&max_id="+max_id;
         buildUrl += "&page="+page;
     }
     else
@@ -386,7 +475,7 @@ void Core::GetFavorites(QString user  /*=""*/, unsigned int page  /*=1*/)
     
 	buildUrl += "?page="+QString::number(page);
 
-    MakeGetRequest(buildUrl,Returnables::FAVORITES);    
+    MakeGetRequest(buildUrl,Returnables::FAVORITES);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -396,13 +485,13 @@ void Core::GetFriendsTimeline(SERVER::Option1 *opt  /*=NULL*/)
     
     if(opt)
     {       
-        QString since       = opt->since;
-        QString sinceId    = QString::number(opt->sinceId);
+        QString since_id    = QString::number(opt->since_id);
+        QString max_id = QString::number(opt->max_id);
         QString count      = QString::number(opt->count);
         QString page       = QString::number(opt->page);
         
-        buildUrl += "?since="+since;
-        buildUrl += "&since_id="+sinceId;
+        buildUrl += "&since_id="+since_id;
+        buildUrl += "&max_id="+max_id;
         buildUrl += "&count="+count;
         buildUrl += "&page="+page;
     }
@@ -411,48 +500,55 @@ void Core::GetFriendsTimeline(SERVER::Option1 *opt  /*=NULL*/)
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
-void Core::PostNewStatus(QString status)
+void Core::PostNewStatus(QString status, QString in_reply_to_status_id, QString source)
 {
-    QByteArray encodedUrl, req, encodedSourceDevice;
+    QByteArray encodedUrl, req;
     encodedUrl = QUrl::toPercentEncoding(status);
-
-    QString sourceDevice = "<a href='http://code.google.com/p/qttwitter/'>Qwitter Book</a>";
-    encodedSourceDevice = QUrl::toPercentEncoding(sourceDevice);
     
     req = "status=";
     req += encodedUrl;
-    req += "&source=Qwitter%20Book";
-    //req += encodedSourceDevice;
+
+    if(!in_reply_to_status_id.isEmpty())
+    {
+        req += "&in_reply_to_status_id=";
+        req += in_reply_to_status_id;
+    }
+
+    if(!source.isEmpty())
+    {
+    req += "&source=";
+    req += source;
+    }
     
     MakePostRequest(POST_NEW_STATUS_URL,req,Returnables::NEW_STATUS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
-void Core::GetRecentReplies(SERVER::Option3 *opt  /*=NULL*/)
+void Core::GetRecentMentions(SERVER::Option3 *opt  /*=NULL*/)
 {
-    QString buildUrl = GET_REPLIES_URL;
+    QString buildUrl = GET_MENTIONS_URL;
     
     if(opt)
-    {       
+    {
+        QString since_id    = QString::number(opt->since_id);
+        QString max_id = QString::number(opt->max_id);
         QString page       = QString::number(opt->page);
-        QString since       = opt->since;
-        QString sinceId    = QString::number(opt->sinceId);
-        
-        buildUrl += "?page="+page;
-        buildUrl += "&since="+since;
-        buildUrl += "&sinceId="+sinceId;
+
+        buildUrl += "?since_id="+since_id;
+        buildUrl += "&max_id="+max_id;
+        buildUrl += "&page="+page;
     }
 
-    MakeGetRequest(buildUrl,Returnables::RECENT_REPLIES);
+    MakeGetRequest(buildUrl,Returnables::RECENT_MENTIONS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
 void Core::RemoveStatus(QString id)
 {
-	QString buildUrl = REMOVE_STATUS_URL;
-	buildUrl = buildUrl.replace("[req-id]",id);
+    QString buildUrl = REMOVE_STATUS_URL;
+    buildUrl = buildUrl.replace("[req-id]",id);
     
-	MakePostRequest(buildUrl,"",Returnables::REMOVE_STATUS);
+    MakePostRequest(buildUrl,"",Returnables::REMOVE_STATUS);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -462,19 +558,19 @@ void Core::GetFriends(SERVER::Option4 *opt  /*=NULL*/)
     
     if(opt)
     {
-        QString user        = opt->user;
+        QString id        = opt->id;
+        QString user_id = QString::number(opt->user_id);
+        QString screen_name = opt->screen_name;
         QString page       = QString::number(opt->page);
-        QString lite          = opt->lite ? "true" : "false";
-        QString since       = opt->since;
         
-        if(!user.isEmpty())
-            buildUrl.replace("[/opt-user]","/"+user);
+        if(!id.isEmpty())
+            buildUrl.replace("[/opt-user]","/"+id);
         else
             buildUrl.replace("[/opt-user]","");
         
-        buildUrl += "?page="+page;
-        buildUrl += "&lite="+lite;
-        buildUrl += "&since="+since;       
+        buildUrl += "?user_id="+user_id;
+        buildUrl += "&screen_name="+screen_name;
+        buildUrl += "&page="+page;
     }
     else
     {
@@ -485,23 +581,25 @@ void Core::GetFriends(SERVER::Option4 *opt  /*=NULL*/)
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
-void Core::GetFollowers(SERVER::Option5 *opt  /*=NULL*/)
+void Core::GetFollowers(SERVER::Option4 *opt  /*=NULL*/)
 {
     QString buildUrl = GET_FOLLOWERS_URL;
     
     if(opt)
     {
-        QString user        = opt->user;
+        QString id        = opt->id;
+        QString user_id = QString::number(opt->user_id);
+        QString screen_name = opt->screen_name;
         QString page       = QString::number(opt->page);
-        QString lite          = opt->lite ? "true" : "false";
         
-        if(!user.isEmpty())
-            buildUrl.replace("[/opt-user]","/"+user);
+        if(!id.isEmpty())
+            buildUrl.replace("[/opt-user]","/"+id);
         else
             buildUrl.replace("[/opt-user]","");
         
-        buildUrl += "?page="+page;
-        buildUrl += "&lite="+lite;
+        buildUrl += "?user_id="+user_id;
+        buildUrl += "&screen_name="+screen_name;
+        buildUrl += "&page="+page;
     }
     else
     {
@@ -512,28 +610,42 @@ void Core::GetFollowers(SERVER::Option5 *opt  /*=NULL*/)
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
-void Core::GetUserDetails(QString user)
+void Core::GetUserDetails(QString id, QString user_id, QString screen_name)
 {
-    QString buildUrl = GET_USER_DETAILS_URL;
-    
-    buildUrl = buildUrl.replace("[req-user]",user);
-    
-    MakeGetRequest(buildUrl,Returnables::USER_DETAILS);
-    m_eventLoop->exec(QEventLoop::AllEvents);
+    if( !id.isEmpty() || !user_id.isEmpty() || !screen_name.isEmpty() )
+    {
+        QString buildUrl = GET_USER_DETAILS_URL;
+
+        if(!id.isEmpty())
+        {
+            buildUrl.replace("[/req-user]", "/" + id);
+        }
+        else if(!user_id.isEmpty())
+        {
+            buildUrl.replace("[/req-user]", "");
+            buildUrl += "?user_id=" + user_id;
+        }
+        else if(!screen_name.isEmpty())
+        {
+            buildUrl.replace("[/req-user]", "");
+            buildUrl += "?screen_name=" + screen_name;
+        }
+
+        MakeGetRequest(buildUrl,Returnables::USER_DETAILS);
+        m_eventLoop->exec(QEventLoop::AllEvents);
+    }
 }
 //=====================================================================
-void Core::GetSentDirectMessages(SERVER::Option6 *opt  /*=NULL*/)
+void Core::GetSentDirectMessages(SERVER::Option5 *opt  /*=NULL*/)
 {
     QString buildUrl = GET_SENT_DIRECT_MESSAGES_URL;
     
     if(opt)
     {       
-        QString since       = opt->since;
-        QString sinceId    = QString::number(opt->sinceId);
+        QString since_id    = QString::number(opt->since_id);
         QString page       = QString::number(opt->page);
         
-        buildUrl += "?since="+since;
-        buildUrl += "&sinceId="+sinceId;
+        buildUrl += "&since_id="+since_id;
         buildUrl += "&page="+page;
     }
 
@@ -541,18 +653,16 @@ void Core::GetSentDirectMessages(SERVER::Option6 *opt  /*=NULL*/)
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
-void Core::GetReceivedDirectMessages(SERVER::Option6 *opt  /*=NULL*/)
+void Core::GetReceivedDirectMessages(SERVER::Option5 *opt  /*=NULL*/)
 {
     QString buildUrl = GET_RECEIVED_DIRECT_MESSAGES_URL;
     
     if(opt)
     {       
-        QString since       = opt->since;
-        QString sinceId    = QString::number(opt->sinceId);
+        QString since_id    = QString::number(opt->since_id);
         QString page       = QString::number(opt->page);
         
-        buildUrl += "?since="+since;
-        buildUrl += "&sinceId="+sinceId;
+        buildUrl += "&since_id="+since_id;
         buildUrl += "&page="+page;
     }
 
@@ -581,7 +691,7 @@ void Core::RemoveDirectMessage(QString id)
     
     buildUrl = buildUrl.replace("[req-id]",id);
 
-	MakePostRequest(buildUrl,"",Returnables::REMOVE_DIRECT_MESSAGE);
+    MakePostRequest(buildUrl,"",Returnables::REMOVE_DIRECT_MESSAGE);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -593,10 +703,10 @@ void Core::AddFriendship(QString user, bool follow)
 	buildUrl = CREATE_FRIENDSHIP_URL;
 	buildUrl = buildUrl.replace("[req-user]",user);
   
-    req = "follow=";
+        req = "follow=";
 	req += follow ? "true" : "false";
       
-	MakePostRequest(buildUrl,req,Returnables::ADD_FRIENDSHIP);
+    MakePostRequest(buildUrl,req,Returnables::ADD_FRIENDSHIP);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -606,7 +716,7 @@ void Core::RemoveFriendship(QString user)
     
     buildUrl = buildUrl.replace("[req-user]",user);
     
-	MakePostRequest(buildUrl,"",Returnables::REMOVE_FRIENDSHIP);
+    MakePostRequest(buildUrl,"",Returnables::REMOVE_FRIENDSHIP);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -627,18 +737,6 @@ void Core::VerifyCredentials()
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
-void Core::UpdateLocation(QString location)
-{
-    QByteArray req, encodedText;
-    encodedText = QUrl::toPercentEncoding(location);
-  
-    req = "location=";
-    req += encodedText;
-    
-    MakePostRequest(UPDATE_LOCATION_URL,req,Returnables::UPDATE_LOCATION);
-    m_eventLoop->exec(QEventLoop::AllEvents);
-}
-//=====================================================================
 void Core::UpdateDeliveryDevice(SERVER::DEVICES device)
 {
 	QByteArray req;
@@ -656,7 +754,7 @@ void Core::UpdateDeliveryDevice(SERVER::DEVICES device)
             break;
     }
     
-	MakePostRequest(UPDATE_DELIVERY_DEVICE_URL,req,Returnables::DELIVERY_DEVICE);
+    MakePostRequest(UPDATE_DELIVERY_DEVICE_URL,req,Returnables::DELIVERY_DEVICE);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -672,7 +770,7 @@ void Core::AddFavorite(QString id)
     
     buildUrl = buildUrl.replace("[req-id]",id);
     
-	MakePostRequest(buildUrl,"",Returnables::ADD_FAVORITE);
+    MakePostRequest(buildUrl,"",Returnables::ADD_FAVORITE);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
@@ -682,11 +780,257 @@ void Core::RemoveFavorite(QString id)
     
     buildUrl = buildUrl.replace("[req-id]",id);
     
-	MakePostRequest(buildUrl,"",Returnables::REMOVE_FAVORITE);
+    MakePostRequest(buildUrl,"",Returnables::REMOVE_FAVORITE);
     m_eventLoop->exec(QEventLoop::AllEvents);
 }
 //=====================================================================
+void Core::UpdateProfileColors(QString background_color, QString text_color, QString link_color, QString sidebar_fill_color, QString sidebar_border_color)
+{
+    QByteArray req = "";
 
+    if(!background_color.isEmpty())
+    {
+        req = "profile_background_color=";
+        req += background_color.remove("#").toAscii();
+        req += "&";
+    }
+    if(!text_color.isEmpty())
+    {
+        req += "profile_text_color=";
+        req += text_color.remove("#").toAscii();
+        req += "&";
+    }
+    if(!link_color.isEmpty())
+    {
+        req += "profile_link_color=";
+        req += link_color.remove("#").toAscii();
+        req += "&";
+    }
+    if(!sidebar_fill_color.isEmpty())
+    {
+        req += "profile_sidebar_fill_color=";
+        req += sidebar_fill_color.remove("#").toAscii();
+        req += "&";
+    }
+    if(!sidebar_border_color.isEmpty())
+    {
+        req += "profile_sidebar_border_color=";
+        req += sidebar_border_color.remove("#").toAscii();
+    }
 
+    if(req.endsWith("&")){ req.chop(1); }
 
+    MakePostRequest(PROFILE_COLORS_URL,req,Returnables::PROFILE_COLORS);
+    m_eventLoop->exec(QEventLoop::AllEvents);
+}
+//=====================================================================
+void Core::UpdateProfile(QString name, QString email, QString url, QString location, QString description)
+{
+    QByteArray req = "";
+
+    if(!name.isEmpty())
+    {
+        req = "name=";
+        req += QUrl::toPercentEncoding(name);
+        req += "&";
+    }
+    if(!email.isEmpty())
+    {
+        req += "email=";
+        req += QUrl::toPercentEncoding(email);
+        req += "&";
+    }
+    if(!url.isEmpty())
+    {
+        req += "url=";
+        req += QUrl::toPercentEncoding(url);
+        req += "&";
+    }
+    if(!location.isEmpty())
+    {
+        req += "location=";
+        req += QUrl::toPercentEncoding(location);
+        req += "&";
+    }
+    if(!description.isEmpty())
+    {
+        req += "description=";
+        req += QUrl::toPercentEncoding(description);
+    }
+
+    if(req.endsWith("&")){ req.chop(1); }
+
+    MakePostRequest(PROFILE_URL,req,Returnables::PROFILE);
+    m_eventLoop->exec(QEventLoop::AllEvents);
+}
+//=====================================================================
+void Core::UpdateProfileImage(QString image)
+{
+    QByteArray req;
+
+    QFile file(image);
+        file.open(QIODevice::ReadOnly);
+
+    QString filename = file.fileName();
+    int pos = filename.lastIndexOf("/");
+    filename.remove(0, pos + 1);
+
+    QByteArray boundary = filename.toUtf8().toBase64();
+
+    header.setRequest("POST", PROFILE_IMAGE_URL, 1, 1);
+        header.setValue("Host", TWITTER_HOST);
+        header.setValue("Connection", "keep-alive");
+        header.setValue("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+        req.append("--" + boundary + "\r\n");
+        req += "Content-Disposition: ";
+        req += "form-data; name=\"image\"; filename=\"" + filename.toUtf8() + "\"\r\n";
+        req += "Content-Type: image/png\r\n";
+        req += "\r\n";
+        req += file.readAll();
+        req += "\r\n";
+        req.append("--" + boundary + "--");
+        req += "\r\n";
+
+        header.setContentLength(req.length());
+
+        file.close();
+        MakePostRequest(PROFILE_IMAGE_URL, req, Returnables::PROFILE_IMAGE, true);
+        m_eventLoop->exec(QEventLoop::AllEvents);
+}
+//=====================================================================
+void Core::UpdateProfileBackgroundImage(QString image, QString isTile)
+{
+    QByteArray req;
+    QFile file(image);
+        file.open(QIODevice::ReadOnly);
+
+    QString filename = file.fileName();
+    int pos = filename.lastIndexOf("/");
+    filename.remove(0, pos + 1);
+
+    QByteArray boundary = filename.toUtf8().toBase64();
+
+    header.setRequest("POST", PROFILE_BACKGROUND_IMAGE_URL, 1, 1);
+        header.setValue("Host", TWITTER_HOST);
+        header.setValue("Connection", "keep-alive");
+        header.setValue("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+        req.append("--" + boundary + "\r\n");
+        req += "Content-Disposition: ";
+        req += "form-data; name=\"image\"; filename=\"" + filename.toUtf8() + "\"\r\n";
+        req += "Content-Type: image/png\r\n";
+        req += "\r\n";
+        req += file.readAll();
+        req += "\r\n";
+        req.append("--" + boundary + "\r\n");
+        req += "Content-Disposition: ";
+        req += "form-data; name=\"tile\"\r\n";
+        req += "\r\n";
+        req += isTile;
+        req += "\r\n";
+        req.append("--" + boundary + "--");
+        req += "\r\n";
+
+        header.setContentLength(req.length());
+
+    file.close();
+    MakePostRequest(PROFILE_BACKGROUND_IMAGE_URL, req, Returnables::PROFILE_BACKGROUND_IMAGE, true);
+    m_eventLoop->exec(QEventLoop::AllEvents);
+}
+//=====================================================================
+void Core::EnableNotifications(QString id)
+{
+    QString buildUrl = ENABLE_NOTIFICATIONS_URL;
+
+    buildUrl = buildUrl.replace("[req-id]",id);
+
+    MakePostRequest(buildUrl,"",Returnables::ENABLE_NOTIFICATIONS);
+    m_eventLoop->exec(QEventLoop::AllEvents);
+}
+//=====================================================================
+void Core::DisableNotifications(QString id)
+{
+    QString buildUrl = DISABLE_NOTIFICATIONS_URL;
+
+    buildUrl = buildUrl.replace("[req-id]",id);
+
+    MakePostRequest(buildUrl,"",Returnables::DISABLE_NOTIFICATIONS);
+    m_eventLoop->exec(QEventLoop::AllEvents);
+}
+//=====================================================================
+void Core::BlockUser(QString id)
+{
+    QString buildUrl = BLOCK_USER_URL;
+
+    buildUrl = buildUrl.replace("[req-id]",id);
+
+    MakePostRequest(buildUrl,"",Returnables::BLOCK_USER);
+    m_eventLoop->exec(QEventLoop::AllEvents);
+}
+//=====================================================================
+void Core::UnBlockUser(QString id)
+{
+    QString buildUrl = UNBLOCK_USER_URL;
+
+    buildUrl = buildUrl.replace("[req-id]",id);
+
+    MakePostRequest(buildUrl,"",Returnables::UNBLOCK_USER);
+    m_eventLoop->exec(QEventLoop::AllEvents);
+}
+//=====================================================================
+void Core::GetFriendsIDs(QString id, QString user_id, QString screen_name)
+{
+    QString buildUrl = FRIENDS_IDS_URL;
+
+    if(!id.isEmpty())
+    {
+        buildUrl.replace("[/req-id]", "/" + id);
+    }
+    else if(!user_id.isEmpty())
+    {
+        buildUrl.replace("[/req-id]","");
+        buildUrl += "?user_id=" + user_id;
+    }
+    else if(!screen_name.isEmpty())
+    {
+        buildUrl.replace("[/req-id]","");
+        buildUrl += "?screen_name="+screen_name;
+    }
+    else
+    {
+        buildUrl.replace("[/req-id]","");
+    }
+
+    MakeGetRequest(buildUrl, Returnables::FRIENDS_IDS);
+    m_eventLoop->exec(QEventLoop::AllEvents);
+}
+//=====================================================================
+void Core::GetFollowersIDs(QString id, QString user_id, QString screen_name)
+{
+    QString buildUrl = FOLLOWERS_IDS_URL;
+
+    if(!id.isEmpty())
+    {
+        buildUrl.replace("[/req-id]", "/" + id);
+    }
+    else if(!user_id.isEmpty())
+    {
+        buildUrl.replace("[/req-id]","");
+        buildUrl += "?user_id=" + user_id;
+    }
+    else if(!screen_name.isEmpty())
+    {
+        buildUrl.replace("[/req-id]","");
+        buildUrl += "?screen_name="+screen_name;
+    }
+    else
+    {
+        buildUrl.replace("[/req-id]","");
+    }
+
+    MakeGetRequest(buildUrl, Returnables::FOLLOWERS_IDS);
+    m_eventLoop->exec(QEventLoop::AllEvents);
+}
+//=====================================================================
 

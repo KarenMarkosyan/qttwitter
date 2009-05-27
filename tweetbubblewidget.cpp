@@ -64,7 +64,7 @@ TweetBubbleWidget::TweetBubbleWidget(QWidget *parent)
 
 }
 
-void TweetBubbleWidget::copyData(Returnables::StatusUser *statusUser)
+void TweetBubbleWidget::copyData(Returnables::StatusElement *statusUser)
 {
     userName = statusUser->user.name;
     userScreenName = statusUser->user.screenName;

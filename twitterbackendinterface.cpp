@@ -184,14 +184,14 @@ void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
                 delete pTimeline;
                 break;
             }
-            case Returnables::LOGIN:
+            case Returnables::VERIFY_CREDENTIALS:
             {
                 qDebug()<<"reached here in Login case";
-                Returnables::Login *login = static_cast<Returnables::Login *>(resp);
-                QString authorized = login->authorized ? "true" : "false";
-                //m_plainTextEdit->appendPlainText("Authorized: "+authorized);
-                qDebug()<<"Authorized: "<<authorized;
-                delete login;
+//                 Returnables::VERIFY_CREDENTIALS *login = static_cast<Returnables::VERIFY_CREDENTIALS *>(resp);
+//                 QString authorized = login->authorized ? "true" : "false";
+//                 //m_plainTextEdit->appendPlainText("Authorized: "+authorized);
+//                 qDebug()<<"Authorized: "<<authorized;
+//                 delete login;
                 break;
             }
             case Returnables::FRIENDS_TIMELINE:
@@ -214,7 +214,7 @@ void twitterBackendInterface::OnResponseReceived(Returnables::Response *resp)
 }
 
 
-void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *> list, Returnables::RequestId reqId)
+void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusElement*> list, Returnables::RequestId reqId)
 {
  /* Returnables::StatusUser *statusUser = NULL;
   QString value = "";
@@ -257,7 +257,7 @@ void twitterBackendInterface::DisplayList(QLinkedList<Returnables::StatusUser *>
 
 //====================== Working Code Follows - Courtesy Shanky ====================
 
-  Returnables::StatusUser *statusUser = NULL;
+  Returnables::StatusElement* statusUser = NULL;
   TweetBubbleWidget *tweetBubble = NULL;
   QString value="See new gui";
 
