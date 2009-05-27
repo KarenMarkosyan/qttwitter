@@ -6,6 +6,7 @@
 
 class FlickCharmPrivate;
 class QWidget;
+class QAbstractScrollArea;
 
 class FlickCharm: public QObject
 {
@@ -22,6 +23,7 @@ protected:
 
 private:
     FlickCharmPrivate *d;
+    QAbstractScrollArea *scrollArea;
 };
 
 #endif // FLICKCHARM_H

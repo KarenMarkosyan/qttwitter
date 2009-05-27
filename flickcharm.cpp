@@ -42,10 +42,11 @@ FlickCharm::~FlickCharm()
 
 void FlickCharm::activateOn(QWidget *widget)
 {
-    QAbstractScrollArea *scrollArea = dynamic_cast<QAbstractScrollArea*>(widget);
+    scrollArea = dynamic_cast<QAbstractScrollArea*>(widget);
     if (scrollArea) {
         scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded); //initially Qt::ScrollBarAlwaysOff
+        scrollArea->verticalScrollBar()->hide(); //Added this line so that later vertical scrollbar can be shown only when scrolling
 
         QWidget *viewport = scrollArea->viewport();
 
@@ -181,6 +182,7 @@ bool FlickCharm::eventFilter(QObject *object, QEvent *event)
         if (mouseEvent->type() == QEvent::MouseButtonRelease) {
             consumed = true;
             data->state = FlickData::AutoScroll;
+            scrollArea->verticalScrollBar()->show(); //trying to emulate scrollbar's visibility only when it's Autoscrolling
         }
         break;
 
@@ -189,11 +191,13 @@ bool FlickCharm::eventFilter(QObject *object, QEvent *event)
             consumed = true;
             data->state = FlickData::Stop;
             data->speed = QPoint(0, 0);
+            scrollArea->verticalScrollBar()->hide(); //hiding the scrollbar when done
         }
         if (mouseEvent->type() == QEvent::MouseButtonRelease) {
             consumed = true;
             data->state = FlickData::Steady;
             data->speed = QPoint(0, 0);
+            scrollArea->verticalScrollBar()->hide(); //hiding the scrollbar when done
         }
         break;
 
@@ -201,6 +205,7 @@ bool FlickCharm::eventFilter(QObject *object, QEvent *event)
         if (mouseEvent->type() == QEvent::MouseButtonRelease) {
             consumed = true;
             data->state = FlickData::Steady;
+            scrollArea->verticalScrollBar()->hide(); //hiding the scrollbar when done
         }
         if (mouseEvent->type() == QEvent::MouseMove) {
             consumed = true;
@@ -208,6 +213,7 @@ bool FlickCharm::eventFilter(QObject *object, QEvent *event)
             data->dragPos = QCursor::pos();
             if (!d->ticker.isActive())
                 d->ticker.start(20, this);
+            scrollArea->verticalScrollBar()->hide(); //hiding the scrollbar when done
         }
         break;
 
@@ -237,8 +243,10 @@ void FlickCharm::timerEvent(QTimerEvent *event)
             data->speed = deaccelerate(data->speed);
             QPoint p = scrollOffset(data->widget);
             setScrollOffset(data->widget, p - data->speed);
-            if (data->speed == QPoint(0, 0))
+            if (data->speed == QPoint(0, 0)){
                 data->state = FlickData::Steady;
+                scrollArea->verticalScrollBar()->hide(); //hiding the scrollbar when done
+            }
         }
     }
 

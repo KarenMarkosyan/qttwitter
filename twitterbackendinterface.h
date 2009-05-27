@@ -4,6 +4,9 @@
 #include <QDebug>
 // #include <twitlib/ITwitReply.h>
 #include <twitlib/QTwitLib.h>
+#include <QTimer>
+#include <QString>
+#include "tweetbubblewidget.h"
 
 class twitterBackendInterface :public QObject
 {
@@ -12,7 +15,11 @@ class twitterBackendInterface :public QObject
 public:
     twitterBackendInterface();
     bool isLogin;
-    void DisplayList(QLinkedList<Returnables::StatusUser*> list, QString header);
+    void DisplayList(QLinkedList<Returnables::StatusUser*> list, Returnables::RequestId reqId);
+    QTimer *timerPublicTweet;
+    // QTimer *timerFriendsTweet;
+    // QTimer *timerUserTweet;
+
 public slots:
     /*Twitter API SLots*/
     void  public_timeline ( /*int since_id*/ );//Primary
@@ -57,17 +64,21 @@ public slots:
 
 
 signals:
-    void public_timeline ( QString );
-    void statusMessage ( QString id );//
+    void public_timeline(QString);
+    void friends_timeline(QString);
+    void user_timeline(QString);
+    void newGuiCreated(QWidget *);
+    void statusMessage(QString id);//
 
 private:
     QString sendMessage;
-    QTwitLib  *m_twitLib;
+    QTwitLib *m_twitLib;
+    QString *lastTweeter;
+    QString *lastTweet;
 };
 
 namespace Backend
 {
-
 class twitterBackend: public twitterBackendInterface {};
 }
 #endif

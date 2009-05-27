@@ -54,7 +54,7 @@ void QTwitLib::GetFriendsTimeline(SERVER::Option1 *opt  /*=NULL*/)
     Core::GetFriendsTimeline(opt);
 }
 //=====================================================================
-void QTwitLib::PostNewStatus(QString status)                                                
+void QTwitLib::PostNewStatus(QString status)
 {
     Core::PostNewStatus(status);
 }
@@ -149,4 +149,3 @@ void QTwitLib::RemoveFavorite(unsigned int id)
     Core::RemoveFavorite(QString::number(id));
 }
 //=====================================================================
-

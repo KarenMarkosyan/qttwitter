@@ -1,4 +1,4 @@
-/*btw just you all know blog.h is mostly written by shashank singh [shashank.singh@geodesic.com]]
+/*
 [Mon Mar 10 01:45:45 2008]
 still to do:: 
 (1)make things work...connection of derived ui class is not wokring that's why when linedit change no data is end to backend..
@@ -120,7 +120,6 @@ this time i did some major cleanup ..and hence this code is now free of followin
 [11:29:30 AM Wednesday, December 10 2008 ] 
 finally i am working on intergating login in twitter .. i am planning to integrate laxis into this twitter client :)
 ..btw public twitter is working..but for some reason it doesn't gives more than 2 twitter at any moment.
-
 [03:26:03 PM Friday, December 12 2008] even murli has joined us in our little project :D
 adn apart from that this little project has now two types of ui..
 though i am still working on stiching ui to backend..uhhh..it's real pain in arse
@@ -144,27 +143,22 @@ CONFIG += qt debug
 [02:21:52 PM Tuesday, December 23 2008]
 wtf why is  QObject::connect(this, SIGNAL(accepted()), this, SLOT(recieveTwit())) not working..in sendTwitDerived.cpp
 fuk fuk fuk.......going back to office work and marble.. will see qtwtitter later
+selection-background-color: rgb(125, 125, 125);\
+selection-background-color: qlineargradient(spread:pad, x1:0.5, y1:0.7, x2:0.5, y2:0,\
+                                    stop:0 rgba(212, 212, 212, 240),\
+                                    stop:0.5 rgba(127, 127, 127, 250),\
+                                    stop:1 rgba(212, 212, 212, 240));\
+QTabBar::tab {\
+        background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
+                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\
+                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);\
+QTabBar::tab:selected, QTabBar::tab:hover {\
+        background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
+                                 stop: 0 #fafafa, stop: 0.4 #f4f4f4,\
+                                 stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);\
 
+from mainwindowimpl.cpp
 
-[07:04:50 PM Tuesday, December 23 2008]
-http://video.google.com/videosearch?q=discovery&emb=0&aq=f#  .i need to watch this episode
+    //
 
-[Sat Jan 3 03:59:38 2009]
-back to qttweitter after a long time 
-
-[Sun Jan 4 07:13:17 2009]
-did some corerctions in sendtwit..lets hope now it will work :)..if send twit will work this is going to be our first release once murli is down with his UI skin using css..
-<<<<<<< .mine
-[Sun Jan 4 07:52:14 2009]
-qttwitter iss finally able to send twitter mesages ..yehaaaaaaaaaaaaw
- :D
-
-
-[12:02 Pm january 12 2009]
-oh was emiititing wrong thisg..now qttwitter is finally working .. :)
-
-[Sun Feb 1 18:18:03 2009]
-working on addding proxy support 
-[Mon Feb 2 00:18:56 2009] still working on proxy support ..asked chirag to test it..seems it's still not working..for people who want to see it's in derivedconfigdialog.cpp in ::accept()
 */
-

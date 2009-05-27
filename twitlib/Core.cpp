@@ -115,7 +115,7 @@ void Core::ReqFinished(int id, bool error)
 		response = QString::null;
      
 	if(!response.isNull())
-    {
+        {
 		switch(m_buffer[id].requestid)
 		{
 		case Returnables::PUBLIC_TIMELINE:
@@ -328,7 +328,13 @@ void Core::Logout()
 //=====================================================================
 void Core::Login(QString user, QString passw)
 {
-    m_http->setUser(user, passw);
+    int id; //Added by Abhijeet Anand temporarily for debuggin purposes
+    QBuffer *tmpBuffer = new QBuffer;   //Added by Abhijeet Anand temporarily for debuggin purposes
+    tmpBuffer->open(QBuffer::ReadWrite);    //Added by Abhijeet Anand temporarily for debuggin purposes
+    tmpBuffer->write("login");  //Added by Abhijeet Anand temporarily for debuggin purposes
+    id = m_http->setUser(user, passw);  //Added by Abhijeet Anand temporarily for debuggin purposes. Originally no lvalue present
+    m_buffer[id].requestid = Returnables::VERIFY_CREDENTIALS;   //Added by Abhijeet Anand temporarily for debuggin purposes
+    m_buffer[id].buffer = tmpBuffer;    //Added by Abhijeet Anand temporarily for debuggin purposes
 	VerifyCredentials();
 }
 //=====================================================================
@@ -407,11 +413,16 @@ void Core::GetFriendsTimeline(SERVER::Option1 *opt  /*=NULL*/)
 //=====================================================================
 void Core::PostNewStatus(QString status)
 {
-    QByteArray encodedUrl, req;
+    QByteArray encodedUrl, req, encodedSourceDevice;
     encodedUrl = QUrl::toPercentEncoding(status);
+
+    QString sourceDevice = "<a href='http://code.google.com/p/qttwitter/'>Qwitter Book</a>";
+    encodedSourceDevice = QUrl::toPercentEncoding(sourceDevice);
     
     req = "status=";
     req += encodedUrl;
+    req += "&source=Qwitter%20Book";
+    //req += encodedSourceDevice;
     
     MakePostRequest(POST_NEW_STATUS_URL,req,Returnables::NEW_STATUS);
     m_eventLoop->exec(QEventLoop::AllEvents);
