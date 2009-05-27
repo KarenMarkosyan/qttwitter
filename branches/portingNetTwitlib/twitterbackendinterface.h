@@ -15,7 +15,7 @@ class twitterBackendInterface :public QObject
 public:
     twitterBackendInterface();
     bool isLogin;
-    void DisplayList(QLinkedList<Returnables::StatusUser*> list, Returnables::RequestId reqId);
+	void DisplayList(QLinkedList<Returnables::StatusElement*> list, Returnables::RequestId reqId);
     QTimer *timerPublicTweet;
     // QTimer *timerFriendsTweet;
     // QTimer *timerUserTweet;

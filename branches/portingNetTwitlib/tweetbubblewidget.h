@@ -45,7 +45,7 @@ private:
     void createLinks(QString *tweet);
 
 public:
-    void copyData(Returnables::StatusUser *statusUser);
+    void copyData(Returnables::StatusElement*statusUser);
 
 public slots:
     void resizeWidgets();
