@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>585</width>
+    <height>380</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>585</width>
+    <height>380</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Qwitter Book - A Qt-based Twitter and Facebook Client</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../images/images.qrc">
+    <normaloff>:/twitter/TwitterPostIcon.png</normaloff>:/twitter/TwitterPostIcon.png</iconset>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>236</red>
+         <green>233</green>
+         <blue>216</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </disabled>
+    </palette>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="margin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidgetTweetWindow">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>236</red>
+            <green>233</green>
+            <blue>216</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>236</red>
+            <green>233</green>
+            <blue>216</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>236</red>
+            <green>233</green>
+            <blue>216</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>236</red>
+            <green>233</green>
+            <blue>216</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <family>Georgia</family>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::TabFocus</enum>
+      </property>
+      <property name="toolTip">
+       <string/>
+      </property>
+      <property name="statusTip">
+       <string/>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>3</number>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideMiddle</enum>
+      </property>
+      <widget class="QWidget" name="tabPublicTimeline">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <attribute name="title">
+        <string>Public Timeline</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QTextBrowser" name="textBrowserPT">
+          <property name="palette">
+           <palette>
+            <active>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="0">
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </active>
+            <inactive>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="0">
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </inactive>
+            <disabled>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>236</red>
+                <green>233</green>
+                <blue>216</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </disabled>
+           </palette>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Grande</family>
+           </font>
+          </property>
+          <property name="cursor" stdset="0">
+           <cursorShape>IBeamCursor</cursorShape>
+          </property>
+          <property name="statusTip">
+           <string>So many people. so much traffic... But let's see what everyone else is doing :-)</string>
+          </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabFriendsTimeline">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <attribute name="title">
+        <string>Friends Timeline</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QTextBrowser" name="textBrowserFT">
+          <property name="palette">
+           <palette>
+            <active>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="0">
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </active>
+            <inactive>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="0">
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </inactive>
+            <disabled>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>236</red>
+                <green>233</green>
+                <blue>216</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </disabled>
+           </palette>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Grande</family>
+           </font>
+          </property>
+          <property name="cursor" stdset="0">
+           <cursorShape>IBeamCursor</cursorShape>
+          </property>
+          <property name="statusTip">
+           <string>Enjoy the trip to the ecstacy-land within this Friends Tweet Shuttle</string>
+          </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabMyTweetsTimeline">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <attribute name="title">
+        <string>My Tweets</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QTextBrowser" name="textBrowserMTT">
+          <property name="palette">
+           <palette>
+            <active>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="0">
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </active>
+            <inactive>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="0">
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </inactive>
+            <disabled>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>236</red>
+                <green>233</green>
+                <blue>216</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </disabled>
+           </palette>
+          </property>
+          <property name="cursor" stdset="0">
+           <cursorShape>IBeamCursor</cursorShape>
+          </property>
+          <property name="statusTip">
+           <string>You are currently xooming accross your Tweetverse</string>
+          </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabTempNewGui">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string>background-image: url(:/globalStyle/BG_LIGHT);</string>
+       </property>
+       <attribute name="title">
+        <string>Temporary View of New GUI</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>8</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QScrollArea" name="scrollArea">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Sunken</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>579</width>
+             <height>268</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="newGuiVLayout">
+            <property name="spacing">
+             <number>2</number>
+            </property>
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMinAndMaxSize</enum>
+            </property>
+            <property name="margin">
+             <number>1</number>
+            </property>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>585</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionLogin"/>
+    <addaction name="actionLogout"/>
+    <addaction name="actionPrint"/>
+    <addaction name="separator"/>
+    <addaction name="actionConfigure"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuTimeline">
+    <property name="statusTip">
+     <string>View various Twitter Timelines</string>
+    </property>
+    <property name="title">
+     <string>&amp;Timeline</string>
+    </property>
+    <addaction name="actionPublic"/>
+    <addaction name="actionFriends"/>
+    <addaction name="actionOwn"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>&amp;About</string>
+    </property>
+    <addaction name="actionIs_It_Working"/>
+    <addaction name="actionAbout_Qt_Twitter"/>
+    <addaction name="actionAbout_Qt"/>
+    <addaction name="actionHelp"/>
+   </widget>
+   <widget class="QMenu" name="menuOther_Services">
+    <property name="title">
+     <string>&amp;Other Services</string>
+    </property>
+    <widget class="QMenu" name="menuSet_FaceBook_Status">
+     <property name="title">
+      <string>&amp;Set FaceBook Status</string>
+     </property>
+     <addaction name="actionFacebook_Status_Twitter"/>
+    </widget>
+    <addaction name="menuSet_FaceBook_Status"/>
+    <addaction name="actionView_Images_From_Area"/>
+   </widget>
+   <widget class="QMenu" name="menuTwitter">
+    <property name="title">
+     <string>T&amp;witter</string>
+    </property>
+    <addaction name="actionSet_New_Status"/>
+    <addaction name="actionFollow"/>
+    <addaction name="actionLeave"/>
+    <addaction name="actionUser_Methods"/>
+    <addaction name="actionDirect_Message_Methods"/>
+    <addaction name="actionFriendship_Methods"/>
+    <addaction name="actionArchive"/>
+    <addaction name="actionFavorite_Methods"/>
+    <addaction name="actionBlock_Methods"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuTimeline"/>
+   <addaction name="menuTwitter"/>
+   <addaction name="menuOther_Services"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="font">
+    <font>
+     <family>Lucida Grande</family>
+     <pointsize>7</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::TopToolBarArea</set>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionLogin"/>
+   <addaction name="actionSet_New_Status"/>
+   <addaction name="actionFollow"/>
+   <addaction name="actionConfigure"/>
+   <addaction name="separator"/>
+   <addaction name="actionQuit"/>
+  </widget>
+  <action name="actionLogin">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/user-online.svg</normaloff>
+     <normalon>:/twitter/twitter_system_tray1.png</normalon>:/twitter/user-online.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Login</string>
+   </property>
+   <property name="toolTip">
+    <string>Login To Twitter</string>
+   </property>
+   <property name="statusTip">
+    <string>Simple Login to twitter</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionLogout">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/user-offline.svg</normaloff>:/twitter/user-offline.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Logout</string>
+   </property>
+   <property name="toolTip">
+    <string>Logout From Twitter</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/twitter/print.jpeg</normaloff>
+     <normalon>:/twitter/print.png</normalon>:/twitter/print.jpeg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Print</string>
+   </property>
+  </action>
+  <action name="actionPublic">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/twitter_system_tray_2.0.png</normaloff>:/twitter/twitter_system_tray_2.0.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Public</string>
+   </property>
+   <property name="statusTip">
+    <string>Display Public TimeLine From Twitter Server</string>
+   </property>
+  </action>
+  <action name="actionFriends">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/twitter_system_tray.png</normaloff>:/twitter/twitter_system_tray.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Friends</string>
+   </property>
+   <property name="statusTip">
+    <string>Display Friends' TimeLine From Twitter Server</string>
+   </property>
+  </action>
+  <action name="actionOwn">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/twhitter_btn_02.png</normaloff>:/twitter/twhitter_btn_02.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Own</string>
+   </property>
+   <property name="statusTip">
+    <string>Display Your Own TimeLine From Twitter Server</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt_Twitter">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/TwitterPostIcon.png</normaloff>:/twitter/TwitterPostIcon.png</iconset>
+   </property>
+   <property name="text">
+    <string>About Qt &amp;Twitter</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/qt.png</normaloff>:/twitter/qt.png</iconset>
+   </property>
+   <property name="text">
+    <string>About &amp;Qt</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/help-about.svg</normaloff>:/twitter/help-about.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New From Twitter</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/application-exit.svg</normaloff>:/twitter/application-exit.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionFacebook_Status_Twitter">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/icon.facebook.png</normaloff>:/twitter/icon.facebook.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Facebook Status = Twitter</string>
+   </property>
+   <property name="toolTip">
+    <string>Set Facebook Status equal to Twitter's microblog from next update</string>
+   </property>
+   <property name="statusTip">
+    <string>Set Facebook Status equal to Twitter's microblog from next update</string>
+   </property>
+   <property name="whatsThis">
+    <string>Set Facebook Status equal to Twitter's microblog from next update</string>
+   </property>
+  </action>
+  <action name="actionConfigure">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/configure.svg</normaloff>:/twitter/configure.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Configure</string>
+   </property>
+  </action>
+  <action name="actionSet_New_Status">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/im-status-message-edit.svg</normaloff>:/twitter/im-status-message-edit.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Set New Status</string>
+   </property>
+  </action>
+  <action name="actionFollow">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/add-profile.svg</normaloff>:/twitter/add-profile.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Follow</string>
+   </property>
+  </action>
+  <action name="actionLeave">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/remove-profile.svg</normaloff>:/twitter/remove-profile.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Leave</string>
+   </property>
+  </action>
+  <action name="actionUser_Methods">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/personal.svg</normaloff>:/twitter/personal.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;User Methods</string>
+   </property>
+  </action>
+  <action name="actionDirect_Message_Methods">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/message-unread.svg</normaloff>:/twitter/message-unread.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Direct Message Methods</string>
+   </property>
+  </action>
+  <action name="actionFriendship_Methods">
+   <property name="text">
+    <string>F&amp;riendship Methods</string>
+   </property>
+  </action>
+  <action name="actionArchive">
+   <property name="text">
+    <string>&amp;Archive</string>
+   </property>
+  </action>
+  <action name="actionFavorite_Methods">
+   <property name="text">
+    <string>Fa&amp;vorite Methods</string>
+   </property>
+  </action>
+  <action name="actionBlock_Methods">
+   <property name="text">
+    <string>&amp;Block Methods</string>
+   </property>
+  </action>
+  <action name="actionIs_It_Working">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/questionmark.png</normaloff>:/twitter/questionmark.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Is It Working?</string>
+   </property>
+  </action>
+  <action name="actionView_Images_From_Area">
+   <property name="text">
+    <string>&amp;View Images From Area</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/twitter/appQuitIcon</normaloff>:/twitter/appQuitIcon</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../images/images.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>action</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>240</x>
+     <y>142</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

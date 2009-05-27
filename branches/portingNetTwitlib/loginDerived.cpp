@@ -1,0 +1,75 @@
+#include "loginDerived.h"
+#include <QDebug>
+
+LoginDialogDerived::LoginDialogDerived()
+{
+    this->setAttribute(Qt::WA_DeleteOnClose);
+    setupUi(this);
+
+    // Accept Reject from the OK Cancel buttons
+    QObject::connect(this, SIGNAL(accepted()), this, SLOT(emitUserPassword()));
+    QObject::connect(this, SIGNAL(rejected()), this, SLOT(clearOnCancel()));
+
+    //Logging in to the twitter
+    QObject::connect(this, SIGNAL(setUserPassword(QString,QString)), myTwitter, SLOT(setUserNamePassword(QString,QString)));
+
+    //Enable the password field only if login ID has been entered in the loginLineEdit field
+    QObject::connect(loginLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(enablePasswordField(const QString &)));
+
+    //Enable the loginButton only if the password has also been entered
+    QObject::connect(passwordLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(enableLoginButton(const QString &)));
+
+    qDebug()<<"reached here in LoginDialogDerived, all connections established";
+    readLoginCredentials();
+
+}
+
+void LoginDialogDerived::emitUserPassword()
+{
+    storeLoginCredentials();
+    emit setUserPassword(loginLineEdit->text(),passwordLineEdit->text());
+    loginLineEdit->setText("");
+    passwordLineEdit->setText("");
+    loginLineEdit->setFocus();
+}
+
+void LoginDialogDerived::enablePasswordField(const QString &text)
+{
+    passwordLineEdit->setEnabled(!text.isEmpty());
+    passwordLineEdit->setText("");
+}
+
+void LoginDialogDerived::enableLoginButton(const QString &text)
+{
+    loginButton->setEnabled(!text.isEmpty() && passwordLineEdit->isEnabled());
+}
+
+void LoginDialogDerived::clearOnCancel()
+{
+    loginLineEdit->setText("");
+    passwordLineEdit->setText("");
+    loginLineEdit->setFocus();
+}
+
+void LoginDialogDerived::showDialog()
+{
+    LoginDialogDerived *loginDialog = new LoginDialogDerived();
+    loginDialog->show();
+}
+
+void LoginDialogDerived::storeLoginCredentials()
+{
+    QSettings loginSettings("Techfreaks4u Inc.", "Qwitter Book");
+
+    loginSettings.setValue("uname", loginLineEdit->text());
+    loginSettings.setValue("password", passwordLineEdit->text());
+}
+
+void LoginDialogDerived::readLoginCredentials()
+{
+    //using QSettings
+    QSettings loginSettings("Techfreaks4u Inc.", "Qwitter Book");
+
+    loginLineEdit->setText(loginSettings.value("uname").toString());
+    passwordLineEdit->setText(loginSettings.value("password").toString());
+}

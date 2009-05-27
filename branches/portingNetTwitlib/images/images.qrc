@@ -1,0 +1,35 @@
+<RCC>
+    <qresource prefix="/twitter" >
+        <file>twitter_system_tray_2.0.png</file>
+        <file>personal.svg</file>
+        <file>qt.png</file>
+        <file>icon.facebook.png</file>
+        <file>twhitter_btn_03.png</file>
+        <file>remove-profile.svg</file>
+        <file>twhitter_btn_02.png</file>
+        <file>twitter_system_tray.png</file>
+        <file>add-profile.svg</file>
+        <file>application-exit.svg</file>
+        <file>configure.svg</file>
+        <file>im-status-message-edit.svg</file>
+        <file>help-about.svg</file>
+        <file>message-unread.svg</file>
+        <file>user-offline.svg</file>
+        <file>user-online.svg</file>
+        <file>Twitter.png</file>
+        <file>TwitterPostIcon.png</file>
+        <file>questionmark.png</file>
+        <file>print.png</file>
+        <file alias="trayIcon" >systemTrayIcon_Normal.png</file>
+        <file>coiserv.png</file>
+        <file alias="appQuitIcon" >application-quit-normal.png</file>
+    </qresource>
+    <qresource prefix="/globalStyle" >
+        <file>work_area.png</file>
+        <file>Fileclose.png</file>
+        <file alias="BG_DARK" >Brushed_Background_Dark.png</file>
+        <file alias="BG_LIGHT" >Brushed_Background_Light.png</file>
+        <file>arrow_left.png</file>
+        <file>arrow_right.png</file>
+    </qresource>
+</RCC>
